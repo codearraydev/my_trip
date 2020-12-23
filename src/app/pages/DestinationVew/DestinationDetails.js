@@ -9,6 +9,7 @@ import renderHTML from "react-render-html";
 import { Carousel } from 'react-bootstrap'
 import DestDecs from '../../components/DestinationDetails/DestDecs';
 import DestHotels from '../../components/DestinationDetails/DestHotels';
+import DestinationPlacesToSee from '../../components/DestinationDetails/DestinationPlacesToSee';
 import { getDestInformationApi } from '../../../shared/actions/DestinationDetailsActions';
 
 
@@ -115,8 +116,23 @@ const DestinationDetails = props => {
                                                     {
                                                         typeof (destInfo.DestInfo.destination) !== 'undefined' ? (
                                                             destInfo.DestInfo.destination.map((item, index) => {
-
                                                                 return <DestDecs destinationName={"General Information About " + item.dest_name} descriptionDetails={item.dest_description} />
+                                                            })
+                                                        ) : null
+                                                    }
+
+                                                    {
+                                                        typeof (destInfo.DestInfo.destination) !== 'undefined' ? (
+                                                            destInfo.DestInfo.destination.map((item, index) => {
+                                                                if (item.activity !== "") {
+                                                                    return <div className="long-description">
+                                                                        <h2>Location Map</h2>
+                                                                        <div className="tab-container style1">
+                                                                            { renderHTML(item.dest_map.replace(`width="600"`, `width = "100%"`)) }
+                                                                        </div>
+                                                                    </div>
+                                                                }
+
                                                             })
                                                         ) : null
                                                     }
@@ -279,7 +295,6 @@ const DestinationDetails = props => {
 
                                                     </div>
 
-
                                                     <div className="long-description">
                                                         <h2>Hotels</h2>
                                                         <div className="block">
@@ -301,6 +316,52 @@ const DestinationDetails = props => {
                                                             </div>
                                                         </div>
 
+                                                    </div>
+
+                                                    <div className="long-description">
+                                                        <h2>Places To See</h2>
+                                                        <div className="block">
+                                                            <div className="row image-box style1">
+                                                                {
+                                                                    typeof (destInfo.DestInfo.places) !== 'undefined' ? (
+                                                                        destInfo.DestInfo.places.map((item, index) => {
+                                                                            return <DestinationPlacesToSee
+                                                                                place_id={item.place_id}
+                                                                                name={item.place_name}
+                                                                                desc={item.place_dest}
+                                                                                image={"https://mytrip.pk/api/app/Controllers/uploads/" + item.place_image}
+                                                                            />
+                                                                        })
+                                                                    ) : null
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="long-description">
+                                                        <h2>Weather</h2>
+                                                        <div className="block">
+                                                            <div className="row image-box style1">
+                                                                <table id="loadtemp" class="table">
+                                                                    <tbody>
+                                                                        <tr style={{ background: "#1cad81", color: "white" }}>
+                                                                            <th>Months</th>
+                                                                            <th>Weather Details</th>
+                                                                        </tr>
+                                                                        {
+                                                                            typeof (destInfo.DestInfo.temperatures) !== 'undefined' ? (
+                                                                                destInfo.DestInfo.temperatures.map((item, index) => {
+                                                                                    return <tr>
+                                                                                        <td>{ item.month }</td>
+                                                                                        <td>{ item.desc_temp }</td>
+                                                                                    </tr>
+                                                                                })
+                                                                            ) : null
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     {

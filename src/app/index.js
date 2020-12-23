@@ -15,9 +15,6 @@ const Router = require("react-router-dom").BrowserRouter;
 const Redirect = require("react-router-dom").Redirect;
 const useHistory = require("react-router-dom").useHistory;
 
-
-
-
 const Main = props => {
     return (
         <Switch>
