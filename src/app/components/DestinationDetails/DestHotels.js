@@ -67,67 +67,78 @@ const DestHotels = props => {
     const [photoIndex, setPhoneIndex] = useState(0);
     const [isOpen, setIsOpen] = useState(false)
     return (
-        <div className="room-list listing-style3 hotel">
+        <div className="col-sm-6 col-md-4" style={ { maxHeight: 240 } }>
             <article className="box">
-                <figure className="col-sm-4 col-md-3" onClick={() => setIsOpen(true)}>
-                    <div className="hover-effect popup-gallery" href="#" title><img style={{ width: 230, height: 160 }} src={props.roomPicture} alt /></div>
+                <figure onClick={() => setIsOpen(true)}>
+                    <a href="#" title className="hover-effect"><img style={{ width: 230, height: 160 }} src={props.roomPicture} alt width={270} height={160} /></a>
                 </figure>
-                <div className="details col-xs-12 col-sm-8 col-md-9">
-                    <div>
-                        <div>
-                            <div className="box-title">
-                                <h4 className="title">{props.roomTitle}</h4>
-                                <dl className="description">
-
-                                    <dd>{props.checkout}</dd>
-                                </dl>
-                            </div>
-                            <div className="amenities">
-                                <i className="soap-icon-wifi circle" />
-                                <i className="soap-icon-fitnessfacility circle" />
-                                <i className="soap-icon-fork circle" />
-                                <i className="soap-icon-television circle" />
-                            </div>
-                        </div>
-                        <div className="price-section">
-                            {/* <span style={{ fontSize: 19 }} className="price"><small>PER/NIGHT</small>PKR. {props.pricepernight}</span> */}
-                        </div>
-                    </div>
-                    <div>
-                        <p>{props.hotel_desc}</p>
-                        <div className="action-section">
-                            <a onClick={() => {
-                                dispatch(setHotelData("param1", "param2", "param3", "param4"))
-                                history.push({
-                                    pathname: props.hotelLink
-                                })
-                            }} href="#" title className="button btn-small full-width text-center">Visit</a>
-                            {/* </Link> */}
-                        </div>
-                    </div>
+                <div className="details">
+                    {/* <span className="price"><small>FROM</small>$490</span> */}
+                    <h4 className="box-title">{props.roomTitle}<small>Paris</small></h4>
                 </div>
             </article>
-
-            {
-                isOpen && (
-                    <Lightbox
-                        mainSrc={props.photoGallery[photoIndex]}
-                        nextSrc={props.photoGallery[(photoIndex + 1) % props.photoGallery.length]}
-                        prevSrc={props.photoGallery[(photoIndex + props.photoGallery.length - 1) % props.photoGallery.length]}
-                        onCloseRequest={() => setIsOpen(false)}
-                        onMovePrevRequest={() => setPhoneIndex((photoIndex + props.photoGallery.length - 1) % props.photoGallery.length)
-                            // this.setState({
-                            //     photoIndex: (photoIndex + images.length - 1) % images.length,
-                            // })
-                        }
-                        onMoveNextRequest={() => setPhoneIndex((photoIndex + props.photoGallery.length + 1) % props.photoGallery.length)
-                            // this.setState({
-                            //     photoIndex: (photoIndex + 1) % images.length,
-                            // })
-                        }
-                    />
-                )}
         </div>
+        // <div className="room-list listing-style3 hotel">
+        //     <article className="box">
+        //         <figure className="col-sm-4 col-md-3" onClick={() => setIsOpen(true)}>
+        //             <div className="hover-effect popup-gallery" href="#" title><img style={{ width: 230, height: 160 }} src={props.roomPicture} alt /></div>
+        //         </figure>
+        //         <div className="details col-xs-12 col-sm-8 col-md-9">
+        //             <div>
+        //                 <div>
+        //                     <div className="box-title">
+        //                         <h4 className="title">{props.roomTitle}</h4>
+        //                         <dl className="description">
+
+        //                             <dd>{props.checkout}</dd>
+        //                         </dl>
+        //                     </div>
+        //                     <div className="amenities">
+        //                         <i className="soap-icon-wifi circle" />
+        //                         <i className="soap-icon-fitnessfacility circle" />
+        //                         <i className="soap-icon-fork circle" />
+        //                         <i className="soap-icon-television circle" />
+        //                     </div>
+        //                 </div>
+        //                 <div className="price-section">
+        //                     {/* <span style={{ fontSize: 19 }} className="price"><small>PER/NIGHT</small>PKR. {props.pricepernight}</span> */}
+        //                 </div>
+        //             </div>
+        //             <div>
+        //                 <p>{props.hotel_desc}</p>
+        //                 <div className="action-section">
+        //                     <a onClick={() => {
+        //                         dispatch(setHotelData("param1", "param2", "param3", "param4"))
+        //                         history.push({
+        //                             pathname: props.hotelLink
+        //                         })
+        //                     }} href="#" title className="button btn-small full-width text-center">Visit</a>
+        //                     {/* </Link> */}
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </article>
+
+        //     {
+        //         isOpen && (
+        //             <Lightbox
+        //                 mainSrc={props.photoGallery[photoIndex]}
+        //                 nextSrc={props.photoGallery[(photoIndex + 1) % props.photoGallery.length]}
+        //                 prevSrc={props.photoGallery[(photoIndex + props.photoGallery.length - 1) % props.photoGallery.length]}
+        //                 onCloseRequest={() => setIsOpen(false)}
+        //                 onMovePrevRequest={() => setPhoneIndex((photoIndex + props.photoGallery.length - 1) % props.photoGallery.length)
+        //                     // this.setState({
+        //                     //     photoIndex: (photoIndex + images.length - 1) % images.length,
+        //                     // })
+        //                 }
+        //                 onMoveNextRequest={() => setPhoneIndex((photoIndex + props.photoGallery.length + 1) % props.photoGallery.length)
+        //                     // this.setState({
+        //                     //     photoIndex: (photoIndex + 1) % images.length,
+        //                     // })
+        //                 }
+        //             />
+        //         )}
+        // </div>
 
     );
 }

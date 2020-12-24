@@ -6,7 +6,7 @@ import SubHeader from "../../components/SubHeader";
 import Footer from '../../components/Footer';
 import DestinationList from "../../components/DestinationDetails/DestintionList";
 import DestinationGrid from "../../components/DestinationDetails/DestinationGrid";
-
+import renderHTML from "react-render-html";
 import { fetchDestFromApi } from "../../../shared/actions/DestinationAction";
 
 const Home = props => {
@@ -15,11 +15,9 @@ const Home = props => {
     const [showList, setList] = useState(true);
     const [showGrid, setGrid] = useState(false)
 
-
     //redux
     const destinationList = useSelector(state => state.Destinations);    //getting user profile
     const dispatch = useDispatch();
-
 
     const loadGrid = () => {
         setList(false)
@@ -39,12 +37,9 @@ const Home = props => {
             ;
     }
 
-
     useEffect(() => {
         dispatch(fetchDestFromApi())
     }, [])
-
-
 
     return (
         <div id="page-wrapper">
@@ -60,8 +55,6 @@ const Home = props => {
                     </ul>
                 </div>
             </div>
-
-
             <section id="content">
                 <div className="container">
                     <div id="main">
@@ -156,7 +149,7 @@ const Home = props => {
                                                             picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.dest_cover_image}
                                                             destName={item.dest_name}
                                                             destRegion={item.dest_cat_name}
-                                                            dest_desc={ item.dest_description}
+                                                            dest_desc={ item.dest_description }
                                                             // hotel_average_price={item.hotel_average_price}
                                                             destLink={'/destinations/' + convertToSlug(item.dest_name) + '/' + item.dest_id}  //{'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
                                                         />

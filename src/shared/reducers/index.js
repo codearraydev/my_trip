@@ -3,6 +3,7 @@ import Hotels from "./Hotels";
 import HotelInf from "./HotelInf";
 import HotelInfo from "./HotelInfo";
 import Destinations from "./Destinations";
+import Booking from "./Booking";
 import DestInfo from "./DestInfo";
 import Tours from "./Tours";
 import TourInfo from "./TourInfo";
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     DestInfo,
     Tours,
     TourInfo,
+    Booking,
     HotelData
 });
 

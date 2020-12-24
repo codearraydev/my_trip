@@ -1,7 +1,7 @@
 import { ActivityIndicator, TouchableOpacity, View } from "react-native-web";
 import { useState, useEffect } from 'react';
 import { connect, useSelector, useDispatch } from "react-redux";
-
+import { Link } from 'react-router-dom';
 import SubHeader from '../../components/SubHeader';
 import Footer from '../../components/Footer';
 import HotelReview from '../../components/HotelDetails/HotelReview';
@@ -24,15 +24,18 @@ import { Zoom } from 'react-slideshow-image';
 import Sidebar from "../../components/Sidebar";
 
 
-// import 'react-date-range/dist/styles.css'; // main style file
-// import 'react-date-range/dist/theme/default.css'; // theme css file
-// import { DateRange } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRange } from 'react-date-range';
+import { range } from "underscore";
 
 
 
 var Carousel = require('react-responsive-carousel').Carousel;
 const HotelDetail = props => {
     const { id } = props.match.params
+
+    var styles = " .rdrDateRangeWrapper, .rdrMonth, .rdrMonthsVertical{ width:256px } ";
 
     // const { HotelInfo, isGetting } = props.HotelInfo;
 
@@ -54,36 +57,90 @@ const HotelDetail = props => {
     ];
 
     const slideImages = [
-
     ];
-
 
     const testinfFUction = () => {
         dispatch(getHotelInformationApi(32))
     }
+
+    const [state, setState] = useState({
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+        price: 0,
+        error: null,
+        rooms: 0,
+        room_type: '',
+        room_id: 0,
+        hotel_id: id,
+        hotel: hotelDetail.HotelInfo
+    });
+    
     useEffect(() => {
-        console.log("this is id=====>>>>" + id)
+        setState({
+            ranges: [{
+                startDate: new Date(),
+                endDate: new Date(),
+                key: 'selection',
+            }],
+            price: 0,
+            error: null,
+            rooms: 0,
+            hotel_id: id,
+            hotel: hotelDetail.HotelInfo,
+            room_type: '',
+            room_id: 0
+        });
         dispatch(getHotelInformationApi(id))
     }, [id])
 
-
+    let rangeDates = {
+        startDate: null,
+        endDate: null,
+        key: 'selection'
+    };
 
     const zoomOutProperties = {
         indicators: false,
         scale: 0.4
     }
 
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 
-    const [state, setState] = useState([
-        {
-            startDate: new Date(),
-            endDate: null,
-            key: 'selection'
-        }
-    ]);
+    function roomTypeChangeEvent(e){
+        let monthSelected = monthNames[state.ranges[0].startDate.getMonth()].toLowerCase()
+        let price = hotelDetail.HotelInfo.hotelroom.find(x => x.room_id == e.target.value).roompricing.find(price => price.month.toLowerCase() == monthSelected).price
+        setState({ ranges: state.ranges,hotel_id: id, hotel: hotelDetail.HotelInfo, price: price, error: null, rooms: document.getElementById('noOfRoomsDD').value, room_type: e.target.options[e.target.selectedIndex].innerHTML, room_id: e.target.value })
+    }
+
+    function dateRangeChangeEvent(rangeNew){
+        document.getElementById('roomTypeDD').value = 0
+        rangeDates.startDate = rangeNew.selection.startDate;
+        rangeDates.endDate = rangeNew.selection.endDate;
+        setState({ room_type: state.room_type, ranges: [rangeNew.selection], price: state.price, rooms: state.rooms, room_id: state.room_id, hotel: hotelDetail.HotelInfo, error: null })
+    }
+
+    function noOfRoomsChangeEvent(){
+        setState({ ranges: state.ranges,hotel_id: id, room_type: state.room_type, price: state.price, rooms: document.getElementById('noOfRoomsDD').value, hotel: hotelDetail.HotelInfo, room_id: state.room_id, error: null })
+    }
+
+    function bookHotel(){
+        if(parseInt(state.rooms) == 0 || parseFloat(state.price) <= 0)
+            return setState({ ranges: state.ranges,hotel_id: id, room_type: state.room_type, price: state.price, rooms: document.getElementById('noOfRoomsDD').value, hotel: hotelDetail.HotelInfo, room_id: state.room_id, error:'Please provide all the required information' })
+
+        setState({ ranges: state.ranges,hotel_id: id, room_type: state.room_type, price: state.price, rooms: state.rooms, room_id: state.room_id, hotel: hotelDetail.HotelInfo, error: null })
+
+        props.history.push({
+            pathname: '/booking-confirmation',
+            state: state
+        })
+    }
 
     return (
         <div id="page-wrapper">
+            <style>
+                {styles}
+            </style>
             <SubHeader />
             <div class="page-title-container">
                 <div class="container">
@@ -98,6 +155,7 @@ const HotelDetail = props => {
             </div>
 
             <section id="content">
+
                 <div className="container">
                     <div className="row">
                         <div id="main" className="col-md-9">
@@ -205,7 +263,7 @@ const HotelDetail = props => {
 
                         {/* <Sidebar /> */}
                         <div className="sidebar col-md-3">
-                            <article className="detailed-logo">
+                            <article style={ {width: 290} } className="detailed-logo">
                                 <figure>
                                     <img width={114} height={85} src="http://placehold.it/114x85" alt />
                                 </figure>
@@ -224,8 +282,53 @@ const HotelDetail = props => {
                                             ) : null
                                         }
 
+                
+                                        <DateRange
+                                            editableDateInputs={true}
+                                            onChange={dateRangeChangeEvent}
+                                            moveRangeOnFirstSelection={false}
+                                            ranges={state.ranges}
+                                        />
 
-                                        <a className="button yellow full-width uppercase btn-small">Book This Hotel</a>
+                                        <select style={ {width: "100%"} } id="noOfRoomsDD" onChange={noOfRoomsChangeEvent}>
+                                            <option value="0" selected disabled>No. of rooms</option>
+                                            <option value="1" key={1}>1</option>
+                                            <option value="2" key={2}>2</option>
+                                            <option value="3" key={3}>3</option>
+                                        </select>
+                                        <select id="roomTypeDD" onChange={ roomTypeChangeEvent } style={ {width: "100%", margin: "10px 0px"} }>
+                                            <option value="0" selected disabled>Room Type</option>
+                                            {
+                                                typeof (hotelDetail.HotelInfo.hotelroom) !== 'undefined' ? (
+                                                    hotelDetail.HotelInfo.hotelroom.map((item, index) => {
+                                                        return <option value={item.room_id} key={index}>{item.room_type}</option>
+                                                    })
+                                                ) : null
+                                            }
+                                        </select>
+
+                                        {
+                                            state.price > 0 ? (
+                                                <div style={
+                                                    { padding: "0px 8px", margin: "0px 0px 5px 0px"}
+                                                }>
+                                                    <span>PKR. { state.price }</span>
+                                                </div>
+                                            ) : null
+                                        }
+
+                                        {
+                                            state.error ? (
+                                                <div style={
+                                                    { padding: "0px 8px", margin: "0px 0px 5px 0px"}
+                                                }>
+                                                    <span>{ state.error }</span>
+                                                </div>
+                                            ) : null
+                                        }
+                                        {/* <Link to='/booking-confirmation'> */}
+                                            <a onClick={ bookHotel } className="button yellow full-width uppercase btn-small">Book This Hotel</a>
+                                        {/* </Link> */}
                                     </div>
                                 }
 
@@ -239,27 +342,5 @@ const HotelDetail = props => {
         </div>
     );
 }
-
-
-
-
-// function mapStateToProps(state) {
-//     return {
-//         HotelInfo: state.HotelInfo
-//     }
-// }
-
-// function mapDispatchToProps(disptach) {
-//     return {
-//         getHotelDetails: (hotel_id) => disptach(getDetailfromApi(hotel_id)),
-
-//     }
-// }
-
-
-// export default connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(HotelDetail)
 
 export default HotelDetail;

@@ -9,14 +9,12 @@ import DestinationDetails from "./pages/DestinationVew/DestinationDetails";
 import TourDetail from './pages/ToursView/TourDetail';
 import TourHome from './pages/ToursView/TourHome';
 import HotelBooking from './pages/HotelsView/HotelBooking';
+import ConfirmBooking from './pages/Booking/ConfirmBooking';
 const Route = require("react-router-dom").Route;
 const Switch = require("react-router-dom").Switch;
 const Router = require("react-router-dom").BrowserRouter;
 const Redirect = require("react-router-dom").Redirect;
 const useHistory = require("react-router-dom").useHistory;
-
-
-
 
 const Main = props => {
     return (
@@ -30,6 +28,7 @@ const Main = props => {
             <Route exact path="/tours" component={TourHome} />
             <Route exact path="/tours/:type/:id" component={TourDetail} />
             <Route exact path="/slides" component={SideHome} />
+            <Route exact name="bookingConfirmation" path="/booking-confirmation" component={ConfirmBooking} />
         </Switch>
     );
 }
