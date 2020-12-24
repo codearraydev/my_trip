@@ -1,7 +1,5 @@
 import { LOAD_HOTELS, LOAD_HOTELS_SUCCESS, LOAD_HOTELS_FAIL } from "../constant/Constant";
 
-
-
 export const fetchHotelsFromApi = () => {
     return (disptach) => {
         disptach(getHotels())
