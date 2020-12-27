@@ -1,10 +1,10 @@
-import Header from '../components/Header';
+import SubHeader from '../components/SubHeader';
 import Footer from '../components/Footer';
 
 const SideHome = props => {
     return (
         <div id="page-wrapper">
-            <Header />
+            <SubHeader />
             <Footer />
         </div>
     );

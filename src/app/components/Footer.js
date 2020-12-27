@@ -1,29 +1,25 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 export default function Footer() {
     return (
         <footer id="footer">
             <div className="footer-wrapper">
                 <div className="container">
                     <div className="row">
-                        <div className="col-sm-6 col-md-3">
+                        <div className="col-sm-6 col-md-4">
                             <h2>Discover</h2>
                             <ul className="discover triangle hover row">
-                                <li className="col-xs-6"><a href="#">Safety</a></li>
-                                <li className="col-xs-6"><a href="#">About</a></li>
-                                <li className="col-xs-6"><a href="#">Travelo Picks</a></li>
-                                <li className="col-xs-6"><a href="#">Latest Jobs</a></li>
-                                <li className="active col-xs-6"><a href="#">Mobile</a></li>
-                                <li className="col-xs-6"><a href="#">Press Releases</a></li>
-                                <li className="col-xs-6"><a href="#">Why Host</a></li>
-                                <li className="col-xs-6"><a href="#">Blog Posts</a></li>
-                                <li className="col-xs-6"><a href="#">Social Connect</a></li>
-                                <li className="col-xs-6"><a href="#">Help Topics</a></li>
-                                <li className="col-xs-6"><a href="#">Site Map</a></li>
-                                <li className="col-xs-6"><a href="#">Policies</a></li>
+                                <li className="col-xs-6"><Link to='/about-us'><a href="#">About Us</a></Link></li>
+                                <li className="col-xs-6"><Link to='/important-numbers'><a href="#">Important</a></Link></li>
+                                <li className="col-xs-6"><Link to='/blogs'><a href="#">Blog</a></Link></li>
+                                <li className="col-xs-6"><Link to='faq'><a href="#">FAQ's</a></Link></li>
+                                <li className="col-xs-6"><a href="#">Contact Us</a></li>
+                                <li className="col-xs-6"><Link to='/privacy'> <a href="#">Privacy</a></Link></li>
+                                <li className="col-xs-6"><Link to='/terms-of-use'><a href="#">Term of Use</a></Link></li>
+
                             </ul>
                         </div>
-                        <div className="col-sm-6 col-md-3">
+                        {/* <div className="col-sm-6 col-md-3">
                             <h2>Travel News</h2>
                             <ul className="travel-news">
                                 <li>
@@ -51,10 +47,10 @@ export default function Footer() {
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-                        <div className="col-sm-6 col-md-3">
-                            <h2>Mailing List</h2>
-                            <p>Sign up for our mailing list to get latest updates and offers.</p>
+                        </div> */}
+                        <div className="col-sm-6 col-md-4">
+                            <h2>Newletter</h2>
+                            <p>Travel Smarter! Sign up for our free newsletter.</p>
                             <br />
                             <div className="icon-check">
                                 <input type="text" className="input-text full-width" placeholder="your email" />
@@ -62,14 +58,14 @@ export default function Footer() {
                             <br />
                             <span>We respect your privacy</span>
                         </div>
-                        <div className="col-sm-6 col-md-3">
-                            <h2>About Travelo</h2>
+                        <div className="col-sm-6 col-md-4">
+                            <h2>About MyTrip</h2>
                             <p>Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massaidp nequetiam lore elerisque.</p>
                             <br />
                             <address className="contact-details">
                                 <span className="contact-phone"><i className="soap-icon-phone" /> 1-800-123-HELLO</span>
                                 <br />
-                                <a href="#" className="contact-email">help@travelo.com</a>
+                                <a href="#" className="contact-email">info@mytrip.pk</a>
                             </address>
                             <ul className="social-icons clearfix">
                                 <li className="twitter"><a title="twitter" href="#" data-toggle="tooltip"><i className="soap-icon-twitter" /></a></li>

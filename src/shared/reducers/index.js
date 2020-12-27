@@ -8,6 +8,13 @@ import DestInfo from "./DestInfo";
 import Tours from "./Tours";
 import TourInfo from "./TourInfo";
 import HotelData from "./HotelData";
+import Blogs from "./Blogs";
+import Post from "./Post";
+import About from "./About";
+import Important from "./Important";
+import Privacy from "./Privacy";
+import Terms from "./Terms";
+import Faq from "./Faq";
 const rootReducer = combineReducers({
     Hotels,
     HotelInf,
@@ -17,7 +24,15 @@ const rootReducer = combineReducers({
     Tours,
     TourInfo,
     Booking,
-    HotelData
+    HotelData,
+    Blogs,
+    Post,
+    About,
+    Important,
+    Privacy,
+    Terms,
+    Faq
+
 });
 
 //export default rootReducer;

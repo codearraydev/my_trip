@@ -10,6 +10,15 @@ import TourDetail from './pages/ToursView/TourDetail';
 import TourHome from './pages/ToursView/TourHome';
 import HotelBooking from './pages/HotelsView/HotelBooking';
 import ConfirmBooking from './pages/Booking/ConfirmBooking';
+
+import BlogsHome from './pages/Blogs/BlogsHome';
+import BlogRead from './pages/Blogs/BlogRead';
+import AboutUs from './pages/AboutUs';
+import ImportantPage from './pages/ImportantPage';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
+import Faqpage from './pages/Faqpage';
+
 const Route = require("react-router-dom").Route;
 const Switch = require("react-router-dom").Switch;
 const Router = require("react-router-dom").BrowserRouter;
@@ -29,6 +38,15 @@ const Main = props => {
             <Route exact path="/tours/:type/:id" component={TourDetail} />
             <Route exact path="/slides" component={SideHome} />
             <Route exact name="bookingConfirmation" path="/booking-confirmation" component={ConfirmBooking} />
+            <Route exact path="/blogs" component={BlogsHome} />
+            <Route exact path="/blog/:slug" component={BlogRead} />
+            <Route exact path="/about-us" component={AboutUs} />
+            <Route exact path="/important-numbers" component={ImportantPage} />
+            <Route exact path="/privacy" component={PrivacyPage} />
+            <Route exact path="/terms-of-use" component={TermsPage} />
+            <Route exact path="/faq" component={Faqpage} />
+
+
         </Switch>
     );
 }

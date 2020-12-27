@@ -8,8 +8,8 @@ import Footer from '../../components/Footer';
 import SubHeader from '../../components/SubHeader';
 import HotelList from '../../components/HotelList';
 import HotelGrid from "../../components/HotelGrid";
-
-import { fetchHotelsFromApi } from "../../../shared/actions/HotelActions";
+import $ from "jquery";
+import { fetchHotelsFromApi, fetchFilterHotelsFromApi } from "../../../shared/actions/HotelActions";
 
 
 const HotelHome = props => {
@@ -83,26 +83,117 @@ const HotelHome = props => {
     }
 
 
+    const searchForLocation = () => {
+        let region = [];
+        $.each($("input[name='city']:checked"), function () {
+            region.push("'" + $(this).val() + "'");
+        });
+
+        let vregion = region = (region.length > 0) ? region.join(" , ") : null;
+
+
+        //  console.log(region)
+
+
+        let myChecks = {
+            "checkmeals": null,
+            "type": null,
+            "checkamen": null,
+            "hoteltype": null,
+            "region": null,
+            "min": null,
+            "max": null,
+            "stay": vregion
+        }
+        let data = JSON.stringify(myChecks);
+
+        console.log(data)
+        dispatch(fetchFilterHotelsFromApi(data))
+        // alert('ok')
+    }
+
+
     const listItems = [
         {
-            "name": "re",
+            "name": "Bahawalpur",
             "title": "Bahawalpur"
         },
         {
-            "name": "bb",
+            "name": "Islamabad",
             "title": "Islamabad"
         },
         {
-            "name": "cc",
+            "name": "Karachi",
             "title": "Karachi"
         },
         {
-            "name": "dd",
+            "name": "Lahore",
             "title": "Lahore"
         },
         {
-            "name": "rr",
+            "name": "Multan",
             "title": "Multan"
+        },
+        {
+            "name": "Attabad",
+            "title": "Attabad"
+        },
+        {
+            "name": "Batakundi",
+            "title": "Batakundi"
+        },
+        {
+            "name": "Chitral",
+            "title": "Chitral"
+        },
+        {
+            "name": "Fairy Meadows",
+            "title": "Fairy Meadows"
+        },
+        {
+            "name": "Ghizer",
+            "title": "Ghizer"
+        },
+
+        {
+            "name": "Gulmit",
+            "title": "Gulmit"
+        },
+        {
+            "name": "Hunza",
+            "title": "Hunza"
+        },
+        {
+            "name": "Murree",
+            "title": "Murree"
+        },
+        {
+            "name": "Muzaffarabad",
+            "title": "Muzaffarabad"
+        },
+        {
+            "name": "Naran",
+            "title": "Naran"
+        },
+        {
+            "name": "Nathiagali",
+            "title": "Nathiagali"
+        },
+        {
+            "name": "Neelum Valley",
+            "title": "Neelum Valley"
+        },
+        {
+            "name": "Shigar",
+            "title": "Shigar"
+        },
+        {
+            "name": "Shogran",
+            "title": "Shogran"
+        },
+        {
+            "name": "Skardu",
+            "title": "Skardu"
         }
     ]
     return (
@@ -147,16 +238,22 @@ const HotelHome = props => {
                                         </h4>
                                         <div id="accomodation-type-filter" className="panel-collapse collapse">
                                             <div className="panel-content">
-                                                <ul className="check-square filters-option">
+                                                <ul className="filters-option">
                                                     {
                                                         //listItems
 
                                                         listItems.map((item, index) => {
                                                             console.log(JSON.stringify(item));
                                                             return (
-                                                                <TouchableOpacity onPress={() => changeClass(item.name)}>
-                                                                    <li id={item.name}><a href="#">{item.title}<small></small></a></li>
-                                                                </TouchableOpacity>
+                                                                <li>
+                                                                    <label htmlFor="vehicle1">
+                                                                        <input onChange={() => searchForLocation()} type="checkbox" name="city" value={item.name} />
+                                                                        {item.title}
+                                                                    </label>
+                                                                </li>
+                                                                // <TouchableOpacity onPress={() => changeClass(item.name)}>
+                                                                //     <li id={item.name}><a href="#">{item.title}<small></small></a></li>
+                                                                // </TouchableOpacity>
                                                             )
                                                         })
                                                     }
@@ -230,7 +327,7 @@ const HotelHome = props => {
                                                         />
                                                     )
                                                 })
-                                            ) : null
+                                            ) : <p>No Records Found</p>
                                         }
 
 
@@ -265,7 +362,7 @@ const HotelHome = props => {
                                                             />
                                                         )
                                                     })
-                                                ) : null
+                                                ) : <p>No Records Found</p>
                                             }
                                         </div>
                                     </div>
