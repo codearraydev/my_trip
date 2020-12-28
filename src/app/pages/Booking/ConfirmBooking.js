@@ -35,13 +35,13 @@ const ConfirmBooking = props => {
 
         setState({error: null, first_name: state.first_name, last_name: state.last_name, phone: state.phone, email: state.email, confirmBtnText: 'PLEASE WAIT' })
 
-        dispatch(confirmBookingApi({
+        confirmBookingApi({
             hotel_id : props.location.state.hotel_id,
             room_id : props.location.state.room_id,
             checkin : moment(props.location.state.ranges[0].startDate).format("YYYY-MM-DD HH:mm:ss"),
             checkout :  moment(props.location.state.ranges[0].endDate).format("YYYY-MM-DD HH:mm:ss"),
             numofrooms : props.location.state.rooms,
-            full_name : first_name,
+            full_name : first_name+' '+last_name,
             email_address : email,
             mobile_no : phone,
             landLine_no : phone,
@@ -49,7 +49,10 @@ const ConfirmBooking = props => {
             city : "",
             country : "",
             special_requirements : ""
-        }));
+        }).then(x => {
+            dispatch(x);
+            props.history.push('/thank-you')
+        })
     }
 
     function changeEvent(e){

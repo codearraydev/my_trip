@@ -1,6 +1,4 @@
-import * as actions from "../constant/Constant";
-
-export const confirmBooking = (data) => {
+export const confirmTourBooking = (data) => {
     return new Promise (function (resolve, reject) {
         var myHeaders = new Headers();
         myHeaders.append("token", "J@NcRfUjXn2r5u8x/A?D(G+KaPdSgVkY");
@@ -12,16 +10,17 @@ export const confirmBooking = (data) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://mytrip.pk/api/public/booking/hotel/add", requestOptions)
+        debugger;
+        fetch("http://mytrip.pk/api/public/booking/add", requestOptions)
             .then(data => data.json())
             .then(json => {
                 if(json.created.toLowerCase() == 'success'){
-                    resolve({ type: 'BOOKING_CONFIRMED', payload: { bookingId: json.bookingid, info: data } })
+                    resolve({ type: 'TOUR_BOOKING_CONFIRMED', payload: { bookingId: json.bookingid, info: data } })
                 } else
-                    reject({ type: 'BOOKING_NOT_CONFIRMED' })
+                    reject({ type: 'TOUR_BOOKING_NOT_CONFIRMED' })
             })
             .catch((err) => {
-                console.log(err)
+                reject({ type: 'TOUR_BOOKING_NOT_CONFIRMED', payload: { err: err } })
             })
     })
 };

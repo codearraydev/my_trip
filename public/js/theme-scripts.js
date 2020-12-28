@@ -731,14 +731,14 @@ tjq(window).load(function() {
     });
     
     // filters option
-    tjq(".filters-container .filters-option a").click(function(e) {
-        e.preventDefault();
-        if (tjq(this).parent().hasClass("active")) {
-            tjq(this).parent().removeClass("active");
-        } else {
-            tjq(this).parent().addClass("active");
-        }
-    });
+    // tjq(".filters-container .filters-option a").click(function(e) {
+    //     e.preventDefault();
+    //     if (tjq(this).parent().hasClass("active")) {
+    //         tjq(this).parent().removeClass("active");
+    //     } else {
+    //         tjq(this).parent().addClass("active");
+    //     }
+    // });
     
     // sort of trip
     tjq(".sort-trip a").click(function(e) {

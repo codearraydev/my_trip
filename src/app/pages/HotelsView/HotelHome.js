@@ -56,6 +56,7 @@ const HotelHome = props => {
 
     const [breakfastClass, setbreakfastClass] = useState('active')
     const [resrotClass, setresrotClass] = useState('active')
+    const [regionsFilter, setRegionsFilter] = useState([]);
 
 
     const changeClass = (param_a) => {
@@ -83,18 +84,19 @@ const HotelHome = props => {
     }
 
 
-    const searchForLocation = () => {
-        let region = [];
-        $.each($("input[name='city']:checked"), function () {
-            region.push("'" + $(this).val() + "'");
-        });
-
-        let vregion = region = (region.length > 0) ? region.join(" , ") : null;
-
-
-        //  console.log(region)
-
-
+    const searchForLocation = (target) => {
+        let regions = regionsFilter;
+        if(regions.includes(target.getAttribute('title')))
+            regions = regions.filter(x => x != target.getAttribute('title'))
+        else
+            regions.push(target.getAttribute('title'))
+        setRegionsFilter(regions)
+        
+        if (target.parentElement.classList.contains('active'))
+            target.parentElement.classList.remove('active')
+        else
+            target.parentElement.classList.add('active')
+        
         let myChecks = {
             "checkmeals": null,
             "type": null,
@@ -103,7 +105,7 @@ const HotelHome = props => {
             "region": null,
             "min": null,
             "max": null,
-            "stay": vregion
+            "stay": regions.join(',')
         }
         let data = JSON.stringify(myChecks);
 
@@ -238,22 +240,24 @@ const HotelHome = props => {
                                         </h4>
                                         <div id="accomodation-type-filter" className="panel-collapse collapse">
                                             <div className="panel-content">
-                                                <ul className="filters-option">
-                                                    {
-                                                        //listItems
 
+                                                <ul className="check-square filters-option">
+                                                    {
                                                         listItems.map((item, index) => {
                                                             console.log(JSON.stringify(item));
                                                             return (
+
                                                                 <li>
-                                                                    <label htmlFor="vehicle1">
-                                                                        <input onChange={() => searchForLocation()} type="checkbox" name="city" value={item.name} />
-                                                                        {item.title}
-                                                                    </label>
+                                                                    <a title={item.title} onClick={(e) => searchForLocation(e.target)}>
+                                                                    {item.title}</a>
                                                                 </li>
-                                                                // <TouchableOpacity onPress={() => changeClass(item.name)}>
-                                                                //     <li id={item.name}><a href="#">{item.title}<small></small></a></li>
-                                                                // </TouchableOpacity>
+
+                                                                // <li>
+                                                                //     <label htmlFor="vehicle1">
+                                                                //         <input onChange={() => searchForLocation()} type="checkbox" name="city" value={item.name} />
+                                                                //         {item.title}
+                                                                //     </label>
+                                                                // </li>
                                                             )
                                                         })
                                                     }

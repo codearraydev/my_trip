@@ -18,6 +18,8 @@ import ImportantPage from './pages/ImportantPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import Faqpage from './pages/Faqpage';
+import ThankYou from './pages/Booking/ThankYou';
+import ConfirmBookingTour from './pages/Booking-Tour/ConfirmTourBooking';
 
 const Route = require("react-router-dom").Route;
 const Switch = require("react-router-dom").Switch;
@@ -45,7 +47,8 @@ const Main = props => {
             <Route exact path="/privacy" component={PrivacyPage} />
             <Route exact path="/terms-of-use" component={TermsPage} />
             <Route exact path="/faq" component={Faqpage} />
-
+            <Route exact path="/thank-you" component={ThankYou} />
+            <Route exact path="/tour-booking" component={ConfirmBookingTour} />
 
         </Switch>
     );
