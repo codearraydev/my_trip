@@ -110,7 +110,7 @@ const HotelHome = props => {
         let data = JSON.stringify(myChecks);
 
         console.log(data)
-        dispatch(fetchFilterHotelsFromApi(data))
+        //dispatch(fetchFilterHotelsFromApi(data))
         // alert('ok')
     }
 
