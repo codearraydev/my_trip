@@ -1,6 +1,6 @@
 import * as actions from "../constant/Constant";
 
-export const fetchDestFromApi = () => {
+export const fetchDestFromApi = (initialData) => {
     return (dispatch) => {
         dispatch(getDestination())
         var myHeaders = new Headers();
@@ -11,8 +11,11 @@ export const fetchDestFromApi = () => {
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
+            body: initialData,
             redirect: 'follow'
         };
+
+        console.log(requestOptions)
         fetch("https://mytrip.pk/api/public/destination/details/undefined", requestOptions)
             .then(data => data.json())
             .then(json => {

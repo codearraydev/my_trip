@@ -128,7 +128,7 @@ const DestinationDetails = props => {
                                                                     return <div className="long-description">
                                                                         <h2>Location Map</h2>
                                                                         <div className="tab-container style1">
-                                                                            { renderHTML(item.dest_map.replace(`width="600"`, `width = "100%"`)) }
+                                                                            {renderHTML(item.dest_map.replace(`width="600"`, `width = "100%"`))}
                                                                         </div>
                                                                     </div>
                                                                 }
@@ -296,25 +296,32 @@ const DestinationDetails = props => {
                                                     </div>
 
                                                     <div className="long-description">
-                                                        <h2>Hotels</h2>
-                                                        <div className="block">
-                                                            <div style={{ height: 500, overflow: 'scroll' }} className="row image-box style1">
-                                                                {
-                                                                    typeof (destInfo.DestInfo.hotels) !== 'undefined' ? (
-                                                                        destInfo.DestInfo.hotels.map((item, index) => {
-                                                                            return <DestHotels
-                                                                                roomTitle={item.hotel_name}
-                                                                                checkout={item.hotel_city}
-                                                                                hotel_desc={item.hotel_desc}
-                                                                                roomPicture={"https://mytrip.pk/api/app/Controllers/uploads/" + item.hotel_cover}
-                                                                                hotelLink={'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
-                                                                            />
+                                                        {
+                                                            typeof (destInfo.DestInfo.hotels) !== 'undefined' && destInfo.DestInfo.hotels.length ? (
+                                                                <>
+                                                                    <h2>Hotels</h2>
+                                                                    <div className="block">
+                                                                        <div style={{}} className="row image-box style1">
+                                                                            {
+                                                                                typeof (destInfo.DestInfo.hotels) !== 'undefined' && destInfo.DestInfo.hotels.length ? (
+                                                                                    destInfo.DestInfo.hotels.map((item, index) => {
+                                                                                        return <DestHotels
+                                                                                            roomTitle={item.hotel_name}
+                                                                                            checkout={item.hotel_city}
+                                                                                            hotel_desc={item.hotel_desc}
+                                                                                            roomPicture={"https://mytrip.pk/api/app/Controllers/uploads/" + item.hotel_cover}
+                                                                                            hotelLink={'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
+                                                                                        />
 
-                                                                        })
-                                                                    ) : null
-                                                                }
-                                                            </div>
-                                                        </div>
+                                                                                    })
+                                                                                ) : null
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+
+                                                                </>
+                                                            ) : null
+                                                        }
 
                                                     </div>
 
@@ -352,8 +359,8 @@ const DestinationDetails = props => {
                                                                             typeof (destInfo.DestInfo.temperatures) !== 'undefined' ? (
                                                                                 destInfo.DestInfo.temperatures.map((item, index) => {
                                                                                     return <tr>
-                                                                                        <td>{ item.month }</td>
-                                                                                        <td>{ item.desc_temp }</td>
+                                                                                        <td>{item.month}</td>
+                                                                                        <td>{item.desc_temp}</td>
                                                                                     </tr>
                                                                                 })
                                                                             ) : null

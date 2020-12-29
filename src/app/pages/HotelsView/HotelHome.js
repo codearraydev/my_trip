@@ -86,17 +86,17 @@ const HotelHome = props => {
 
     const searchForLocation = (target) => {
         let regions = regionsFilter;
-        if(regions.includes(target.getAttribute('title')))
+        if (regions.includes(target.getAttribute('title')))
             regions = regions.filter(x => x != target.getAttribute('title'))
         else
             regions.push(target.getAttribute('title'))
         setRegionsFilter(regions)
-        
+
         if (target.parentElement.classList.contains('active'))
             target.parentElement.classList.remove('active')
         else
             target.parentElement.classList.add('active')
-        
+
         let myChecks = {
             "checkmeals": null,
             "type": null,
@@ -110,91 +110,91 @@ const HotelHome = props => {
         let data = JSON.stringify(myChecks);
 
         console.log(data)
-        //dispatch(fetchFilterHotelsFromApi(data))
+        dispatch(fetchFilterHotelsFromApi(data))
         // alert('ok')
     }
 
 
     const listItems = [
         {
-            "name": "Bahawalpur",
+            "name": "\'Bahawalpur\'",
             "title": "Bahawalpur"
         },
         {
-            "name": "Islamabad",
+            "name": "\'Islamabad\'",
             "title": "Islamabad"
         },
         {
-            "name": "Karachi",
+            "name": "\'Karachi\'",
             "title": "Karachi"
         },
         {
-            "name": "Lahore",
+            "name": "\'Lahore\'",
             "title": "Lahore"
         },
         {
-            "name": "Multan",
+            "name": "\'Multan\'",
             "title": "Multan"
         },
         {
-            "name": "Attabad",
+            "name": "\'Attabad\'",
             "title": "Attabad"
         },
         {
-            "name": "Batakundi",
+            "name": "\'Batakundi\'",
             "title": "Batakundi"
         },
         {
-            "name": "Chitral",
+            "name": "\'Chitral\'",
             "title": "Chitral"
         },
         {
-            "name": "Fairy Meadows",
+            "name": "\'Fairy Meadows\'",
             "title": "Fairy Meadows"
         },
         {
-            "name": "Ghizer",
+            "name": "\'Ghizer\'",
             "title": "Ghizer"
         },
 
         {
-            "name": "Gulmit",
+            "name": "\'Gulmit\'",
             "title": "Gulmit"
         },
         {
-            "name": "Hunza",
+            "name": "\'Hunza\'",
             "title": "Hunza"
         },
         {
-            "name": "Murree",
+            "name": "\'Murree\'",
             "title": "Murree"
         },
         {
-            "name": "Muzaffarabad",
+            "name": "\'Muzaffarabad\'",
             "title": "Muzaffarabad"
         },
         {
-            "name": "Naran",
+            "name": "\'Naran\'",
             "title": "Naran"
         },
         {
-            "name": "Nathiagali",
+            "name": "\'Nathiagali\'",
             "title": "Nathiagali"
         },
         {
-            "name": "Neelum Valley",
+            "name": "\'Neelum Valley\'",
             "title": "Neelum Valley"
         },
         {
-            "name": "Shigar",
+            "name": "\'Shigar\'",
             "title": "Shigar"
         },
         {
-            "name": "Shogran",
+            "name": "\'Shogran\'",
             "title": "Shogran"
         },
         {
-            "name": "Skardu",
+            "name": "\'Skardu\'",
             "title": "Skardu"
         }
     ]
@@ -248,8 +248,8 @@ const HotelHome = props => {
                                                             return (
 
                                                                 <li>
-                                                                    <a title={item.title} onClick={(e) => searchForLocation(e.target)}>
-                                                                    {item.title}</a>
+                                                                    <a title={item.name} onClick={(e) => searchForLocation(e.target)}>
+                                                                        {item.title}</a>
                                                                 </li>
 
                                                                 // <li>

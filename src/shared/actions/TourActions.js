@@ -2,7 +2,7 @@ import { LOAD_TOUR, LOAD_TOUR_SUCCESS, LOAD_TOUR_FAIL } from "../constant/Consta
 
 
 
-export const fetchDestFromApi = () => {
+export const fetchDestFromApi = (initialFIlters) => {
     return (disptach) => {
         disptach(getTour())
         var myHeaders = new Headers();
@@ -13,6 +13,7 @@ export const fetchDestFromApi = () => {
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
+            body: initialFIlters,
             redirect: 'follow'
         };
         fetch("https://www.mytrip.pk/api/public/tours/filters", requestOptions)

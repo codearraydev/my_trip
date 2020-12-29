@@ -11,6 +11,8 @@ import { fetchDestFromApi } from "../../../shared/actions/DestinationAction";
 
 const Home = props => {
 
+
+    const initialData = JSON.stringify({ "region": null });
     const [gridClass, setGridClass] = useState('swap-grid');
     const [showList, setList] = useState(true);
     const [showGrid, setGrid] = useState(false)
@@ -38,8 +40,69 @@ const Home = props => {
     }
 
     useEffect(() => {
-        dispatch(fetchDestFromApi())
+        dispatch(fetchDestFromApi(initialData))
     }, [])
+
+
+
+
+    const listItems = [
+        {
+            "name": "1",
+            "title": "KPK"
+        },
+        {
+            "name": "6",
+            "title": "Gilgit Baltistan"
+        },
+        {
+            "name": "7",
+            "title": "Azad Kashmir"
+        },
+        {
+            "name": "3",
+            "title": "Punjab"
+        },
+        {
+            "name": "4",
+            "title": "Sindh"
+        },
+        {
+            "name": "5",
+            "title": "Balochistan"
+        }
+    ];
+
+    const [regionsFilter, setRegionsFilter] = useState([]);
+    const searchForDestinatons = (target) => {
+
+
+        let regions = regionsFilter;
+        if (regions.includes(target.getAttribute('title')))
+            regions = regions.filter(x => x != target.getAttribute('title'))
+        else
+            regions.push(target.getAttribute('title'))
+        setRegionsFilter(regions)
+
+        if (target.parentElement.classList.contains('active'))
+            target.parentElement.classList.remove('active')
+        else
+            target.parentElement.classList.add('active')
+
+
+        let myChecks = {
+            "region": (regions.length > 0) ? regions.join(" , ") : null
+        }
+
+        let data = JSON.stringify(myChecks);
+
+        //console.log(data)
+        dispatch(fetchDestFromApi(data))
+        //let vregion = regions = (regions.length > 0) ? regions.join(" , ") : null;
+        //let raw = JSON.stringify({ "region": regions.join(" , ") });
+
+        // console.log(raw)
+    }
 
     return (
         <div id="page-wrapper">
@@ -61,24 +124,13 @@ const Home = props => {
                         <div className="row">
                             {/*  Search Filters */}
                             <div className="col-sm-4 col-md-3">
-                                <h4 className="search-results-title"><i className="soap-icon-search" /><b>1,984</b> results found.</h4>
+                                <h4 className="search-results-title"><i className="soap-icon-search" /><b>Filters</b> </h4>
                                 <div className="toggle-container filters-container">
-                                    <div className="panel style1 arrow-right">
-                                        <h4 className="panel-title">
-                                            <a data-toggle="collapse" href="#price-filter" className="collapsed">Price</a>
-                                        </h4>
-                                        <div id="price-filter" className="panel-collapse collapse">
-                                            <div className="panel-content">
-                                                <div id="price-range" />
-                                                <br />
-                                                <div className="clearer" />
-                                            </div>{/* end content */}
-                                        </div>
-                                    </div>
+
 
                                     <div className="panel style1 arrow-right">
                                         <h4 className="panel-title">
-                                            <a data-toggle="collapse" href="#accomodation-type-filter" className="collapsed">Region/Cites</a>
+                                            <a data-toggle="collapse" href="#accomodation-type-filter" className="collapsed">Region</a>
                                         </h4>
                                         <div id="accomodation-type-filter" className="panel-collapse collapse">
                                             <div className="panel-content">
@@ -98,6 +150,31 @@ const Home = props => {
 
 
                                                 </ul> */}
+
+                                                <ul className="check-square filters-option">
+                                                    {
+                                                        listItems.map((item, index) => {
+                                                            // console.log(JSON.stringify(item));
+                                                            return (
+
+                                                                <li>
+                                                                    <a title={item.name} onClick={(e) => { searchForDestinatons(e.target) }}>
+                                                                        {item.title}</a>
+                                                                </li>
+
+                                                                // <li>
+                                                                //     <label htmlFor="vehicle1">
+                                                                //         <input onChange={() => searchForLocation()} type="checkbox" name="city" value={item.name} />
+                                                                //         {item.title}
+                                                                //     </label>
+                                                                // </li>
+                                                            )
+                                                        })
+                                                    }
+
+
+                                                </ul>
+
 
                                             </div>
                                         </div>
@@ -149,7 +226,7 @@ const Home = props => {
                                                             picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.dest_cover_image}
                                                             destName={item.dest_name}
                                                             destRegion={item.dest_cat_name}
-                                                            dest_desc={ item.dest_description }
+                                                            dest_desc={item.dest_description}
                                                             // hotel_average_price={item.hotel_average_price}
                                                             destLink={'/destinations/' + convertToSlug(item.dest_name) + '/' + item.dest_id}  //{'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
                                                         />
