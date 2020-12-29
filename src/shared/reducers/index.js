@@ -6,6 +6,7 @@ import Destinations from "./Destinations";
 import Booking from "./Booking";
 import DestInfo from "./DestInfo";
 import Tours from "./Tours";
+import Cars from "./Cars";
 import TourInfo from "./TourInfo";
 import HotelData from "./HotelData";
 import Blogs from "./Blogs";
@@ -31,8 +32,8 @@ const rootReducer = combineReducers({
     Important,
     Privacy,
     Terms,
-    Faq
-
+    Faq,
+    Cars
 });
 
 //export default rootReducer;

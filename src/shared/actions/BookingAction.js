@@ -1,6 +1,6 @@
-import * as actions from "../constant/Constant";
+import EmailTemplates from '../../app/email-templates/Booking';
 
-export const confirmBooking = (data) => {
+const confirmBooking = (data) => {
     return new Promise (function (resolve, reject) {
         var myHeaders = new Headers();
         myHeaders.append("token", "J@NcRfUjXn2r5u8x/A?D(G+KaPdSgVkY");
@@ -25,3 +25,39 @@ export const confirmBooking = (data) => {
             })
     })
 };
+
+const sendBookingEmail = (full_name, hotelName, mobile_no, numofrooms, finalDateIn, finalDateOut, roomPrice, diffDays, RoomCost, email) => {
+    return new Promise (function (resolve, reject) {
+        var myHeaders = new Headers();
+        myHeaders.append("token", "J@NcRfUjXn2r5u8x/A?D(G+KaPdSgVkY");
+        myHeaders.append("Content-Type", "application/json");
+        var emailBody = EmailTemplates.HotelBooking(full_name, hotelName, mobile_no, numofrooms, finalDateIn, finalDateOut, roomPrice, diffDays, RoomCost);
+        var raw = JSON.stringify(emailBody);
+        var senderMail = "no-reply@mytrip.pk";	
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: {
+                send: senderMail,
+                receive: email,
+                message: emailBody,
+                subject: "New Hotel Booking Request"
+            },
+            redirect: 'follow'
+        };
+        fetch("https://mytrip.pk/includes/sendEmail.php", requestOptions)
+            .then(r => {
+                debugger;
+                let response = r.json();
+                resolve({ type: 'EMAIL_SENT' })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    })
+}
+
+export default {
+    confirmBooking,
+    sendBookingEmail
+}
