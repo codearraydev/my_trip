@@ -3,7 +3,7 @@ import moment from 'moment';
 import { useDispatch } from "react-redux";
 import SubHeader from "../../components/SubHeader";
 import Footer from '../../components/Footer';
-import { confirmTourBooking as confirmBookingApi } from "../../../shared/actions/TourBookingAction";
+import TourBookingActions from "../../../shared/actions/TourBookingAction";
 
 const ConfirmBookingTour = props => {
 
@@ -47,12 +47,13 @@ const ConfirmBookingTour = props => {
         travelDate: null,
         nationality: 'Pakistan',
         room_quantity: 1,
-        hotelType: 'Gold',
+        hoteltype: 'Gold',
         message: '',
         tourservices: "",
         traveloption: "Road",
         tour_id: props.location.state.tour.tour_id,
-        confirmBtnText: 'CONFIRM BOOKING'
+        confirmBtnText: 'CONFIRM BOOKING',
+        tour_id_related: 0
     });
 
     const dispatch = useDispatch();
@@ -72,18 +73,19 @@ const ConfirmBookingTour = props => {
     
     function confirmBooking(event){
         event.preventDefault();
-        debugger;
         if(!state.first_name || !state.travephone || !state.travelDate)
             return setState({...state, error: 'Please provide required information' });
 
         setState({ ...state, error: null, confirmBtnText: 'PLEASE WAIT' })
 
-        confirmBookingApi({ 
+        TourBookingActions.confirmTourBooking({ 
             ...state,
             travelUser: state.first_name + ' ' + state.last_name
         }).then(x => {
-            dispatch(x);
-            props.history.push('/thank-you')
+            TourBookingActions.sendBookingEmail((state.first_name + ' ' + state.last_name), props.location.state.tour.dest_name, state.travephone, state.hoteltype, state.travelOption, state.travelDate, state.travelFrom, state.travelReason, state.email).then(x => {
+                dispatch(x);
+                props.history.push('/thank-you')
+            })
         })
     }
 
@@ -172,11 +174,11 @@ const ConfirmBookingTour = props => {
                                             </div>
                                             <div className="col-sm-4 col-md-4">
                                                 <label>Hotel Type</label>
-                                                <input name="hotelType" type="radio" value="Gold" checked={state.hotelType === "Gold"} onChange={ (e) => setState({...state, hotelType: e.currentTarget.value}) } /> Gold
+                                                <input name="hoteltype" type="radio" value="Gold" checked={state.hoteltype === "Gold"} onChange={ (e) => setState({...state, hoteltype: e.currentTarget.value}) } /> Gold
                                                 <br />
-                                                <input name="hotelType" type="radio" value="Bronze" checked={state.hotelType === "Bronze"} onChange={ (e) => setState({...state, hotelType: e.currentTarget.value}) } /> Bronze
+                                                <input name="hoteltype" type="radio" value="Bronze" checked={state.hoteltype === "Bronze"} onChange={ (e) => setState({...state, hoteltype: e.currentTarget.value}) } /> Bronze
                                                 <br />
-                                                <input name="hotelType" type="radio" value="Standard" checked={state.hotelType === "Standard"} onChange={ (e) => setState({...state, hotelType: e.currentTarget.value}) } /> Standard
+                                                <input name="hoteltype" type="radio" value="Standard" checked={state.hoteltype === "Standard"} onChange={ (e) => setState({...state, hoteltype: e.currentTarget.value}) } /> Standard
                                             </div>
                                             <div className="col-sm-4 col-md-4">
                                                 <label>Tour Services</label>

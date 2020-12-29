@@ -20,6 +20,9 @@ import TermsPage from './pages/TermsPage';
 import Faqpage from './pages/Faqpage';
 import ThankYou from './pages/Booking/ThankYou';
 import ConfirmBookingTour from './pages/Booking-Tour/ConfirmTourBooking';
+import CarsHome from './pages/Cars/CarsHome';
+import ConfirmCarHiring from './pages/Cars/ConfirmCarHiring';
+import ThankYouCarHire from './pages/Cars/ThankYou';
 
 const Route = require("react-router-dom").Route;
 const Switch = require("react-router-dom").Switch;
@@ -49,7 +52,9 @@ const Main = props => {
             <Route exact path="/faq" component={Faqpage} />
             <Route exact path="/thank-you" component={ThankYou} />
             <Route exact path="/tour-booking" component={ConfirmBookingTour} />
-
+            <Route exact path="/car-hire" component={CarsHome} />
+            <Route exact path="/car-hire-confirmation" component={ConfirmCarHiring} />
+            <Route exact path="/car-hire-thank-you" component={ThankYouCarHire} />
         </Switch>
     );
 }

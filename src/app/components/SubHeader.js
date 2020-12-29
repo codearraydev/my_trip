@@ -39,7 +39,9 @@ export default function SubHeader() {
                                 </Link>
                             </li>
                             <li className="menu-item-has-children">
-                                <a href="flight-index.html">Car Hire</a>
+                                <Link to='/car-hire'>
+                                    <a>Car Hire</a>
+                                </Link>
 
                             </li>
                             <li className="menu-item-has-children">
@@ -87,9 +89,9 @@ export default function SubHeader() {
                             </ul>
                         </li>
                         <li className="menu-item-has-children">
-                            <a href="flight-index.html">Flights</a>
+                            <a>Flights</a>
                             <ul>
-                                <li><a href="flight-index.html">Home Flights</a></li>
+                                <li><a>Home Flights</a></li>
                                 <li><a href="flight-list-view.html">List View</a></li>
                                 <li><a href="flight-grid-view.html">Grid View</a></li>
                                 <li><a href="flight-block-view.html">Block View</a></li>

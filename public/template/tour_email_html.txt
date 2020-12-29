@@ -1,0 +1,65 @@
+var message = '<html><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"><\/script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"><\/script></head>';
+                message += '<body>';
+                message += '<p>Dear ' + full_name + '</p>';
+                message += '<p>Thank you for choosing MyTrip.pk as your travel partner.\
+                            We have received your booking request for '+tourName+'.\
+                            We are checking for hotel availability and preparing a travel plan for you. You will be\
+                            notified within 6 hours. Tour details are as under: <p>';
+                message += "<div class='table-responsive'>\
+                        <table class='table'>\
+                                <tbody>\
+                                <tr style='height: 20px;'>\
+                                <td style='width: 30.6098%; height: 20px;'><strong>&nbsp;Name</strong></td>\
+                                <td style='width: 64.3902%; height: 20px;'>"+full_name+"</td>\
+                                </tr>\
+                                <tr style='height: 20px;'>\
+                                <td style='width: 30.6098%; height: 20px;'><strong>&nbsp;Mobile</strong></td>\
+                                <td style='width: 64.3902%; height: 20px;'>"+contact_no+"</td>\
+                                </tr>\
+                                <tr style='height: 20px;'>\
+                                <td style='width: 30.6098%; height: 20px;'>&nbsp;<strong>Tour Location</strong></td>\
+                                <td style='width: 64.3902%; height: 20px;'>"+tourName+"</td>\
+                                </tr>\
+                                <tr style='height: 20px;'>\
+                                <td style='width: 30.6098%; height: 20px;'>&nbsp;<strong>Hotel Type</strong></td>\
+                                <td style='width: 64.3902%; height: 20px;'> "+hoteltype+" </td>\
+                                </tr>\
+                                <tr style='height: 20px;'>\
+                                <td style='width: 30.6098%; height: 20px;'>&nbsp;<strong>Traveling Option</strong></td>\
+                                <td style='width: 64.3902%; height: 20px;'>By "+travelOption+"</td>\
+                                </tr>\
+                                <tr style='height: 20.8px;'>\
+                                <td style='width: 30.6098%; height: 20.8px;'>&nbsp;<strong>Tour Date</strong></td>\
+                                <td style='width: 64.3902%; height: 20.8px;'>"+travelDate+"</td>\
+                                </tr>\
+                                <tr style='height: 20px;'>\
+                                <td style='width: 30.6098%; height: 20px;'>&nbsp;<strong>Traveling From</strong></td>\
+                                <td style='width: 64.3902%; height: 20px;'>"+travelFrom+"</td>\
+                                </tr>\
+                                <tr style='height: 20px;'>\
+                                <td style='width: 30.6098%; height: 20px;'>&nbsp;<strong>Travelling Reason</strong></td>\
+                                <td style='width: 64.3902%; height: 20px;'>"+travelReason+"</td>\
+                                </tr>\
+                                </tbody>\
+                        </table>\
+                    </div>";
+                message += "<p><img class='img-responsive' src='https://mytrip.pk/images/step-1.png' alt='workflow' /></p>\
+                    <p>Thank you in advance.</p>";
+                message += '</body></html>';
+					
+					
+				
+/***************************************************************/
+Send Email Function
+
+var senderMail = "no-reply@mytrip.pk";				//sender
+
+url: "https://mytrip.pk/includes/sendEmail.php",
+type: "POST",
+data: {
+	send: senderMail,
+	receive: email,    //receiver email
+	message: message,	//html cotent
+	subject: "Tour Booking"
+}
+       

@@ -3,7 +3,7 @@ import moment from 'moment';
 import { useDispatch } from "react-redux";
 import SubHeader from "../../components/SubHeader";
 import Footer from '../../components/Footer';
-import { confirmBooking as confirmBookingApi } from "../../../shared/actions/BookingAction";
+import ConfirmBookingActions from "../../../shared/actions/BookingAction";
 
 const ConfirmBooking = props => {
 
@@ -35,7 +35,7 @@ const ConfirmBooking = props => {
 
         setState({error: null, first_name: state.first_name, last_name: state.last_name, phone: state.phone, email: state.email, confirmBtnText: 'PLEASE WAIT' })
 
-        confirmBookingApi({
+        ConfirmBookingActions.confirmBooking({
             hotel_id : props.location.state.hotel_id,
             room_id : props.location.state.room_id,
             checkin : moment(props.location.state.ranges[0].startDate).format("YYYY-MM-DD HH:mm:ss"),
@@ -50,8 +50,21 @@ const ConfirmBooking = props => {
             country : "",
             special_requirements : ""
         }).then(x => {
-            dispatch(x);
-            props.history.push('/thank-you')
+            ConfirmBookingActions.sendBookingEmail(
+                first_name+' '+last_name,
+                props.location.state.hotel.hotel.hotel_name,
+                phone,
+                props.location.state.rooms,
+                moment(props.location.state.ranges[0].startDate).format("YYYY-MM-DD HH:mm:ss"),
+                moment(props.location.state.ranges[0].endDate).format("YYYY-MM-DD HH:mm:ss"),
+                props.location.state.price*props.location.state.rooms,
+                moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days'),
+                props.location.state.price,
+                email
+            ).then(x => {
+                dispatch(x);
+                props.history.push('/thank-you')
+            })
         })
     }
 

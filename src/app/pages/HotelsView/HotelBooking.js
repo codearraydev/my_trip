@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import SubHeader from '../../components/SubHeader';
 import Footer from '../../components/Footer';
 import { connect, useSelector, useDispatch } from "react-redux";
+
 const HotelBooking = props => {
 
     //const { data } = props.location

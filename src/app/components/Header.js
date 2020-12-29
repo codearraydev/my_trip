@@ -87,8 +87,9 @@ export default function Header() {
 
                             </li>
                             <li className="menu-item-has-children">
-                                <a href="flight-index.html">Car Hire</a>
-
+                                <Link to='/car-hire'>
+                                    <a>Car Hire</a>
+                                </Link>
                             </li>
                             <li className="menu-item-has-children">
                                 {/* <a href="car-index.html">Tours</a> */}
