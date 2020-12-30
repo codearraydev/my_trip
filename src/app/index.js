@@ -23,6 +23,7 @@ import ConfirmBookingTour from './pages/Booking-Tour/ConfirmTourBooking';
 import CarsHome from './pages/Cars/CarsHome';
 import ConfirmCarHiring from './pages/Cars/ConfirmCarHiring';
 import ThankYouCarHire from './pages/Cars/ThankYou';
+import ThankYouTour from './pages/Booking-Tour/ThankYou';
 
 const Route = require("react-router-dom").Route;
 const Switch = require("react-router-dom").Switch;
@@ -55,6 +56,7 @@ const Main = props => {
             <Route exact path="/car-hire" component={CarsHome} />
             <Route exact path="/car-hire-confirmation" component={ConfirmCarHiring} />
             <Route exact path="/car-hire-thank-you" component={ThankYouCarHire} />
+            <Route exact path="/tour-thank-you" component={ThankYouTour} />
         </Switch>
     );
 }

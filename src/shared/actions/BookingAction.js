@@ -30,20 +30,19 @@ const sendBookingEmail = (full_name, hotelName, mobile_no, numofrooms, finalDate
     return new Promise (function (resolve, reject) {
         var myHeaders = new Headers();
         myHeaders.append("token", "J@NcRfUjXn2r5u8x/A?D(G+KaPdSgVkY");
-        myHeaders.append("Content-Type", "application/json");
+        // myHeaders.append("Content-Type", "application/json");
         var emailBody = EmailTemplates.HotelBooking(full_name, hotelName, mobile_no, numofrooms, finalDateIn, finalDateOut, roomPrice, diffDays, RoomCost);
-        var raw = JSON.stringify(emailBody);
         var senderMail = "no-reply@mytrip.pk";	
+
+        let formData = new FormData();
+        formData.append('send', senderMail);
+        formData.append('receive', email);
+        formData.append('message', emailBody);
+        formData.append('subject', "New Hotel Booking Request");
+
         var requestOptions = {
             method: 'POST',
-            headers: myHeaders,
-            body: {
-                send: senderMail,
-                receive: email,
-                message: emailBody,
-                subject: "New Hotel Booking Request"
-            },
-            redirect: 'follow'
+            body: formData,
         };
         fetch("https://mytrip.pk/includes/sendEmail.php", requestOptions)
             .then(r => {

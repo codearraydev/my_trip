@@ -16,6 +16,7 @@ const fetchCarsFromApi = () => {
             .then(json => {
                 disptach(getCarsSuccess(json.result))
                 disptach(getNonFilteredCars(json.result))
+                window.initPriceRange(Math.min(...json.result.map(x => x.car_price)), Math.max(...json.result.map(x => x.car_price)));
             })
             .catch((err) => {
                 console.log(err)

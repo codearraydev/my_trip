@@ -8,7 +8,11 @@ const initialState = {
         car_type: [],
         car_make: [],
         car_class: [],
-        features: []
+        features: [],
+        price: {
+            low: 0,
+            hight: 0
+        }
     },
     isGetting: false,
     error: false

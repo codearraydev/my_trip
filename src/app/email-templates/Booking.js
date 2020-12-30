@@ -47,6 +47,7 @@ const TourBooking = (full_name, tourName, contact_no, hoteltype, travelOption, t
     message += "<p><img class='img-responsive' src='https://mytrip.pk/images/step-1.png' alt='workflow' /></p>\
         <p>Thank you in advance.</p>";
     message += '</body></html>';
+    return message;
 }
 
 const HotelBooking = (full_name, hotelName, mobile_no, numofrooms, finalDateIn, finalDateOut, roomPrice, diffDays, RoomCost) => {
