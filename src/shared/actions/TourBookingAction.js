@@ -12,7 +12,6 @@ const confirmTourBooking = (data) => {
             body: raw,
             redirect: 'follow'
         };
-        debugger;
         fetch("http://mytrip.pk/api/public/booking/add", requestOptions)
             .then(data => data.json())
             .then(json => {
@@ -33,20 +32,19 @@ const sendBookingEmail = (full_name, tourName, contact_no, hoteltype, travelOpti
         myHeaders.append("token", "J@NcRfUjXn2r5u8x/A?D(G+KaPdSgVkY");
         myHeaders.append("Content-Type", "application/json");
         var emailBody = EmailTemplates.TourBooking(full_name, tourName, contact_no, hoteltype, travelOption, travelDate, travelFrom, travelReason);
-        var raw = JSON.stringify(emailBody);
         var senderMail = "no-reply@mytrip.pk";	
+
+        let formData = new FormData();
+        formData.append('send', senderMail);
+        formData.append('receive', email);
+        formData.append('message', emailBody);
+        formData.append('subject', "Tour Booking");
+
         var requestOptions = {
             method: 'POST',
-            headers: myHeaders,
-            body: {
-                send: senderMail,
-                receive: email,
-                message: emailBody,
-                subject: "Tour Booking"
-            },
-            redirect: 'follow'
+            body: formData,
         };
-        debugger;
+
         fetch("https://mytrip.pk/includes/sendEmail.php", requestOptions)
             .then(r => {
                 let response = r.json();

@@ -26,7 +26,11 @@ const CarsHome = props => {
         car_type: [],
         car_make: [],
         car_class: [],
-        features: []
+        features: [],
+        price: {
+            low: 0,
+            hight: 0
+        }
     };
 
     const loadGrid = () => {
@@ -58,12 +62,26 @@ const CarsHome = props => {
         })
     }
 
+    let minPrice = null;
+    let maxPrice = null;
+
+    const handlePriceRangeChange = () => {
+        minPrice = parseFloat(document.getElementById("carHireMinPrice").getAttribute('range'))
+        maxPrice = parseFloat(document.getElementById("carHireMaxPrice").getAttribute('range'))
+
+        setTimeout(() => {
+            applyFilter(null, 'price', null);
+        }, 500);
+    }
+
     function applyFilter(target, mod, modVal){
         // Mod is the property of car, i.e. Car make, Car Type, Car Model & it must match with key of car i.e. car_make, car_model, car_type
-        if (target.parentElement.classList.contains('active'))
-            target.parentElement.classList.remove('active')
-        else
-            target.parentElement.classList.add('active')
+        if(target){
+            if (target.parentElement.classList.contains('active'))
+                target.parentElement.classList.remove('active')
+            else
+                target.parentElement.classList.add('active')
+        }
 
         filtersApplied = allCars.filters;
         let carsToRender = [];
@@ -121,9 +139,7 @@ const CarsHome = props => {
             carClassFilter.includes(x.car_class)
         )
 
-        debugger;
         if(filtersApplied.features.length){
-
             if(
                 filtersApplied.features.includes("car_ac") &&
                 !filtersApplied.features.includes("car_gearbox_1") &&
@@ -165,7 +181,15 @@ const CarsHome = props => {
                 filtersApplied.features.includes("car_gearbox_1") &&
                 filtersApplied.features.includes("car_gearbox_2")
             )
-                carsToRender = carsToRender.filter(x => x.car_ac == 1 || x.car_gearbox == 1 || x.car_gearbox == 2)
+            carsToRender = carsToRender.filter(x => x.car_ac == 1 || x.car_gearbox == 1 || x.car_gearbox == 2)
+        }
+
+        if(mod == 'price' || (filtersApplied.price.low && filtersApplied.price.low > 0)){
+            filtersApplied.price = {
+                low: minPrice ? minPrice : filtersApplied.price.low,
+                high: maxPrice ? maxPrice : filtersApplied.price.high
+            }
+            carsToRender = carsToRender.filter(x => x.car_price >= (minPrice ? minPrice : filtersApplied.price.low) && x.car_price <= (maxPrice ? maxPrice : filtersApplied.price.high))
         }
 
         dispatch(CarActions.getFilteredCars(carsToRender, carsList.UnFilteredCars, filtersApplied))
@@ -186,6 +210,8 @@ const CarsHome = props => {
                 </div>
             </div>
 
+            {/* DUMMY BUTTON TO TRIGGER PRICE RANGE CHANGE FROM INDEX.HTML  */}
+            <button id="carHirePriceRangeChange" onClick={handlePriceRangeChange} hidden></button>
 
             <section id="content">
                 <div className="container">
@@ -203,6 +229,8 @@ const CarsHome = props => {
                                             <div className="panel-content">
                                                 <div id="price-range" />
                                                 <br />
+                                                <span className="min-price-label pull-left"></span>
+                                                <span className="max-price-label pull-right"></span>
                                                 <div className="clearer" />
                                             </div>{/* end content */}
                                         </div>
