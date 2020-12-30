@@ -30,12 +30,12 @@ const ThankYouTour = (props) => {
                     <div className="row">
                         <div id="main" className="col-sm-8 col-md-9">
                             <div className="booking-information travelo-box">
-                                <h2>Car Booking Confirmation</h2>
+                                <h2>Tour Booking Confirmation</h2>
                                 <hr />
                                 <div className="booking-confirmation clearfix">
                                     <i className="soap-icon-recommend icon circle"></i>
                                     <div className="message">
-                                        <h4 className="main-message">Thank You. Your Car Booking is Confirmed Now.</h4>
+                                        <h4 className="main-message">Thank You. Your Tour Booking is Confirmed Now.</h4>
                                         <p>A confirmation email has been sent to your provided email address.</p>
                                     </div>
                                 </div>
