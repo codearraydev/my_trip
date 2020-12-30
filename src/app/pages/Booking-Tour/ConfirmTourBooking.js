@@ -84,7 +84,10 @@ const ConfirmBookingTour = props => {
         }).then(x => {
             TourBookingActions.sendBookingEmail((state.first_name + ' ' + state.last_name), props.location.state.tour.dest_name, state.travephone, state.hoteltype, state.travelOption, state.travelDate, state.travelFrom, state.travelReason, state.email).then(x => {
                 dispatch(x);
-                props.history.push('/thank-you')
+                return props.history.push({
+                    pathname: '/tour-thank-you',
+                    state: state
+                })
             })
         })
     }

@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import Footer from '../../components/Footer';
 import SubHeader from '../../components/SubHeader';
-import ReactToPrint from 'react-to-print';
 
-const ThankYouCarHire = (props) => {
+const ThankYouTour = (props) => {
 
     useEffect(() => {
-        if(!props.location.state.carid)
-            return props.history.push('/car-hire')
+        if(!props.location.state.tour_id)
+            return props.history.push('/tours')
     }, [])
 
     return (
@@ -92,4 +91,4 @@ const ThankYouCarHire = (props) => {
     );
 }
 
-export default ThankYouCarHire;
+export default ThankYouTour;

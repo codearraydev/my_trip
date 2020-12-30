@@ -18,7 +18,7 @@ const ConfirmCarHiring = props => {
         depdate: null,
         returndate: null,
         message: '',
-        carid: props.location.state.car_id,
+        carid: props.location.state.carid,
         confirmBtnText: 'CONFIRM BOOKING'
     });
 
@@ -34,10 +34,11 @@ const ConfirmCarHiring = props => {
 
         CarActions.confirmCarHire(state).then(x => {
             if(x.status == 201){
-                alert('Booking Created')
-                return props.history.push('/car-hire')
+                return props.history.push({
+                    pathname: '/car-hire-thank-you',
+                    state: state
+                })
             }
-                // return props.history.push('/car-hire-thank-you')
             alert('An error occurred')
         })
     }
