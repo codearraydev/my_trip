@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import renderHTML from "react-render-html";
+import { ActivityIndicator, FlatList, TouchableOpacity, View } from "react-native-web";
+
+import Lightbox from 'react-image-lightbox';
+
+import { Modal, Button, ModalBody, ModalDialog, ModalFooter, ModalTitle, ModalProps, ModalDialogProps } from 'react-bootstrap';
 const TourPackages = props => {
+
+
+    const [photoIndex, setPhoneIndex] = useState(0);
+    const [isOpen, setIsOpen] = useState(false)
+
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         // <li>
         //     <article className="box">
@@ -27,17 +43,52 @@ const TourPackages = props => {
         //         </div>
         //     </article>
         // </li>
-        <div className="col-sm-6 col-md-4">
-            <article className="box">
-                <figure>
-                    <a href="#" title className="hover-effect"><img src="http://placehold.it/270x160" alt width={270} height={160} /></a>
-                </figure>
-                <div className="details">
-                    <span className="price"><small>FROM</small>$490</span>
-                    <h4 className="box-title">Atlantis - The Palm<small>Paris</small></h4>
-                </div>
-            </article>
-        </div>
+        <>
+            <div className="col-sm-6 col-md-4">
+                <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => setIsOpen(true)}>
+                    {/* <article className="box">
+                        <figure>
+                            <a title ><img style={{ width: '100%', height: 160, objectFit: 'cover' }} src={[props.packagePicture]} alt width={270} height={160} /></a>
+                        </figure>
+
+                        <div className="details">
+                            <h4 className="box-title">{props.packageName}</h4>
+                        </div>
+
+
+                    </article> */}
+
+
+                    <article className="box">
+                        <figure>
+                            <a title ><img style={{ width: '100%', height: 160, objectFit: 'cover' }} src={[props.packagePicture]} alt width={270} height={160} /></a>
+                        </figure>
+                        <div className="details">
+                            <span className="price">
+
+                            </span>
+                            <h4 className="box-title" style={{ height: 30, overflow: "hidden" }}>{props.packageName}<small></small></h4>
+                            <div className="action">
+                                <a style={{ width: '100%' }} className="button btn-small yellow popup-map" href="#" data-box="48.856614, 2.352222">Book Tour</a>
+                            </div>
+                        </div>
+                    </article>
+
+
+
+                </TouchableOpacity>
+            </div >
+
+            {
+                isOpen && (
+                    <Lightbox
+                        mainSrc={props.packagePicture}
+                        onCloseRequest={() => setIsOpen(false)}
+                    />
+                )}
+
+        </>
+
     );
 }
 

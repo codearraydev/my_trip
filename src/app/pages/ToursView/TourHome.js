@@ -1,5 +1,5 @@
 import { connect, useSelector, useDispatch } from "react-redux";
-import { ActivityIndicator, TouchableOpacity, View ,  Button, Text} from "react-native-web";
+import { ActivityIndicator, TouchableOpacity, View, Button, Text } from "react-native-web";
 import { useState, useEffect } from 'react';
 
 import SubHeader from "../../components/SubHeader";
@@ -8,13 +8,15 @@ import DestinationList from "../../components/DestinationDetails/DestintionList"
 import DestinationGrid from "../../components/DestinationDetails/DestinationGrid";
 
 import { fetchDestFromApi } from "../../../shared/actions/TourActions";
+import DestinationBlock from "../../components/DestinationDetails/DestinationBlock";
 
 
 const TourHome = props => {
 
     const [gridClass, setGridClass] = useState('swap-grid');
-    const [showList, setList] = useState(true);
-    const [showGrid, setGrid] = useState(false)
+    const [showList, setList] = useState(false);
+    const [showGrid, setGrid] = useState(false);
+    const [showBlock, setBlock] = useState(true)
 
 
     //redux
@@ -25,11 +27,19 @@ const TourHome = props => {
     const loadGrid = () => {
         setList(false)
         setGrid(true)
+        setBlock(false)
     }
 
     const loadList = () => {
         setList(true)
         setGrid(false)
+        setBlock(false)
+    }
+
+    const loadblock = () => {
+        setList(false)
+        setGrid(false)
+        setBlock(true)
     }
 
     function convertToSlug(Text) {
@@ -330,7 +340,7 @@ const TourHome = props => {
 
                             <div className="col-sm-8 col-md-9">
                                 <div className="sort-by-section clearfix">
-                                    <h4 class="panel-content sort-by-title block-sm">Sort results by:</h4>
+                                    <h4 class="panel-content sort-by-title block-sm">Sort:</h4>
                                     <ul class="check-square filters-option">
                                         {/* {
                                             mainFilters.map((item, index) => {
@@ -360,8 +370,8 @@ const TourHome = props => {
                                             mainFilters.map((item, index) => {
                                                 // console.log(JSON.stringify(item));
                                                 return (
-                                                    <li style={{ cursor: 'pointer', marginLeft: 10, borderRadius: 4 }}>
-                                                        <a title={item.name} onClick={(e) => { findTours(e.target, "duration") }}>
+                                                    <li style={{ cursor: 'pointer', marginLeft: 10, borderRadius: 4, marginTop: 4 }}>
+                                                        <a class="button btn-small" title={item.name} onClick={(e) => { findTours(e.target, "duration") }}>
                                                             {item.title}
                                                         </a>
                                                     </li>
@@ -370,7 +380,13 @@ const TourHome = props => {
                                         }
                                     </ul>
 
-                                    <ul className="swap-tiles clearfix block-sm">
+                                    {/* <ul className="swap-tiles clearfix block-sm">
+                                        <li className="swap-block">
+                                            <TouchableOpacity onPress={() => loadblock()}>
+                                                <a href="#"><i className="soap-icon-block" /></a>
+                                            </TouchableOpacity>
+                                        </li>
+
                                         <li className="swap-list active">
                                             <TouchableOpacity onPress={() => loadList()}>
                                                 <a href="#"><i className="soap-icon-list" /></a>
@@ -381,6 +397,32 @@ const TourHome = props => {
                                                 <a href="#"><i className="soap-icon-grid" /></a>
                                             </TouchableOpacity>
                                         </li>
+
+                                    </ul> */}
+                                </div>
+
+                                <br /><br />
+                                <div className="sort-by-section clearfix">
+
+                                    <h4 class="panel-content sort-by-title block-sm">Select Your Tour:</h4>
+                                    <ul className="swap-tiles clearfix block-sm">
+                                        <li className="swap-block">
+                                            <TouchableOpacity onPress={() => loadblock()}>
+                                                <a href="#"><i className="soap-icon-block" /></a>
+                                            </TouchableOpacity>
+                                        </li>
+
+                                        <li className="swap-list active">
+                                            <TouchableOpacity onPress={() => loadList()}>
+                                                <a href="#"><i className="soap-icon-list" /></a>
+                                            </TouchableOpacity>
+                                        </li>
+                                        <li className={gridClass}>
+                                            <TouchableOpacity onPress={() => loadGrid()}>
+                                                <a href="#"><i className="soap-icon-grid" /></a>
+                                            </TouchableOpacity>
+                                        </li>
+
                                     </ul>
                                 </div>
 
@@ -446,6 +488,45 @@ const TourHome = props => {
                                                         )
                                                     })
                                                 ) : null
+                                            }
+                                        </div>
+                                    </div>
+
+                                }
+
+                                {
+                                    showBlock &&
+                                    <div className="hotel-list">
+                                        <div className="row image-box hotel listing-style2">
+
+                                            {
+                                                destinationList.isGetting && <View style={{ textAlign: 'center', marginBottom: 5 }}><ActivityIndicator size="small" color="#00A1DE" /></View>
+                                            }
+                                            {
+
+                                                typeof (destinationList.Tours) !== 'undefined' && destinationList.Tours.length ? (
+                                                    destinationList.Tours.map((item, index) => {
+                                                        // console.log(item.dest_cover_image);
+                                                        return (
+                                                            <DestinationBlock
+                                                                picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.tour_cover}
+                                                                destName={item.tour_location}
+                                                                destRegion={item.dest_cat_name}
+                                                                dest_desc={item.tour_description}
+                                                                // hotel_average_price={item.hotel_average_price}
+                                                                destLink={'/tours/main/' + item.tour_id}//{'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
+                                                            />
+                                                            // <HotelGrid
+                                                            //     picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.hotel_cover}
+                                                            //     hotelName={item.hotel_name}
+                                                            //     hotel_city={item.hotel_city}
+                                                            //     hotel_desc={item.hotel_desc}
+                                                            //     hotel_average_price={item.hotel_average_price}
+                                                            //     hotelLink={'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
+                                                            // />
+                                                        )
+                                                    })
+                                                ) : <p>No Records Found</p>
                                             }
                                         </div>
                                     </div>

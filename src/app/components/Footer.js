@@ -83,15 +83,15 @@ export default function Footer() {
             <div className="bottom gray-area">
                 <div className="container">
                     <div className="logo pull-left">
-                        <a href="index.html" title="Travelo - home">
-                            <img src="images/logo.png" alt="Travelo HTML5 Template" />
+                        <a href="/" title="Travelo - home">
+                            <img style={{ height: 28 }} src="https://www.mytrip.pk/images/logo.png" alt="Travelo HTML5 Template" />
                         </a>
                     </div>
                     <div className="pull-right">
                         <a id="back-to-top" href="#" className="animated" data-animation-type="bounce"><i className="soap-icon-longarrow-up circle" /></a>
                     </div>
                     <div className="copyright pull-right">
-                        <p>© 2014 Travelo</p>
+                        <p>© 2021 MyTrip</p>
                     </div>
                 </div>
             </div>

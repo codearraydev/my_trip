@@ -8,14 +8,22 @@ const DestinationList = props => {
 
     var destDesc = renderHTML(props.dest_desc)
 
+
+
+    const truncateString = (string, maxLength = 500) => {
+        if (!string) return null;
+        if (string.length <= maxLength) return string;
+        return `${string.substring(0, maxLength)}...`;
+    };
+
     return (
         <article className="box">
             <style>
-                { styles }
+                {styles}
             </style>
             <figure className="col-sm-5 col-md-4">
                 <a title href="ajax/slideshow-popup.html" className="hover-effect popup-gallery"> <LazyLoadImage
-                    style={{ width: 270, height: 175, objectFit: 'cover' }}
+                    style={{ width: '100%', height: 175, objectFit: 'cover' }}
                     alt={'tryu'}
                     src={props.picture} // use normal <img> attributes as props
                 /></a>
@@ -24,19 +32,19 @@ const DestinationList = props => {
                 <div>
                     <div>
                         <h4 className="box-title">{props.destName}<small><i className="soap-icon-departure yellow-color" /> {props.destRegion}</small></h4>
-                        <div className="amenities">
+                        {/* <div className="amenities">
                             <i className="soap-icon-wifi circle" />
                             <i className="soap-icon-fitnessfacility circle" />
                             <i className="soap-icon-fork circle" />
                             <i className="soap-icon-television circle" />
-                        </div>
+                        </div> */}
                     </div>
-                    <div>
+                    {/* <div>
                         <div className="five-stars-container">
                             <span className="five-stars" style={{ width: '80%' }} />
                         </div>
                         <span className="review">270 reviews</span>
-                    </div>
+                    </div> */}
                 </div>
                 <div>
                     <p style={{ display: 'inline-block', textOverflow: 'ellipsis', height: 100, overflow: "hidden" }}> {renderHTML(props.dest_desc)}</p>

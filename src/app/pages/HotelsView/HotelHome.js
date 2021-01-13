@@ -10,6 +10,7 @@ import HotelList from '../../components/HotelList';
 import HotelGrid from "../../components/HotelGrid";
 import $ from "jquery";
 import { fetchHotelsFromApi, fetchFilterHotelsFromApi } from "../../../shared/actions/HotelActions";
+import HotelBlock from "../../components/HotelDetails/HotelBlock";
 
 
 const HotelHome = props => {
@@ -20,18 +21,27 @@ const HotelHome = props => {
     const dispatch = useDispatch();
     const [gridClass, setGridClass] = useState('swap-grid');
 
-    const [showList, setList] = useState(true);
-    const [showGrid, setGrid] = useState(false)
+    const [showList, setList] = useState(false);
+    const [showGrid, setGrid] = useState(false);
+    const [showBlock, setBlock] = useState(true)
 
 
     const loadGrid = () => {
         setList(false)
         setGrid(true)
+        setBlock(false)
     }
 
     const loadList = () => {
         setList(true)
         setGrid(false)
+        setBlock(false)
+    }
+
+    const loadblock = () => {
+        setList(false)
+        setGrid(false)
+        setBlock(true)
     }
 
     useEffect(() => {
@@ -284,6 +294,12 @@ const HotelHome = props => {
                                         <li className="sort-by-popularity"><a className="sort-by-container" href="#"><span>popularity</span></a></li>
                                     </ul> */}
                                     <ul className="swap-tiles clearfix block-sm">
+
+                                        <li className="swap-block">
+                                            <TouchableOpacity onPress={() => loadblock()}>
+                                                <a href="#"><i className="soap-icon-block" /></a>
+                                            </TouchableOpacity>
+                                        </li>
                                         <li className="swap-list active">
                                             <TouchableOpacity onPress={() => loadList()}>
                                                 <a href="#"><i className="soap-icon-list" /></a>
@@ -294,6 +310,8 @@ const HotelHome = props => {
                                                 <a href="#"><i className="soap-icon-grid" /></a>
                                             </TouchableOpacity>
                                         </li>
+
+
                                         {/* <li className="swap-block">
                                             <TouchableOpacity onPress={() => { }}>
                                                 <a href="#"><i className="soap-icon-block" /></a>
@@ -364,6 +382,46 @@ const HotelHome = props => {
                                                                 hotel_average_price={item.hotel_average_price}
                                                                 hotelLink={'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
                                                             />
+                                                        )
+                                                    })
+                                                ) : <p>No Records Found</p>
+                                            }
+                                        </div>
+                                    </div>
+
+                                }
+
+
+                                {
+                                    showBlock &&
+                                    <div className="hotel-list">
+                                        <div className="row image-box hotel listing-style2">
+
+                                            {
+                                                hotelInformation.isGetting && <View style={{ textAlign: 'center', marginBottom: 5 }}><ActivityIndicator size="small" color="#00A1DE" /></View>
+                                            }
+                                            {
+
+                                                typeof (hotelInformation.Hotels) !== 'undefined' && hotelInformation.Hotels.length ? (
+                                                    hotelInformation.Hotels.map((item, index) => {
+                                                        // console.log(item.dest_cover_image);
+                                                        return (
+                                                            <HotelBlock
+                                                                picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.hotel_cover}
+                                                                hotelName={item.hotel_name}
+                                                                hotel_city={item.hotel_city}
+                                                                hotel_desc={item.hotel_desc}
+                                                                hotel_average_price={item.hotel_average_price}
+                                                                hotelLink={'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
+                                                            />
+                                                            // <HotelGrid
+                                                            //     picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.hotel_cover}
+                                                            //     hotelName={item.hotel_name}
+                                                            //     hotel_city={item.hotel_city}
+                                                            //     hotel_desc={item.hotel_desc}
+                                                            //     hotel_average_price={item.hotel_average_price}
+                                                            //     hotelLink={'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
+                                                            // />
                                                         )
                                                     })
                                                 ) : <p>No Records Found</p>

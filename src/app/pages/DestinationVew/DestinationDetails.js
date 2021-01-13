@@ -1,7 +1,7 @@
 
 import { connect, useSelector, useDispatch } from "react-redux";
 import { ActivityIndicator, FlatList, TouchableOpacity, View } from "react-native-web";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 
 import SubHeader from '../../components/SubHeader';
 import Footer from '../../components/Footer';
@@ -9,6 +9,8 @@ import renderHTML from "react-render-html";
 import { Carousel } from 'react-bootstrap'
 import DestDecs from '../../components/DestinationDetails/DestDecs';
 import DestHotels from '../../components/DestinationDetails/DestHotels';
+import DestinationGrid from "../../components/DestinationDetails/DestinationGrid";
+import PlaceGrid from "../../components/DestinationDetails/PlaceGrid";
 import DestinationPlacesToSee from '../../components/DestinationDetails/DestinationPlacesToSee';
 import { getDestInformationApi } from '../../../shared/actions/DestinationDetailsActions';
 
@@ -32,6 +34,7 @@ import Typography from '@material-ui/core/Typography';
 import Sidebar from "../../components/Sidebar";
 import DestSidebar from "../../components/DestinationDetails/DestSidebar";
 import HotelRooms from "../../components/HotelDetails/HotelRooms";
+import HotelGrid from "../../components/HotelGrid";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -47,6 +50,11 @@ const DestinationDetails = props => {
     const { id } = props.match.params
     const destInfo = useSelector(state => state.DestInfo);    //getting user profile
     const dispatch = useDispatch();
+
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
 
 
     useEffect(() => {
@@ -72,7 +80,7 @@ const DestinationDetails = props => {
             <div className="page-title-container">
                 <div className="container">
                     <div className="page-title pull-left">
-                        <h2 className="entry-title">Destination Duide</h2>
+                        <h2 className="entry-title">Destination Guide</h2>
                     </div>
                     <ul className="breadcrumbs pull-right">
                         <li><a href="#">HOME</a></li>
@@ -93,7 +101,7 @@ const DestinationDetails = props => {
                                     <div className="tab-pane fade active in" id="travel-guide-info">
                                         <div className="image-container">
                                             {
-                                                destInfo.isGetting && <img src="http://placehold.it/882x320" alt />
+                                                destInfo.isGetting && <p></p>
                                             }
                                             {
                                                 typeof (destInfo.DestInfo.destination) !== 'undefined' ? (
@@ -126,7 +134,7 @@ const DestinationDetails = props => {
                                                             destInfo.DestInfo.destination.map((item, index) => {
                                                                 if (item.activity !== "") {
                                                                     return <div className="long-description">
-                                                                        <h2>Location Map</h2>
+                                                                        <h2 style={{ borderBottom: 2, borderBottomStyle: 'solid', borderBottomColor: '#fdb714', paddingBottom: 10 }}>Location Map</h2>
                                                                         <div className="tab-container style1">
                                                                             {renderHTML(item.dest_map.replace(`width="600"`, `width = "100%"`))}
                                                                         </div>
@@ -138,7 +146,7 @@ const DestinationDetails = props => {
                                                     }
 
                                                     <div className="long-description">
-                                                        <h2>Routes</h2>
+                                                        <h2 style={{ borderBottom: 2, borderBottomStyle: 'solid', borderBottomColor: '#fdb714', paddingBottom: 10 }}>Routes</h2>
                                                         <div className="tab-container style1">
                                                             <ul className="tabs full-width">
                                                                 {
@@ -160,22 +168,7 @@ const DestinationDetails = props => {
                                                             </ul>
                                                             <div className="tab-content">
 
-                                                                {/* {
-                                                                    typeof (destInfo.DestInfo.route) !== 'undefined' ? (
-                                                                        destInfo.DestInfo.route.map((item, index) => {
-                                                                            if (index == 0) {
-                                                                                return <div className="tab-pane fade in active" id={"#unlimited-layouts" + item.route_id}>
-                                                                                    <p>{item.route_name}</p>
-                                                                                </div>
-                                                                            } else {
-                                                                                return <div className="tab-pane fade" id={"#unlimited-layouts" + item.route_id}>
-                                                                                    <p>{item.route_name}</p>
-                                                                                </div>
-                                                                            }
 
-                                                                        })
-                                                                    ) : null
-                                                                } */}
 
                                                                 {
                                                                     typeof (destInfo.DestInfo.route) !== 'undefined' ? (
@@ -183,7 +176,25 @@ const DestinationDetails = props => {
                                                                             if (index == 0) {
                                                                                 return <div className="tab-pane fade in active" id={"unlimited-layouts" + item.route_id}>
                                                                                     <p></p>
-                                                                                    <Timeline align="alternate">
+                                                                                    <ul class="timeline">
+                                                                                        {
+                                                                                            item.routedetail.map((route_details, index) => {
+                                                                                                return <li>
+                                                                                                    <div class={route_details.r_direction}>
+                                                                                                        <div class="flag-wrapper">
+                                                                                                            <span class="hexa"></span>
+                                                                                                            <span class="flag">{route_details.r_from + ' to ' + route_details.r_to}</span>
+                                                                                                            <span class="time-wrapper">
+                                                                                                                <span class="time">{'Distance: ' + route_details.r_distance}</span>
+                                                                                                            </span>
+                                                                                                        </div>
+                                                                                                        <div class="desc">{'Road Conditions: ' + route_details.r_road + ' and it takes about ' + route_details.r_time + ' to travel'}</div>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            })
+                                                                                        }
+                                                                                    </ul>
+                                                                                    {/* <Timeline align="alternate">
                                                                                         {
                                                                                             item.routedetail.map((route_details, index) => {
                                                                                                 return <TimelineItem style={{ marginTop: 10 }}>
@@ -209,12 +220,30 @@ const DestinationDetails = props => {
                                                                                                 </TimelineItem>
                                                                                             })
                                                                                         }
-                                                                                    </Timeline>
+                                                                                    </Timeline> */}
                                                                                 </div>
                                                                             } else {
                                                                                 return <div className="tab-pane fade" id={"unlimited-layouts" + item.route_id}>
                                                                                     <p></p>
-                                                                                    <Timeline align="alternate">
+                                                                                    <ul class="timeline">
+                                                                                        {
+                                                                                            item.routedetail.map((route_details, index) => {
+                                                                                                return <li>
+                                                                                                    <div class={route_details.r_direction}>
+                                                                                                        <div class="flag-wrapper">
+                                                                                                            <span class="hexa"></span>
+                                                                                                            <span class="flag">{route_details.r_from + ' to ' + route_details.r_to}</span>
+                                                                                                            <span class="time-wrapper">
+                                                                                                                <span class="time">{'Distance: ' + route_details.r_distance}</span>
+                                                                                                            </span>
+                                                                                                        </div>
+                                                                                                        <div class="desc">{'Road Conditions: ' + route_details.r_road + ' and it takes about ' + route_details.r_time + ' to travel'}</div>
+                                                                                                    </div>
+                                                                                                </li>
+                                                                                            })
+                                                                                        }
+                                                                                    </ul>
+                                                                                    {/* <Timeline align="alternate">
                                                                                         {
                                                                                             item.routedetail.map((route_details, index) => {
                                                                                                 return <TimelineItem style={{ marginTop: 10 }}>
@@ -240,7 +269,7 @@ const DestinationDetails = props => {
                                                                                                 </TimelineItem>
                                                                                             })
                                                                                         }
-                                                                                    </Timeline>
+                                                                                    </Timeline> */}
                                                                                 </div>
                                                                             }
 
@@ -299,12 +328,22 @@ const DestinationDetails = props => {
                                                         {
                                                             typeof (destInfo.DestInfo.hotels) !== 'undefined' && destInfo.DestInfo.hotels.length ? (
                                                                 <>
-                                                                    <h2>Hotels</h2>
+                                                                    <h2 style={{ borderBottom: 2, borderBottomStyle: 'solid', borderBottomColor: '#fdb714', paddingBottom: 10 }}>Hotels</h2>
                                                                     <div className="block">
-                                                                        <div style={{}} className="row image-box style1">
+                                                                        <div style={{ display: 'flex', overflowX: 'auto', flexWrap: 'nowrap' }} className="row image-box hotel listing-style1">
                                                                             {
                                                                                 typeof (destInfo.DestInfo.hotels) !== 'undefined' && destInfo.DestInfo.hotels.length ? (
                                                                                     destInfo.DestInfo.hotels.map((item, index) => {
+                                                                                        //  return 
+
+                                                                                        // return <HotelGrid
+                                                                                        //     picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.hotel_cover}
+                                                                                        //     hotelName={item.hotel_name}
+                                                                                        //     hotel_city={item.hotel_city}
+                                                                                        //     hotel_desc={item.hotel_desc}
+                                                                                        //     // hotel_average_price={item.hotel_average_price}
+                                                                                        //     hotelLink={'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
+                                                                                        // />
                                                                                         return <DestHotels
                                                                                             roomTitle={item.hotel_name}
                                                                                             checkout={item.hotel_city}
@@ -326,17 +365,27 @@ const DestinationDetails = props => {
                                                     </div>
 
                                                     <div className="long-description">
-                                                        <h2>Places To See</h2>
+                                                        <h2 style={{ borderBottom: 2, borderBottomStyle: 'solid', borderBottomColor: '#fdb714', paddingBottom: 10 }}>Places To See</h2>
                                                         <div className="block">
+
                                                             <div className="row image-box style1">
                                                                 {
                                                                     typeof (destInfo.DestInfo.places) !== 'undefined' ? (
                                                                         destInfo.DestInfo.places.map((item, index) => {
-                                                                            return <DestinationPlacesToSee
-                                                                                place_id={item.place_id}
-                                                                                name={item.place_name}
-                                                                                desc={item.place_dest}
-                                                                                image={"https://mytrip.pk/api/app/Controllers/uploads/" + item.place_image}
+                                                                            // return <DestinationPlacesToSee
+                                                                            //     place_id={item.place_id}
+                                                                            //     name={item.place_name}
+                                                                            //     desc={item.place_dest}
+                                                                            //     image={"https://mytrip.pk/api/app/Controllers/uploads/" + item.place_image}
+                                                                            // />
+
+                                                                            return <PlaceGrid
+                                                                                picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.place_image}
+                                                                                destName={item.place_name}
+                                                                                //destRegion={item.dest_cat_name}
+                                                                                dest_desc={item.place_dest}
+                                                                            // hotel_average_price={item.hotel_average_price}
+                                                                            //destLink={'/destinations/details'}//{'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
                                                                             />
                                                                         })
                                                                     ) : null
@@ -346,10 +395,10 @@ const DestinationDetails = props => {
                                                     </div>
 
                                                     <div className="long-description">
-                                                        <h2>Weather</h2>
+                                                        <h2 style={{ borderBottom: 2, borderBottomStyle: 'solid', borderBottomColor: '#fdb714', paddingBottom: 10 }}>Weather</h2>
                                                         <div className="block">
                                                             <div className="row image-box style1">
-                                                                <table id="loadtemp" class="table">
+                                                                <table style={{ width: '95%', marginLeft: 15 }} id="loadtemp" class="table">
                                                                     <tbody>
                                                                         <tr style={{ background: "#1cad81", color: "white" }}>
                                                                             <th>Months</th>
@@ -429,17 +478,11 @@ const DestinationDetails = props => {
                                         </figure>
                                         <div className="details">
                                             <h2 className="box-title">{destInfo.DestInfo.tours[0].tour_location}<small><i className="soap-icon-departure yellow-color" /><span className="fourty-space">Pakistan</span></small></h2>
-                                            <a className="button yellow full-width uppercase btn-small">Book Tour Now</a>
+                                            <a target="_blank" href={'/tours/main/' + destInfo.DestInfo.tours[0].tour_id} className="button yellow full-width uppercase btn-small">Book Tour Now</a>
                                         </div>
                                     </article>
                                 ) : <article className="detailed-logo">
-                                        <figure>
-                                            <img width={114} height={85} src="image.jpg" alt />
-                                        </figure>
-                                        <div className="details">
-                                            <h2 className="box-title"><small><i className="soap-icon-departure yellow-color" /><span className="fourty-space">Pakistan</span></small></h2>
-                                            <a className="button yellow full-width uppercase btn-small">Book Tour Now</a>
-                                        </div>
+                                        <View style={{ textAlign: 'center', marginBottom: 5 }}><ActivityIndicator size="small" color="#00A1DE" /></View>
                                     </article>
                             }
 
@@ -454,12 +497,12 @@ const DestinationDetails = props => {
                                                 if (item.cult !== "") {
                                                     return <article className="box">
                                                         <figure>
-                                                            <a href="#"><img style={{ marginTop: 10 }} width={63} height={59} src="http://placehold.it/63x59" alt /></a>
+                                                            <a href="#"><img style={{ marginTop: 10 }} width={63} height={59} src={"https://mytrip.pk/api/app/Controllers/uploads/" + item.dest_cover_image} alt /></a>
                                                         </figure>
                                                         <div className="details">
                                                             <h5 className="box-title"><a href="#">{item.tour_location}</a></h5>
                                                             <label style={{ marginTop: 10 }} className="price-wrapper">
-                                                                <span className="price-per-unit">Book Tour</span>
+                                                                <span className="price-per-unit"><a href={'/tours/main/' + item.tour_id}>Book Tour</a></span>
                                                             </label>
                                                         </div>
                                                     </article>

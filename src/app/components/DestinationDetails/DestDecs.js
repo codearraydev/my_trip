@@ -5,7 +5,7 @@ import renderHTML from "react-render-html";
 const DestDecs = props => {
     return (
         <div className="long-description">
-            <h2>{props.destinationName}</h2>
+            <h2 style={{ borderBottom: 2, borderBottomStyle: 'solid', borderBottomColor: '#fdb714', paddingBottom: 10 }}>{props.destinationName}</h2>
             <p style={{ textAlign: 'justify', fontFamily: 'cursive !important' }}>  {renderHTML(props.descriptionDetails)} </p>
         </div>
     );

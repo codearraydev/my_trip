@@ -2,13 +2,13 @@ import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import renderHTML from "react-render-html";
-const DestinationGrid = props => {
+const PlaceGrid = props => {
     return (
         <div className="col-sm-6 col-md-4">
             <article className="box">
                 <figure>
                     <a href="ajax/slideshow-popup.html" className="hover-effect popup-gallery"><LazyLoadImage
-                        style={{ width: '100%', height: 175, objectFit: 'cover' }}
+                        style={{ width: '95%', marginLeft: 15, height: 175, objectFit: 'cover' }}
                         alt={'tryu'}
                         src={props.picture} // use normal <img> attributes as props
                     /></a>
@@ -25,8 +25,8 @@ const DestinationGrid = props => {
                     </div> */}
                     <p className="description" style={{ height: 65, overflow: "hidden" }}>{renderHTML(props.dest_desc)}</p>
                     <div className="action">
-                        <Link className="button btn-small" to={props.destLink}><a href="#"> SELECT</a></Link>
-                        <a className="button btn-small yellow popup-map" href="#" data-box="48.856614, 2.352222">VIEW ON MAP</a>
+                        {/* <Link className="button btn-small" to={props.destLink}><a href="#"> SELECT</a></Link> */}
+                        <a style={{ width: '100%' }} className="button btn-small yellow popup-map" href="#" data-box="48.856614, 2.352222">View Details</a>
                     </div>
                 </div>
             </article>
@@ -34,4 +34,4 @@ const DestinationGrid = props => {
     );
 }
 
-export default DestinationGrid
+export default PlaceGrid

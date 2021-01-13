@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import moment from 'moment';
 import { useDispatch } from "react-redux";
 import SubHeader from "../../components/SubHeader";
@@ -17,47 +17,52 @@ const ConfirmBooking = props => {
     });
 
     useEffect(() => {
-        if(!props.location.state)
+        if (!props.location.state)
             return props.history.push('/hotels')
 
     }, [])
 
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    });
+
     const dispatch = useDispatch();
-    
-    function confirmBooking(event){
+
+    function confirmBooking(event) {
         event.preventDefault();
         const first_name = document.getElementById('first_name').value;
         const last_name = document.getElementById('last_name').value;
         const email = document.getElementById('email').value;
         const phone = document.getElementById('phone').value;
-        if(!first_name || !phone)
-            return setState({error: 'Please provide required information', first_name: first_name, last_name: last_name, phone: phone, email: email, confirmBtnText: 'CONFIRM BOOKING' });
+        if (!first_name || !phone)
+            return setState({ error: 'Please provide required information', first_name: first_name, last_name: last_name, phone: phone, email: email, confirmBtnText: 'CONFIRM BOOKING' });
 
-        setState({error: null, first_name: state.first_name, last_name: state.last_name, phone: state.phone, email: state.email, confirmBtnText: 'PLEASE WAIT' })
+        setState({ error: null, first_name: state.first_name, last_name: state.last_name, phone: state.phone, email: state.email, confirmBtnText: 'PLEASE WAIT' })
 
         ConfirmBookingActions.confirmBooking({
-            hotel_id : props.location.state.hotel_id,
-            room_id : props.location.state.room_id,
-            checkin : moment(props.location.state.ranges[0].startDate).format("YYYY-MM-DD HH:mm:ss"),
-            checkout :  moment(props.location.state.ranges[0].endDate).format("YYYY-MM-DD HH:mm:ss"),
-            numofrooms : props.location.state.rooms,
-            full_name : first_name+' '+last_name,
-            email_address : email,
-            mobile_no : phone,
-            landLine_no : phone,
-            address : "",
-            city : "",
-            country : "",
-            special_requirements : ""
+            hotel_id: props.location.state.hotel_id,
+            room_id: props.location.state.room_id,
+            checkin: moment(props.location.state.ranges[0].startDate).format("YYYY-MM-DD HH:mm:ss"),
+            checkout: moment(props.location.state.ranges[0].endDate).format("YYYY-MM-DD HH:mm:ss"),
+            numofrooms: props.location.state.rooms,
+            full_name: first_name + ' ' + last_name,
+            email_address: email,
+            mobile_no: phone,
+            landLine_no: phone,
+            address: "",
+            city: "",
+            country: "",
+            special_requirements: ""
         }).then(x => {
             ConfirmBookingActions.sendBookingEmail(
-                first_name+' '+last_name,
+                first_name + ' ' + last_name,
                 props.location.state.hotel.hotel.hotel_name,
                 phone,
                 props.location.state.rooms,
                 moment(props.location.state.ranges[0].startDate).format("YYYY-MM-DD HH:mm:ss"),
                 moment(props.location.state.ranges[0].endDate).format("YYYY-MM-DD HH:mm:ss"),
-                props.location.state.price*props.location.state.rooms,
+                props.location.state.price * props.location.state.rooms,
                 moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days'),
                 props.location.state.price,
                 email
@@ -68,12 +73,12 @@ const ConfirmBooking = props => {
         })
     }
 
-    function changeEvent(e){
+    function changeEvent(e) {
         const first_name = document.getElementById('first_name').value;
         const last_name = document.getElementById('last_name').value;
         const email = document.getElementById('email').value;
         const phone = document.getElementById('phone').value;
-        setState({error: null, first_name: first_name, last_name: last_name, phone: phone, email: email, confirmBtnText: 'CONFIRM BOOKING' });
+        setState({ error: null, first_name: first_name, last_name: last_name, phone: phone, email: email, confirmBtnText: 'CONFIRM BOOKING' });
     }
 
     return (
@@ -95,7 +100,7 @@ const ConfirmBooking = props => {
                     <div className="row">
                         <div id="main" class="col-sms-6 col-sm-8 col-md-9">
                             <div class="booking-section travelo-box">
-                                <form onSubmit={ confirmBooking } class="booking-form">
+                                <form onSubmit={confirmBooking} class="booking-form">
                                     <div class="person-information">
                                         <h2>Your Personal Information</h2>
                                         <div class="form-group row">
@@ -177,11 +182,11 @@ const ConfirmBooking = props => {
                                         </div>
                                     </div> */}
                                     {
-                                        state.error && (<span style={ { fontWeight: 'bold', color: 'red' } }>{state.error}<br /><br /></span>)
+                                        state.error && (<span style={{ fontWeight: 'bold', color: 'red' }}>{state.error}<br /><br /></span>)
                                     }
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-5">
-                                            <button type="submit" class="full-width btn-large" disabled={state.confirmBtnText != 'CONFIRM BOOKING'}>{ state.confirmBtnText }</button>
+                                            <button type="submit" class="full-width btn-large" disabled={state.confirmBtnText != 'CONFIRM BOOKING'}>{state.confirmBtnText}</button>
                                         </div>
                                     </div>
                                 </form>
@@ -193,10 +198,10 @@ const ConfirmBooking = props => {
                                 <article class="image-box hotel listing-style1">
                                     <figure class="clearfix">
                                         <a href="hotel-detailed.html" class="hover-effect middle-block"><img
-                                                class="middle-item" width="270" height="160" alt=""
-                                                src="http://placehold.it/270x160" /></a>
+                                            class="middle-item" width="270" height="160" alt=""
+                                            src="http://placehold.it/270x160" /></a>
                                         <div class="travel-title">
-                                            <h5 class="box-title">{ props.location.state && props.location.state.hotel.hotel.hotel_name }<small>{ props.location.state && props.location.state.hotel.hotel.hotel_city }</small></h5>
+                                            <h5 class="box-title">{props.location.state && props.location.state.hotel.hotel.hotel_name}<small>{props.location.state && props.location.state.hotel.hotel.hotel_city}</small></h5>
                                         </div>
                                     </figure>
                                     <div class="details">
@@ -207,7 +212,7 @@ const ConfirmBooking = props => {
                                             </div>
                                             <div class="duration text-center">
                                                 <i class="soap-icon-clock"></i>
-                                                <span>{moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days') } Nights</span>
+                                                <span>{moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days')} Nights</span>
                                             </div>
                                             <div class="check-out">
                                                 <label>Check out</label>
@@ -215,7 +220,7 @@ const ConfirmBooking = props => {
                                             </div>
                                         </div>
                                         <div class="guest">
-                                            <small class="uppercase">{ props.location.state && props.location.state.rooms } { props.location.state && props.location.state.room_type } room
+                                            <small class="uppercase">{props.location.state && props.location.state.rooms} {props.location.state && props.location.state.room_type} room
                                             </small>
                                         </div>
                                     </div>
@@ -223,7 +228,7 @@ const ConfirmBooking = props => {
                                 <h4>Other Details</h4>
                                 <dl class="other-details">
                                     <dt class="feature">room Type:</dt>
-                                    <dd class="value">{ props.location.state && props.location.state.room_type }</dd>
+                                    <dd class="value">{props.location.state && props.location.state.room_type}</dd>
                                     <dt class="feature">per Room price:</dt>
                                     <dd class="value">-</dd>
                                     <dt class="feature">2 night Stay:</dt>
@@ -231,7 +236,7 @@ const ConfirmBooking = props => {
                                     <dt class="feature">taxes and fees:</dt>
                                     <dd class="value">-</dd>
                                     <dt class="total-price">Total Price</dt>
-                                    <dd class="total-price-value">PKR. { props.location.state && props.location.state.price*props.location.state.rooms * (moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days') == 0 ? 1 : moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days')) }</dd>
+                                    <dd class="total-price-value">PKR. {props.location.state && props.location.state.price * props.location.state.rooms * (moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days') == 0 ? 1 : moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days'))}</dd>
                                 </dl>
                             </div>
                             <div class="travelo-box contact-box">
@@ -240,7 +245,7 @@ const ConfirmBooking = props => {
                                     help you.</p>
                                 <address class="contact-details">
                                     <span class="contact-phone"><i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
-                                    <br/>
+                                    <br />
                                     <a class="contact-email" href="#">help@travelo.com</a>
                                 </address>
                             </div>

@@ -8,14 +8,18 @@ import DestinationList from "../../components/DestinationDetails/DestintionList"
 import DestinationGrid from "../../components/DestinationDetails/DestinationGrid";
 import renderHTML from "react-render-html";
 import { fetchDestFromApi } from "../../../shared/actions/DestinationAction";
+import DestinationBlock from "../../components/DestinationDetails/DestinationBlock";
 
 const Home = props => {
 
 
     const initialData = JSON.stringify({ "region": null });
     const [gridClass, setGridClass] = useState('swap-grid');
-    const [showList, setList] = useState(true);
-    const [showGrid, setGrid] = useState(false)
+
+    const [showList, setList] = useState(false);
+    const [showGrid, setGrid] = useState(false);
+    const [showBlock, setBlock] = useState(true);
+
 
     //redux
     const destinationList = useSelector(state => state.Destinations);    //getting user profile
@@ -24,11 +28,19 @@ const Home = props => {
     const loadGrid = () => {
         setList(false)
         setGrid(true)
+        setBlock(false)
     }
 
     const loadList = () => {
         setList(true)
         setGrid(false)
+        setBlock(false)
+    }
+
+    const loadblock = () => {
+        setList(false)
+        setGrid(false)
+        setBlock(true)
     }
 
     function convertToSlug(Text) {
@@ -189,6 +201,12 @@ const Home = props => {
                                     <h4 className="sort-by-title block-sm">Select your Destination</h4>
 
                                     <ul className="swap-tiles clearfix block-sm">
+                                        <li className="swap-block">
+                                            <TouchableOpacity onPress={() => loadblock()}>
+                                                <a href="#"><i className="soap-icon-block" /></a>
+                                            </TouchableOpacity>
+                                        </li>
+
                                         <li className="swap-list active">
                                             <TouchableOpacity onPress={() => loadList()}>
                                                 <a href="#"><i className="soap-icon-list" /></a>
@@ -199,6 +217,7 @@ const Home = props => {
                                                 <a href="#"><i className="soap-icon-grid" /></a>
                                             </TouchableOpacity>
                                         </li>
+
                                         {/* <li className="swap-block">
                                             <TouchableOpacity onPress={() => { }}>
                                                 <a href="#"><i className="soap-icon-block" /></a>
@@ -264,11 +283,51 @@ const Home = props => {
                                                                 destRegion={item.dest_cat_name}
                                                                 dest_desc={item.dest_description}
                                                                 // hotel_average_price={item.hotel_average_price}
-                                                                destLink={'/destinations/details'}//{'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
+                                                                destLink={'/destinations/' + convertToSlug(item.dest_name) + '/' + item.dest_id}  //{'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
                                                             />
                                                         )
                                                     })
                                                 ) : null
+                                            }
+                                        </div>
+                                    </div>
+
+                                }
+
+
+                                {
+                                    showBlock &&
+                                    <div className="hotel-list">
+                                        <div className="row image-box hotel listing-style2">
+
+                                            {
+                                                destinationList.isGetting && <View style={{ textAlign: 'center', marginBottom: 5 }}><ActivityIndicator size="small" color="#00A1DE" /></View>
+                                            }
+                                            {
+
+                                                typeof (destinationList.Destinations) !== 'undefined' && destinationList.Destinations.length ? (
+                                                    destinationList.Destinations.map((item, index) => {
+                                                        // console.log(item.dest_cover_image);
+                                                        return (
+                                                            <DestinationBlock
+                                                                picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.dest_cover_image}
+                                                                destName={item.dest_name}
+                                                                destRegion={item.dest_cat_name}
+                                                                dest_desc={item.dest_description}
+                                                                // hotel_average_price={item.hotel_average_price}
+                                                                destLink={'/destinations/' + convertToSlug(item.dest_name) + '/' + item.dest_id}  //{'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
+                                                            />
+                                                            // <HotelGrid
+                                                            //     picture={'https://www.mytrip.pk/api/app/Controllers/uploads/' + item.hotel_cover}
+                                                            //     hotelName={item.hotel_name}
+                                                            //     hotel_city={item.hotel_city}
+                                                            //     hotel_desc={item.hotel_desc}
+                                                            //     hotel_average_price={item.hotel_average_price}
+                                                            //     hotelLink={'/hotels/' + convertToSlug(item.hotel_name) + '/' + item.hotel_id}
+                                                            // />
+                                                        )
+                                                    })
+                                                ) : <p>No Records Found</p>
                                             }
                                         </div>
                                     </div>

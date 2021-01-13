@@ -24,7 +24,7 @@ const HotelRooms = props => {
         <div className="room-list listing-style3 hotel">
             <article className="box">
                 <figure className="col-sm-4 col-md-3" onClick={() => setIsOpen(true)}>
-                    <div className="hover-effect popup-gallery" href="#" title><img style={{ width: 230, height: 160 }} src={props.roomPicture} alt /></div>
+                    <div className="hover-effect popup-gallery" href="#" title><img style={{ width: '100%', height: 160 }} src={props.roomPicture} alt /></div>
                 </figure>
                 <div className="details col-xs-12 col-sm-8 col-md-9">
                     <div>
@@ -43,7 +43,7 @@ const HotelRooms = props => {
                                 <i className="soap-icon-television circle" />
                             </div>
                         </div>
-                        <div className="price-section">
+                        <div style={{marginTop: 50}} className="price-section">
                             <span style={{ fontSize: 19 }} className="price"><small>PER/NIGHT</small>PKR. {props.pricepernight}</span>
                         </div>
                     </div>
@@ -57,12 +57,12 @@ const HotelRooms = props => {
                             //     data: [{ id: 1, name: 'Ford', color: 'red' }] // your data array of objects
                             // }}
                             > */}
-                            <a onClick={() => {
+                            {/* <a onClick={() => {
                                 dispatch(setHotelData("param1", "param2", "param3", "param4"))
                                 history.push({
                                     pathname: "/hotels/book"
                                 })
-                            }} href="#" title className="button btn-small full-width text-center">BOOK NOW</a>
+                            }} href="#" title className="button btn-small full-width text-center">BOOK NOW</a> */}
                             {/* </Link> */}
                         </div>
                     </div>

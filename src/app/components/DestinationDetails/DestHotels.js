@@ -50,7 +50,7 @@ import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { Link, useHistory } from 'react-router-dom';
 import { connect, useSelector, useDispatch } from "react-redux";
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { setHotelData } from '../../../shared/actions/HotelDataActions';
 const DestHotels = props => {
     const history = useHistory();
@@ -67,17 +67,58 @@ const DestHotels = props => {
     const [photoIndex, setPhoneIndex] = useState(0);
     const [isOpen, setIsOpen] = useState(false)
     return (
-        <div className="col-sm-6 col-md-4" style={ { maxHeight: 240 } }>
+        <div style={{ flex: '0 0 auto' }} className="col-sm-6 col-md-4">
             <article className="box">
-                <figure onClick={() => setIsOpen(true)}>
-                    <a href="#" title className="hover-effect"><img style={{ width: 230, height: 160 }} src={props.roomPicture} alt width={270} height={160} /></a>
+                <figure>
+                    <a href={props.hotelLink} title className="hover-effect"><img style={{ width: '100%', height: 160, objectFit: 'cover' }} src={props.roomPicture} alt width={270} height={160} /></a>
                 </figure>
                 <div className="details">
-                    {/* <span className="price"><small>FROM</small>$490</span> */}
-                    <h4 className="box-title">{props.roomTitle}<small>Paris</small></h4>
+                    <a title="View all" href={props.hotelLink} className="pull-right button btn-mini uppercase">View</a>
+                    <h5 className="box-title">{props.roomTitle}</h5>
+                    {/* <label className="price-wrapper">
+                        <span className="price-per-unit">$620</span>avg/night
+                    </label> */}
                 </div>
             </article>
         </div>
+
+        // <div style={{ flex: '0 0 auto' }} className="col-sm-6 col-md-4">
+        //     <article className="box">
+        //         <figure>
+        //             <a title href={props.hotelLink} className="hover-effect"><LazyLoadImage
+        //                 style={{ width: '100%', height: 175, objectFit: 'cover' }}
+        //                 alt={'tryu'}
+        //                 src={props.roomPicture} // use normal <img> attributes as props
+        //             /></a>
+        //         </figure>
+        //         <div className="details">
+        //             {/* <span className="price">
+        //     <small>avg/night</small>
+        //     PKR. {props.hotel_average_price}
+        // </span> */}
+        //             <a title href={props.hotelLink}><h4 className="box-title" style={{ height: 30, overflow: "hidden" }}>{props.hotelName}<small>{props.hotel_city}</small></h4></a>
+        //             {/* <div className="feedback">
+        //                 <div data-placement="bottom" data-toggle="tooltip" className="five-stars-container" title="4 stars"><span style={{ width: '80%' }} className="five-stars" /></div>
+        //                 <span className="review">270 reviews</span>
+        //             </div> */}
+        //             <p className="description" style={{ height: 65, overflow: "hidden" }}>{props.hotel_desc}</p>
+        //             <div className="action">
+        //                 <a style={{ width: '100%' }} className="button btn-small" href={props.hotelLink}> SELECT</a>
+        //             </div>
+        //         </div>
+        //     </article>
+        // </div>
+        // <div className="col-sm-6 col-md-4" style={{ maxHeight: 240 }}>
+        //     <article className="box">
+        //         <figure onClick={() => setIsOpen(true)}>
+        //             <a href="#" title className="hover-effect"><img style={{ width: '100%', height: 160, objectFit: 'cover' }} src={props.roomPicture} alt width={270} height={160} /></a>
+        //         </figure>
+        //         <div className="details">
+        //             {/* <span className="price"><small>FROM</small>$490</span> */}
+        //             <h6 className="box-title">{props.roomTitle}<small></small></h6>
+        //         </div>
+        //     </article>
+        // </div>
         // <div className="room-list listing-style3 hotel">
         //     <article className="box">
         //         <figure className="col-sm-4 col-md-3" onClick={() => setIsOpen(true)}>

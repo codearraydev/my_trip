@@ -8,6 +8,9 @@ import DestDecs from '../../components/DestinationDetails/DestDecs';
 import { getDestInformationApi } from '../../../shared/actions/TourDetailsActions';
 import { makeStyles } from '@material-ui/core/styles';
 import TourPackages from "../../components/TourDetails/TourPackages";
+
+
+import { Modal, ModalBody, ModalDialog, ModalFooter, ModalTitle, ModalProps, ModalDialogProps } from 'react-bootstrap';
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: '6px 16px',
@@ -30,7 +33,7 @@ const TourDetail = props => {
     }, [id])
 
     const bookTourNow = () => {
-        if(destInfo.TourInfo.tour)
+        if (destInfo.TourInfo.tour)
             props.history.push({
                 pathname: "/tour-booking",
                 state: { tour: destInfo.TourInfo.tour[0] }
@@ -96,15 +99,31 @@ const TourDetail = props => {
                                             {
                                                 !destInfo.isGetting &&
                                                 <div className="long-description">
-                                                    <h2>Available Packages</h2>
-                                                    <div className="block">
-                                                        <div className="row image-box style1">
-                                                            <TourPackages />
-                                                            <TourPackages />
-                                                            <TourPackages />
-                                                            <TourPackages />
-                                                        </div>
-                                                    </div>
+                                                    {
+                                                        typeof (destInfo.TourInfo.package) !== 'undefined' && destInfo.TourInfo.package.length ? (
+                                                            <>
+                                                                <h2>Available Packages</h2>
+                                                                <div className="block">
+                                                                    <div className="row image-box style1">
+                                                                        {
+                                                                            destInfo.TourInfo.package.map((item, index) => {
+                                                                                return <TourPackages
+                                                                                    packagePicture={"https://mytrip.pk/api/app/Controllers/uploads/" + item.package_image}
+                                                                                    packageName={item.package_name}
+                                                                                />
+
+
+
+                                                                            })
+                                                                        }
+
+
+                                                                    </div>
+                                                                </div>
+                                                            </>
+                                                        ) : null
+                                                    }
+
                                                 </div>
                                             }
                                         </div>

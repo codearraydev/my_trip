@@ -374,11 +374,11 @@
       #header .logo img {
         height: 30px;
         width: auto;
-        filter: alpha(opacity=0) !important;
+        filter: alpha(opacity=1) !important;
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)" !important;
-        -moz-opacity: 0 !important;
-        -khtml-opacity: 0 !important;
-        opacity: 0 !important; }
+        -moz-opacity: 1 !important;
+        -khtml-opacity: 1 !important;
+        opacity: 1 !important; }
     #header .main-navigation {
       background: #fff; }
     #header .mobile-menu-toggle {

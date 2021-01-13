@@ -4,102 +4,80 @@ import { Link } from 'react-router-dom';
 export default function Header() {
     return (
         <header id="header" className="navbar-static-top">
-            <div className="topnav hidden-xs">
-                <div className="container">
-                    <ul className="quick-menu pull-left">
-                        <li><a href="#">My Account</a></li>
-                        <li className="ribbon">
-                            <a href="#">English</a>
-                            <ul className="menu mini">
-                                <li><a href="#" title="Dansk">Dansk</a></li>
-                                <li><a href="#" title="Deutsch">Deutsch</a></li>
-                                <li className="active"><a href="#" title="English">English</a></li>
-                                <li><a href="#" title="Español">Español</a></li>
-                                <li><a href="#" title="Français">Français</a></li>
-                                <li><a href="#" title="Italiano">Italiano</a></li>
-                                <li><a href="#" title="Magyar">Magyar</a></li>
-                                <li><a href="#" title="Nederlands">Nederlands</a></li>
-                                <li><a href="#" title="Norsk">Norsk</a></li>
-                                <li><a href="#" title="Polski">Polski</a></li>
-                                <li><a href="#" title="Português">Português</a></li>
-                                <li><a href="#" title="Suomi">Suomi</a></li>
-                                <li><a href="#" title="Svenska">Svenska</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul className="quick-menu pull-right">
-                        <li><a href="#travelo-login" className="soap-popupbox">LOGIN</a></li>
-                        <li><a href="#travelo-signup" className="soap-popupbox">SIGNUP</a></li>
-                        <li className="ribbon currency">
-                            <a href="#" title>USD</a>
-                            <ul className="menu mini">
-                                <li><a href="#" title="AUD">AUD</a></li>
-                                <li><a href="#" title="BRL">BRL</a></li>
-                                <li className="active"><a href="#" title="USD">USD</a></li>
-                                <li><a href="#" title="CAD">CAD</a></li>
-                                <li><a href="#" title="CHF">CHF</a></li>
-                                <li><a href="#" title="CNY">CNY</a></li>
-                                <li><a href="#" title="CZK">CZK</a></li>
-                                <li><a href="#" title="DKK">DKK</a></li>
-                                <li><a href="#" title="EUR">EUR</a></li>
-                                <li><a href="#" title="GBP">GBP</a></li>
-                                <li><a href="#" title="HKD">HKD</a></li>
-                                <li><a href="#" title="HUF">HUF</a></li>
-                                <li><a href="#" title="IDR">IDR</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
             <div className="main-header">
                 <a href="#mobile-menu-01" data-toggle="collapse" className="mobile-menu-toggle">
                     Mobile Menu Toggle
                 </a>
                 <div className="container">
                     <h1 className="logo navbar-brand">
-                        <a href="index.html" title="Travelo - home">
-                            <img src="https://www.mytrip.pk/images/logo.png" alt="Travelo HTML5 Template" />
-                        </a>
+                        <Link to='/'>
+                            <a href="#" title="MyTrip - home">
+                                <img style={{ height: 28 }} src="https://www.mytrip.pk/images/logo.png" alt="Travelo HTML5 Template" />
+                            </a>
+                        </Link>
                     </h1>
                     <nav id="main-menu" role="navigation">
                         <ul className="menu">
                             <li className="menu-item-has-children">
                                 <Link to='/'>
-                                    <a href="#">Home</a>
+                                    <a href="#" style={{ paddingTop: 10, display: 'flex', flexDirection: 'column', }}>
+                                        <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom', margin: '0 auto', marginBottom: 5 }} src="https://mytrip.pk/images/icons/home_ic.png" alt="icon" />
+
+
+                                        <p>Home</p>
+                                    </a>
+                                    {/* <a href="#">Home</a> */}
                                 </Link>
-
-
                             </li>
 
                             <li className="menu-item-has-children">
                                 <Link to='/destinations'>
-                                    <a href="#">Destinations</a>
+                                    {/* <a href="#">Destinations</a> */}
+                                    <a href="#" style={{ paddingTop: 10, display: 'flex', flexDirection: 'column', }}>
+                                        <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom', margin: '0 auto', marginBottom: 5 }} src="https://mytrip.pk/images/icons/destination-map.png" alt="icon" />
+                                        <p>Destinations</p>
+                                    </a>
                                 </Link>
 
                             </li>
 
                             <li className="menu-item-has-children">
                                 <Link to='/hotels'>
-                                    <a href="#">Hotels</a>
+                                    {/* <a href="#">Hotels</a> */}
+                                    <a href="#" style={{ paddingTop: 10, display: 'flex', flexDirection: 'column', }}>
+                                        <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom', margin: '0 auto', marginBottom: 5 }} src="https://mytrip.pk/images/icons/hotel-icon.png" alt="icon" />
+                                        <p>Hotels</p>
+                                    </a>
                                 </Link>
-
-
-
                             </li>
                             <li className="menu-item-has-children">
                                 <Link to='/car-hire'>
-                                    <a>Car Hire</a>
+                                    {/* <a>Car Hire</a> */}
+                                    <a href="#" style={{ paddingTop: 10, display: 'flex', flexDirection: 'column', }}>
+                                        <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom', margin: '0 auto', marginBottom: 5 }} src="https://mytrip.pk/images/icons/car-icon2.png" alt="icon" />
+                                        <p>Car Hire</p>
+                                    </a>
                                 </Link>
+
                             </li>
                             <li className="menu-item-has-children">
                                 {/* <a href="car-index.html">Tours</a> */}
                                 <Link to='/tours'>
-                                    <a href="#">Tours</a>
+                                    {/* <a href="#">Tours</a> */}
+                                    <a href="#" style={{ paddingTop: 10, display: 'flex', flexDirection: 'column', }}>
+                                        <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom', margin: '0 auto', marginBottom: 5 }} src="https://mytrip.pk/images/icons/tour.png" alt="icon" />
+                                        <p>Tours</p>
+                                    </a>
                                 </Link>
 
                             </li>
                             <li className="menu-item-has-children">
-                                <a href="cruise-index.html">Shop</a>
+                                {/* <a href="#">Shop</a> */}
+                                <a href="#" style={{ paddingTop: 10, display: 'flex', flexDirection: 'column', }}>
+                                    <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom', margin: '0 auto', marginBottom: 5 }} src="https://mytrip.pk/images/icons/shop-icon.png" alt="icon" />
+                                    <p>Shop</p>
+                                </a>
 
                             </li>
                         </ul>
@@ -108,219 +86,69 @@ export default function Header() {
                 <nav id="mobile-menu-01" className="mobile-menu collapse">
                     <ul id="mobile-primary-menu" className="menu">
                         <li className="menu-item-has-children">
-                            <a href="index.html">Home</a>
-                            <ul>
-                                <li><a href="index.html">Home Layout 1</a></li>
-                                <li><a href="homepage2.html">Home Layout 2</a></li>
-                                <li><a href="homepage3.html">Home Layout 3</a></li>
-                                <li><a href="homepage4.html">Home Layout 4</a></li>
-                                <li><a href="homepage5.html">Home Layout 5</a></li>
-                                <li><a href="homepage6.html">Home Layout 6</a></li>
-                                <li><a href="homepage7.html">Home Layout 7</a></li>
-                                <li><a href="homepage8.html">Home Layout 8</a></li>
-                                <li><a href="homepage9.html">Home Layout 9</a></li>
-                                <li><a href="homepage10.html">Home Layout 10</a></li>
-                                <li><a href="homepage11.html">Home Layout 11</a></li>
-                            </ul>
+                            <Link style={{ height: 70 }} to='/'>
+                                {/* <a href="#" style={{ paddingTop: 15, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}>
+                                        <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/destination-map.png" alt="icon" />
+                                        <p>Home</p>
+                                    </a> */}
+                                {/* <a href="#">Home</a> */}
+                                <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
+                                    <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/home_ic.png" alt="icon" />
+                                    <p style={{ marginLeft: 10 }}>Home</p>
+                                </a>
+                            </Link>
+                        </li>
+
+                        <li className="menu-item-has-children">
+                            <Link style={{ height: 70 }} to='/destinations'>
+                                {/* <a href="#">Destinations</a> */}
+                                <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
+                                    <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/destination-map.png" alt="icon" />
+                                    <p style={{ marginLeft: 10 }}>Destinations</p>
+                                </a>
+                            </Link>
+
+                        </li>
+
+                        <li className="menu-item-has-children">
+                            <Link style={{ height: 70 }} to='/hotels'>
+                                {/* <a href="#">Hotels</a> */}
+                                <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
+                                    <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/hotel-icon.png" alt="icon" />
+                                    <p style={{ marginLeft: 10 }}>Hotels</p>
+                                </a>
+                            </Link>
                         </li>
                         <li className="menu-item-has-children">
-                            <a href="hotel-index.html">Hotels</a>
-                            <ul>
-                                <li><a href="hotel-index.html">Home Hotels</a></li>
-                                <li><a href="hotel-list-view.html">List View</a></li>
-                                <li><a href="hotel-grid-view.html">Grid View</a></li>
-                                <li><a href="hotel-block-view.html">Block View</a></li>
-                                <li><a href="hotel-detailed.html">Detailed</a></li>
-                                <li><a href="hotel-booking.html">Booking</a></li>
-                                <li><a href="hotel-thankyou.html">Thank You</a></li>
-                            </ul>
+                            <Link style={{ height: 70 }} to='/car-hire'>
+                                {/* <a>Car Hire</a> */}
+                                <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
+                                    <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/car-icon2.png" alt="icon" />
+                                    <p style={{ marginLeft: 10 }}>Car Hire</p>
+                                </a>
+                            </Link>
+
                         </li>
                         <li className="menu-item-has-children">
-                            <a href="flight-index.html">Flights</a>
-                            <ul>
-                                <li><a href="flight-index.html">Home Flights</a></li>
-                                <li><a href="flight-list-view.html">List View</a></li>
-                                <li><a href="flight-grid-view.html">Grid View</a></li>
-                                <li><a href="flight-block-view.html">Block View</a></li>
-                                <li><a href="flight-detailed.html">Detailed</a></li>
-                                <li><a href="flight-booking.html">Booking</a></li>
-                                <li><a href="flight-thankyou.html">Thank You</a></li>
-                            </ul>
+                            {/* <a href="car-index.html">Tours</a> */}
+                            <Link style={{ height: 70 }} to='/tours'>
+                                {/* <a href="#">Tours</a> */}
+                                <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
+                                    <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/tour.png" alt="icon" />
+                                    <p style={{ marginLeft: 10 }}>Tours</p>
+                                </a>
+                            </Link>
+
                         </li>
                         <li className="menu-item-has-children">
-                            <a href="car-index.html">Cars</a>
-                            <ul>
-                                <li><a href="car-index.html">Home Cars</a></li>
-                                <li><a href="car-list-view.html">List View</a></li>
-                                <li><a href="car-grid-view.html">Grid View</a></li>
-                                <li><a href="car-block-view.html">Block View</a></li>
-                                <li><a href="car-detailed.html">Detailed</a></li>
-                                <li><a href="car-booking.html">Booking</a></li>
-                                <li><a href="car-thankyou.html">Thank You</a></li>
-                            </ul>
-                        </li>
-                        <li className="menu-item-has-children">
-                            <a href="cruise-index.html">Cruises</a>
-                            <ul>
-                                <li><a href="cruise-index.html">Home Cruises</a></li>
-                                <li><a href="cruise-list-view.html">List View</a></li>
-                                <li><a href="cruise-grid-view.html">Grid View</a></li>
-                                <li><a href="cruise-block-view.html">Block View</a></li>
-                                <li><a href="cruise-detailed.html">Detailed</a></li>
-                                <li><a href="cruise-booking.html">Booking</a></li>
-                                <li><a href="cruise-thankyou.html">Thank You</a></li>
-                            </ul>
-                        </li>
-                        <li className="menu-item-has-children">
-                            <a href="#">Pages</a>
-                            <ul>
-                                <li className="menu-item-has-children">
-                                    <a href="#">Standard Pages</a>
-                                    <ul>
-                                        <li><a href="pages-aboutus1.html">About Us 1</a></li>
-                                        <li><a href="pages-aboutus2.html">About Us 2</a></li>
-                                        <li><a href="pages-services1.html">Services 1</a></li>
-                                        <li><a href="pages-services2.html">Services 2</a></li>
-                                        <li><a href="pages-photogallery-4column.html">Gallery 4 Column</a></li>
-                                        <li><a href="pages-photogallery-3column.html">Gallery 3 Column</a></li>
-                                        <li><a href="pages-photogallery-2column.html">Gallery 2 Column</a></li>
-                                        <li><a href="pages-photogallery-fullview.html">Gallery Read</a></li>
-                                        <li><a href="pages-blog-rightsidebar.html">Blog Right Sidebar</a></li>
-                                        <li><a href="pages-blog-leftsidebar.html">Blog Left Sidebar</a></li>
-                                        <li><a href="pages-blog-fullwidth.html">Blog Full Width</a></li>
-                                        <li><a href="pages-blog-read.html">Blog Read</a></li>
-                                        <li><a href="pages-faq1.html">Faq 1</a></li>
-                                        <li><a href="pages-faq2.html">Faq 2</a></li>
-                                        <li><a href="pages-layouts-leftsidebar.html">Layouts Left Sidebar</a></li>
-                                        <li><a href="pages-layouts-rightsidebar.html">Layouts Right Sidebar</a></li>
-                                        <li><a href="pages-layouts-twosidebar.html">Layouts Two Sidebar</a></li>
-                                        <li><a href="pages-layouts-fullwidth.html">Layouts Full Width</a></li>
-                                        <li><a href="pages-contactus1.html">Contact Us 1</a></li>
-                                        <li><a href="pages-contactus2.html">Contact Us 2</a></li>
-                                        <li><a href="pages-contactus3.html">Contact Us 3</a></li>
-                                        <li><a href="pages-travelo-policies.html">Travelo Policies</a></li>
-                                        <li><a href="pages-sitemap.html">Site Map</a></li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#">Extra Pages</a>
-                                    <ul>
-                                        <li><a href="extra-pages-holidays.html">Holidays</a></li>
-                                        <li><a href="extra-pages-hotdeals.html">Hot Deals</a></li>
-                                        <li><a href="extra-pages-before-you-fly.html">Before You Fly</a></li>
-                                        <li><a href="extra-pages-inflight-experience.html">Inflight Experience</a></li>
-                                        <li><a href="extra-pages-things-todo1.html">Things To Do 1</a></li>
-                                        <li><a href="extra-pages-things-todo2.html">Things To Do 2</a></li>
-                                        <li><a href="extra-pages-travel-essentials.html">Travel Essentials</a></li>
-                                        <li><a href="extra-pages-travel-stories.html">Travel Stories</a></li>
-                                        <li><a href="extra-pages-travel-guide.html">Travel Guide</a></li>
-                                        <li><a href="extra-pages-travel-ideas.html">Travel Ideas</a></li>
-                                        <li><a href="extra-pages-travel-insurance.html">Travel Insurance</a></li>
-                                        <li><a href="extra-pages-group-booking.html">Group Bookings</a></li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#">Special Pages</a>
-                                    <ul>
-                                        <li><a href="pages-404-1.html">404 Page 1</a></li>
-                                        <li><a href="pages-404-2.html">404 Page 2</a></li>
-                                        <li><a href="pages-404-3.html">404 Page 3</a></li>
-                                        <li><a href="pages-coming-soon1.html">Coming Soon 1</a></li>
-                                        <li><a href="pages-coming-soon2.html">Coming Soon 2</a></li>
-                                        <li><a href="pages-coming-soon3.html">Coming Soon 3</a></li>
-                                        <li><a href="pages-loading1.html">Loading Page 1</a></li>
-                                        <li><a href="pages-loading2.html">Loading Page 2</a></li>
-                                        <li><a href="pages-loading3.html">Loading Page 3</a></li>
-                                        <li><a href="pages-login1.html">Login Page 1</a></li>
-                                        <li><a href="pages-login2.html">Login Page 2</a></li>
-                                        <li><a href="pages-login3.html">Login Page 3</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li className="menu-item-has-children">
-                            <a href="#">Shortcodes</a>
-                            <ul>
-                                <li><a href="shortcode-accordions-toggles.html">Accordions &amp; Toggles</a></li>
-                                <li><a href="shortcode-tabs.html">Tabs</a></li>
-                                <li><a href="shortcode-buttons.html">Buttons</a></li>
-                                <li><a href="shortcode-icon-boxes.html">Icon Boxes</a></li>
-                                <li><a href="shortcode-gallery-styles.html">Image &amp; Gallery Styles</a></li>
-                                <li><a href="shortcode-image-box-styles.html">Image Box Styles</a></li>
-                                <li className="menu-item-has-children">
-                                    <a href="#">Listing Styles</a>
-                                    <ul>
-                                        <li><a href="shortcode-listing-style1.html">Listing Style 01</a></li>
-                                        <li><a href="shortcode-listing-style2.html">Listing Style 02</a></li>
-                                        <li><a href="shortcode-listing-style3.html">Listing Style 03</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="shortcode-dropdowns.html">Dropdowns</a></li>
-                                <li><a href="shortcode-pricing-tables.html">Pricing Tables</a></li>
-                                <li><a href="shortcode-testimonials.html">Testimonials</a></li>
-                                <li><a href="shortcode-our-team.html">Our Team</a></li>
-                                <li><a href="shortcode-gallery-popup.html">Gallery Popup</a></li>
-                                <li><a href="shortcode-map-popup.html">Map Popup</a></li>
-                                <li><a href="shortcode-style-changer.html">Style Changer</a></li>
-                                <li><a href="shortcode-typography.html">Typography</a></li>
-                                <li><a href="shortcode-animations.html">Animations</a></li>
-                            </ul>
-                        </li>
-                        <li className="menu-item-has-children">
-                            <a href="#">Bonus</a>
-                            <ul>
-                                <li><a href="dashboard1.html">Dashboard 1</a></li>
-                                <li><a href="dashboard2.html">Dashboard 2</a></li>
-                                <li><a href="dashboard3.html">Dashboard 3</a></li>
-                                <li className="menu-item-has-children">
-                                    <a href="#">7 Footer Styles</a>
-                                    <ul>
-                                        <li><a href="#">Default Style</a></li>
-                                        <li><a href="footer-style1.html">Footer Style 1</a></li>
-                                        <li><a href="footer-style2.html">Footer Style 2</a></li>
-                                        <li><a href="footer-style3.html">Footer Style 3</a></li>
-                                        <li><a href="footer-style4.html">Footer Style 4</a></li>
-                                        <li><a href="footer-style5.html">Footer Style 5</a></li>
-                                        <li><a href="footer-style6.html">Footer Style 6</a></li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#">8 Header Styles</a>
-                                    <ul>
-                                        <li><a href="#">Default Style</a></li>
-                                        <li><a href="header-style1.html">Header Style 1</a></li>
-                                        <li><a href="header-style2.html">Header Style 2</a></li>
-                                        <li><a href="header-style3.html">Header Style 3</a></li>
-                                        <li><a href="header-style4.html">Header Style 4</a></li>
-                                        <li><a href="header-style5.html">Header Style 5</a></li>
-                                        <li><a href="header-style6.html">Header Style 6</a></li>
-                                        <li><a href="header-style7.html">Header Style 7</a></li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#">7 Inner Start Styles</a>
-                                    <ul>
-                                        <li><a href="#">Default Style</a></li>
-                                        <li><a href="inner-starts-style1.html">Inner Start Style 1</a></li>
-                                        <li><a href="inner-starts-style2.html">Inner Start Style 2</a></li>
-                                        <li><a href="inner-starts-style3.html">Inner Start Style 3</a></li>
-                                        <li><a href="inner-starts-style4.html">Inner Start Style 4</a></li>
-                                        <li><a href="inner-starts-style5.html">Inner Start Style 5</a></li>
-                                        <li><a href="inner-starts-style6.html">Inner Start Style 6</a></li>
-                                    </ul>
-                                </li>
-                                <li className="menu-item-has-children">
-                                    <a href="#">3 Search Styles</a>
-                                    <ul>
-                                        <li><a href="search-style1.html">Search Style 1</a></li>
-                                        <li><a href="search-style2.html">Search Style 2</a></li>
-                                        <li><a href="search-style3.html">Search Style 3</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            {/* <a href="#">Shop</a> */}
+                            <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
+                                <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/shop-icon.png" alt="icon" />
+                                <p style={{ marginLeft: 10 }}>Shop</p>
+                            </a>
                         </li>
                     </ul>
-                    <ul className="mobile-topnav container">
+                    {/* <ul className="mobile-topnav container">
                         <li><a href="#">MY ACCOUNT</a></li>
                         <li className="ribbon language menu-color-skin">
                             <a href="#" data-toggle="collapse">ENGLISH</a>
@@ -360,7 +188,7 @@ export default function Header() {
                                 <li><a href="#" title="IDR">IDR</a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> */}
                 </nav>
             </div>
         </header>

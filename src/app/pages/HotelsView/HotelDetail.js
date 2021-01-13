@@ -1,5 +1,5 @@
 import { ActivityIndicator, TouchableOpacity, View } from "react-native-web";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { connect, useSelector, useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import SubHeader from '../../components/SubHeader';
@@ -75,7 +75,18 @@ const HotelDetail = props => {
         hotel_id: id,
         hotel: hotelDetail.HotelInfo
     });
-    
+
+
+    const [fisrtLoad, setFirstLoad] = useState(true)
+    useLayoutEffect(() => {
+        if (fisrtLoad) {
+            window.scrollTo(0, 0)
+            setFirstLoad(false)
+        }
+        setFirstLoad(false)
+
+    });
+
     useEffect(() => {
         setState({
             ranges: [{
@@ -105,30 +116,30 @@ const HotelDetail = props => {
         scale: 0.4
     }
 
-    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    function roomTypeChangeEvent(e){
+    function roomTypeChangeEvent(e) {
         let monthSelected = monthNames[state.ranges[0].startDate.getMonth()].toLowerCase()
         let price = hotelDetail.HotelInfo.hotelroom.find(x => x.room_id == e.target.value).roompricing.find(price => price.month.toLowerCase() == monthSelected).price
-        setState({ ranges: state.ranges,hotel_id: id, hotel: hotelDetail.HotelInfo, price: price, error: null, rooms: document.getElementById('noOfRoomsDD').value, room_type: e.target.options[e.target.selectedIndex].innerHTML, room_id: e.target.value })
+        setState({ ranges: state.ranges, hotel_id: id, hotel: hotelDetail.HotelInfo, price: price, error: null, rooms: document.getElementById('noOfRoomsDD').value, room_type: e.target.options[e.target.selectedIndex].innerHTML, room_id: e.target.value })
     }
 
-    function dateRangeChangeEvent(rangeNew){
+    function dateRangeChangeEvent(rangeNew) {
         document.getElementById('roomTypeDD').value = 0
         rangeDates.startDate = rangeNew.selection.startDate;
         rangeDates.endDate = rangeNew.selection.endDate;
         setState({ room_type: state.room_type, ranges: [rangeNew.selection], price: state.price, rooms: state.rooms, room_id: state.room_id, hotel: hotelDetail.HotelInfo, error: null })
     }
 
-    function noOfRoomsChangeEvent(){
-        setState({ ranges: state.ranges,hotel_id: id, room_type: state.room_type, price: state.price, rooms: document.getElementById('noOfRoomsDD').value, hotel: hotelDetail.HotelInfo, room_id: state.room_id, error: null })
+    function noOfRoomsChangeEvent() {
+        setState({ ranges: state.ranges, hotel_id: id, room_type: state.room_type, price: state.price, rooms: document.getElementById('noOfRoomsDD').value, hotel: hotelDetail.HotelInfo, room_id: state.room_id, error: null })
     }
 
-    function bookHotel(){
-        if(parseInt(state.rooms) == 0 || parseFloat(state.price) <= 0)
-            return setState({ ranges: state.ranges,hotel_id: id, room_type: state.room_type, price: state.price, rooms: document.getElementById('noOfRoomsDD').value, hotel: hotelDetail.HotelInfo, room_id: state.room_id, error:'Please provide all the required information' })
+    function bookHotel() {
+        if (parseInt(state.rooms) == 0 || parseFloat(state.price) <= 0)
+            return setState({ ranges: state.ranges, hotel_id: id, room_type: state.room_type, price: state.price, rooms: document.getElementById('noOfRoomsDD').value, hotel: hotelDetail.HotelInfo, room_id: state.room_id, error: 'Please provide all the required information' })
 
-        setState({ ranges: state.ranges,hotel_id: id, room_type: state.room_type, price: state.price, rooms: state.rooms, room_id: state.room_id, hotel: hotelDetail.HotelInfo, error: null })
+        setState({ ranges: state.ranges, hotel_id: id, room_type: state.room_type, price: state.price, rooms: state.rooms, room_id: state.room_id, hotel: hotelDetail.HotelInfo, error: null })
 
         props.history.push({
             pathname: '/booking-confirmation',
@@ -177,14 +188,14 @@ const HotelDetail = props => {
                                                 })
                                             ) : null
                                         }
-                                        <Zoom
+                                        <Slide
                                             {...zoomOutProperties}>
                                             {slideImages.map((each, index) => (
                                                 <div key={index} style={{ width: "100%" }}>
                                                     <img style={{ objectFit: "cover", width: "100%", height: 400 }} src={each} />
                                                 </div>
                                             ))}
-                                        </Zoom>
+                                        </Slide>
                                     </div>
                                     <div id="map-tab" className="tab-pane fade">
                                         <iframe className="img-responsive" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3207.913788233577!2d74.87879331477001!3d36.48379829314663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e8ade46bbf3ccd%3A0xda14008b9702f1ca!2sPassu%20Ambassador%20Hotel!5e0!3m2!1sen!2s!4v1580110515567!5m2!1sen!2s" width="600" height="450" frameBorder="0" style={{ border: 0 }} />
@@ -263,7 +274,7 @@ const HotelDetail = props => {
 
                         {/* <Sidebar /> */}
                         <div className="sidebar col-md-3">
-                            <article style={ {width: 290} } className="detailed-logo">
+                            <article style={{ width: 290 }} className="detailed-logo">
                                 <figure>
                                     <img width={114} height={85} src="http://placehold.it/114x85" alt />
                                 </figure>
@@ -282,7 +293,7 @@ const HotelDetail = props => {
                                             ) : null
                                         }
 
-                
+
                                         <DateRange
                                             editableDateInputs={true}
                                             onChange={dateRangeChangeEvent}
@@ -290,13 +301,15 @@ const HotelDetail = props => {
                                             ranges={state.ranges}
                                         />
 
-                                        <select style={ {width: "100%"} } id="noOfRoomsDD" onChange={noOfRoomsChangeEvent}>
+                                        <select style={{ width: "100%" }} id="noOfRoomsDD" onChange={noOfRoomsChangeEvent}>
                                             <option value="0" selected disabled>No. of rooms</option>
                                             <option value="1" key={1}>1</option>
                                             <option value="2" key={2}>2</option>
                                             <option value="3" key={3}>3</option>
+                                            <option value="4" key={4}>4</option>
+                                            <option value="5" key={5}>5</option>
                                         </select>
-                                        <select id="roomTypeDD" onChange={ roomTypeChangeEvent } style={ {width: "100%", margin: "10px 0px"} }>
+                                        <select id="roomTypeDD" onChange={roomTypeChangeEvent} style={{ width: "100%", margin: "10px 0px" }}>
                                             <option value="0" selected disabled>Room Type</option>
                                             {
                                                 typeof (hotelDetail.HotelInfo.hotelroom) !== 'undefined' ? (
@@ -310,9 +323,9 @@ const HotelDetail = props => {
                                         {
                                             state.price > 0 ? (
                                                 <div style={
-                                                    { padding: "0px 8px", margin: "0px 0px 5px 0px"}
+                                                    { padding: "0px 8px", margin: "0px 0px 5px 0px" }
                                                 }>
-                                                    <span>PKR. { state.price }</span>
+                                                    <span>PKR. {state.price}</span>
                                                 </div>
                                             ) : null
                                         }
@@ -320,14 +333,14 @@ const HotelDetail = props => {
                                         {
                                             state.error ? (
                                                 <div style={
-                                                    { padding: "0px 8px", margin: "0px 0px 5px 0px"}
+                                                    { padding: "0px 8px", margin: "0px 0px 5px 0px" }
                                                 }>
-                                                    <span>{ state.error }</span>
+                                                    <span>{state.error}</span>
                                                 </div>
                                             ) : null
                                         }
                                         {/* <Link to='/booking-confirmation'> */}
-                                            <a onClick={ bookHotel } className="button yellow full-width uppercase btn-small">Book This Hotel</a>
+                                        <a onClick={bookHotel} className="button yellow full-width uppercase btn-small">Book This Hotel</a>
                                         {/* </Link> */}
                                     </div>
                                 }
