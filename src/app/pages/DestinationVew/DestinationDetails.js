@@ -329,6 +329,10 @@ const DestinationDetails = props => {
                                                             typeof (destInfo.DestInfo.hotels) !== 'undefined' && destInfo.DestInfo.hotels.length ? (
                                                                 <>
                                                                     <h2 style={{ borderBottom: 2, borderBottomStyle: 'solid', borderBottomColor: '#fdb714', paddingBottom: 10 }}>Hotels</h2>
+
+
+                                                                    
+
                                                                     <div className="block">
                                                                         <div style={{ display: 'flex', overflowX: 'auto', flexWrap: 'nowrap' }} className="row image-box hotel listing-style1">
                                                                             {
@@ -398,7 +402,7 @@ const DestinationDetails = props => {
                                                         <h2 style={{ borderBottom: 2, borderBottomStyle: 'solid', borderBottomColor: '#fdb714', paddingBottom: 10 }}>Weather</h2>
                                                         <div className="block">
                                                             <div className="row image-box style1">
-                                                                <table style={{ width: '95%', marginLeft: 15 }} id="loadtemp" class="table">
+                                                                <table style={{ width: '90%', marginLeft: 15 }} id="loadtemp" class="table">
                                                                     <tbody>
                                                                         <tr style={{ background: "#1cad81", color: "white" }}>
                                                                             <th>Months</th>

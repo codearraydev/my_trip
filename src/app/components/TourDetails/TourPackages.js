@@ -61,7 +61,7 @@ const TourPackages = props => {
 
                     <article className="box">
                         <figure>
-                            <a title ><img style={{ width: '100%', height: 160, objectFit: 'cover' }} src={[props.packagePicture]} alt width={270} height={160} /></a>
+                            <a title ><img style={{ width: '90%', marginLeft: 15, height: 160, objectFit: 'cover' }} src={[props.packagePicture]} alt width={270} height={160} /></a>
                         </figure>
                         <div className="details">
                             <span className="price">
@@ -69,7 +69,7 @@ const TourPackages = props => {
                             </span>
                             <h4 className="box-title" style={{ height: 30, overflow: "hidden" }}>{props.packageName}<small></small></h4>
                             <div className="action">
-                                <a style={{ width: '100%' }} className="button btn-small yellow popup-map" href="#" data-box="48.856614, 2.352222">Book Tour</a>
+                                <a style={{ width: '95%' }} className="button btn-small yellow popup-map" href="#" data-box="48.856614, 2.352222">Book Tour</a>
                             </div>
                         </div>
                     </article>
