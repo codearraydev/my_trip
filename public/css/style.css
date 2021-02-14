@@ -1346,7 +1346,7 @@ img.full-width {
 }
 
 .global-map-area {
-  background: url("http://placehold.it/2080x1000") no-repeat;
+  background: url("https://wallpapercave.com/wp/trlzN6b.jpg") no-repeat;
 }
 
 .global-map-area .description p {
@@ -1381,7 +1381,7 @@ section#content:after {
 }
 
 .section {
-  padding-top: 80px;
+  padding-top: 5px;
   padding-bottom: 70px;
 }
 
@@ -1846,6 +1846,17 @@ button.btn-small, a.button.btn-small {
   padding: 0 24px;
   line-height: 28px;
   font-size: 0.9167em;
+ 
+}
+
+
+button.btn-small-tour, a.button.btn-small-tour {
+  height: 28px;
+  padding: 0 24px;
+  line-height: 28px;
+  font-size: 0.9167em;
+  width: 107px;
+  text-align: center;
 }
 
 button.btn-mini, a.button.btn-mini {
@@ -1921,6 +1932,12 @@ button.sky-blue1:hover, a.button.sky-blue1:hover {
 button.yellow, a.button.yellow {
   background: #fdb714;
 }
+
+
+button.blue, a.button.blue {
+  background:  #428bca;
+}
+
 
 button.yellow:hover, a.button.yellow:hover {
   background: #e9b02b;
@@ -2513,7 +2530,7 @@ blockquote.style2:before, blockquote.style2:after {
   -ms-transform: rotateY(180deg) scale(0.5, 0.5);
   -o-transform: rotateY(180deg) scale(0.5, 0.5);
   transform: rotateY(180deg) scale(0.5, 0.5);
-  background: url(../images/icon/hover-effect.png) no-repeat center;
+  /* background: url(../images/icon/hover-effect.png) no-repeat center; */
   filter: alpha(opacity=0);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   -moz-opacity: 0;
@@ -3592,7 +3609,8 @@ ul.check-circle li:before {
   color: #fff;
   display: block;
   padding: 0 20px;
-  background: #d9d9d9;
+  /* background: #d9d9d9; */
+  background: #6a9ec9;
   font-size: 1em;
   font-weight: bold;
   height: 40px;
@@ -14701,4 +14719,158 @@ button.ui-button::-moz-focus-inner {
 
 .header_icon{
     margin: 0 auto;
+}
+
+
+#display {
+  /* position: absolute;
+  top: 275px;
+  z-index: 999;
+  background: #ffffffcf;
+  border-radius: 10px;
+  border: 1px solid #e7d089 !important;
+  padding: 0 13px;
+  width: 280px;
+  overflow: auto;
+  height: inherit;
+  margin-left: 33%; */
+
+  position: absolute;
+    top: 100%;
+    z-index: 999;
+    background: #ffffffcf;
+    border-radius: 10px;
+    border: 1px solid #e7d089 !important;
+    padding: 0 13px;
+    width: 95%;
+    overflow: auto;
+    height: inherit;
+    margin-left: 9px;
+    /* margin: 0 auto;*/
+}
+
+
+
+.display_box {
+  height: 35px !important;
+  border-top: 1px solid #e1c67d !important;
+  font-size: 14px;
+}
+#display .display_box:nth-child(01) {
+  border-top: 0 !important;
+}
+.display_box img {
+  margin-right: 12px !important;
+  height: 100%;
+  object-fit: contain;
+}
+.display_box:hover {
+  background: #e7d089 !important;
+}
+.display_box a{
+  color: #000;
+}
+
+.container_cover {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.bottom-left_cover {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.top-left_cover {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+.top-right_cover {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+.bottom-right_cover {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+.centered_cover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9); /* Black with a little bit see-through */
+}
+
+/* The content */
+.overlay-content {
+  position: relative;
+  top: 46%;
+  width: 80%;
+  text-align: center;
+  margin-top: 30px;
+  margin: auto;
+}
+
+/* Close button */
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: white;
+}
+
+.overlay .closebtn:hover {
+  color: #ccc;
+}
+
+/* Style the search field */
+.overlay input[type=text] {
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  float: left;
+  width: 80%;
+  background: white;
+}
+
+.overlay input[type=text]:hover {
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+.overlay button {
+  float: left;
+  width: 20%;
+  padding: 15px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background: #bbb;
 }

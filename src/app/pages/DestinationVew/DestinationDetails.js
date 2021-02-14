@@ -124,7 +124,7 @@ const DestinationDetails = props => {
                                                     {
                                                         typeof (destInfo.DestInfo.destination) !== 'undefined' ? (
                                                             destInfo.DestInfo.destination.map((item, index) => {
-                                                                return <DestDecs destinationName={"General Information About " + item.dest_name} descriptionDetails={item.dest_description} />
+                                                                return <DestDecs destinationName={"About " + item.dest_name} descriptionDetails={item.dest_description} />
                                                             })
                                                         ) : null
                                                     }
@@ -334,7 +334,7 @@ const DestinationDetails = props => {
                                                                     
 
                                                                     <div className="block">
-                                                                        <div style={{ display: 'flex', overflowX: 'auto', flexWrap: 'nowrap' }} className="row image-box hotel listing-style1">
+                                                                        <div style={{ display: 'block', overflowX: 'auto', flexWrap: 'nowrap' }} className="row image-box hotel listing-style1">
                                                                             {
                                                                                 typeof (destInfo.DestInfo.hotels) !== 'undefined' && destInfo.DestInfo.hotels.length ? (
                                                                                     destInfo.DestInfo.hotels.map((item, index) => {

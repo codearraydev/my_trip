@@ -13,13 +13,13 @@ export default function Header() {
                     <h1 className="logo navbar-brand">
                         <Link to='/'>
                             <a href="#" title="MyTrip - home">
-                                <img style={{ height: 28 }} src="https://www.mytrip.pk/images/logo.png" alt="Travelo HTML5 Template" />
+                                <img style={{ height: 33 }} src="https://www.mytrip.pk/images/my_trip_logo_lite.png" alt="Travelo HTML5 Template" />
                             </a>
                         </Link>
                     </h1>
                     <nav id="main-menu" role="navigation">
                         <ul className="menu">
-                            <li className="menu-item-has-children">
+                            {/* <li className="menu-item-has-children">
                                 <Link to='/'>
                                     <a href="#" style={{ paddingTop: 10, display: 'flex', flexDirection: 'column', }}>
                                         <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom', margin: '0 auto', marginBottom: 5 }} src="https://mytrip.pk/images/icons/home_ic.png" alt="icon" />
@@ -27,9 +27,8 @@ export default function Header() {
 
                                         <p>Home</p>
                                     </a>
-                                    {/* <a href="#">Home</a> */}
                                 </Link>
-                            </li>
+                            </li> */}
 
                             <li className="menu-item-has-children">
                                 <Link to='/destinations'>
@@ -85,19 +84,14 @@ export default function Header() {
                 </div>
                 <nav id="mobile-menu-01" className="mobile-menu collapse">
                     <ul id="mobile-primary-menu" className="menu">
-                        <li className="menu-item-has-children">
+                        {/* <li className="menu-item-has-children">
                             <Link style={{ height: 70 }} to='/'>
-                                {/* <a href="#" style={{ paddingTop: 15, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center' }}>
-                                        <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/destination-map.png" alt="icon" />
-                                        <p>Home</p>
-                                    </a> */}
-                                {/* <a href="#">Home</a> */}
                                 <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
                                     <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/home_ic.png" alt="icon" />
                                     <p style={{ marginLeft: 10 }}>Home</p>
                                 </a>
                             </Link>
-                        </li>
+                        </li> */}
 
                         <li className="menu-item-has-children">
                             <Link style={{ height: 70 }} to='/destinations'>
@@ -141,11 +135,15 @@ export default function Header() {
 
                         </li>
                         <li className="menu-item-has-children">
-                            {/* <a href="#">Shop</a> */}
-                            <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
-                                <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/shop-icon.png" alt="icon" />
-                                <p style={{ marginLeft: 10 }}>Shop</p>
-                            </a>
+                            {/* <a href="car-index.html">Tours</a> */}
+                            <Link style={{ height: 70 }}>
+                                {/* <a href="#">Tours</a> */}
+                                <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
+                                    <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/shop-icon.png" alt="icon" />
+                                    <p style={{ marginLeft: 10 }}>Shop</p>
+                                </a>
+                            </Link>
+
                         </li>
                     </ul>
                     {/* <ul className="mobile-topnav container">

@@ -408,7 +408,7 @@ tjq(window).load(function() {
     if (enableChaser == 1 && tjq('#content').length > 0 && tjq('#main-menu ul.menu').length > 0) {
         var forchBottom;
         var chaser = tjq('#main-menu ul.menu').clone().hide().appendTo(document.body).wrap("<div class='chaser hidden-mobile'><div class='container'></div></div>");
-        tjq('<h1 class="logo navbar-brand"><a title="Travelo - home" href="index.html"><img alt="" src="https://www.mytrip.pk/images/logo.png"></a></h1>').insertBefore('.chaser .menu');
+        tjq('<h1 class="logo navbar-brand"><a title="Travelo - home" href="#"><img alt="" src="https://www.mytrip.pk/images/my_trip_logo_lite.png"></a></h1>').insertBefore('.chaser .menu');
         var forch = tjq('#content').first();
         forchBottom = forch.offset().top + 2;
         tjq(window).on('scroll', function () {

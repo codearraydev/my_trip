@@ -43,8 +43,8 @@ const ConfirmBooking = props => {
         ConfirmBookingActions.confirmBooking({
             hotel_id: props.location.state.hotel_id,
             room_id: props.location.state.room_id,
-            checkin: moment(props.location.state.ranges[0].startDate).format("YYYY-MM-DD HH:mm:ss"),
-            checkout: moment(props.location.state.ranges[0].endDate).format("YYYY-MM-DD HH:mm:ss"),
+            checkin: moment(props.location.state.ranges[0].start).format("YYYY-MM-DD HH:mm:ss"),
+            checkout: moment(props.location.state.ranges[0].end).format("YYYY-MM-DD HH:mm:ss"),
             numofrooms: props.location.state.rooms,
             full_name: first_name + ' ' + last_name,
             email_address: email,
@@ -60,10 +60,10 @@ const ConfirmBooking = props => {
                 props.location.state.hotel.hotel.hotel_name,
                 phone,
                 props.location.state.rooms,
-                moment(props.location.state.ranges[0].startDate).format("YYYY-MM-DD HH:mm:ss"),
-                moment(props.location.state.ranges[0].endDate).format("YYYY-MM-DD HH:mm:ss"),
+                moment(props.location.state.ranges[0].start).format("YYYY-MM-DD HH:mm:ss"),
+                moment(props.location.state.ranges[0].end).format("YYYY-MM-DD HH:mm:ss"),
                 props.location.state.price * props.location.state.rooms,
-                moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days'),
+                moment(props.location.state && props.location.state.ranges[0].end).diff(moment(props.location.state && props.location.state.ranges[0].start), 'days'),
                 props.location.state.price,
                 email
             ).then(x => {
@@ -208,15 +208,15 @@ const ConfirmBooking = props => {
                                         <div class="constant-column-3 timing clearfix">
                                             <div class="check-in">
                                                 <label>Check in</label>
-                                                <span>{moment(props.location.state && props.location.state.ranges[0].startDate).format("MMM DD, YYYY")}</span>
+                                                <span>{moment(props.location.state && props.location.state.ranges[0].start).format("MMM DD, YYYY")}</span>
                                             </div>
                                             <div class="duration text-center">
                                                 <i class="soap-icon-clock"></i>
-                                                <span>{moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days')} Nights</span>
+                                                <span>{moment(props.location.state && props.location.state.ranges[0].end).diff(moment(props.location.state && props.location.state.ranges[0].start), 'days')} Nights</span>
                                             </div>
                                             <div class="check-out">
                                                 <label>Check out</label>
-                                                <span>{moment(props.location.state && props.location.state.ranges[0].endDate).format("MMM DD, YYYY")}</span>
+                                                <span>{moment(props.location.state && props.location.state.ranges[0].end).format("MMM DD, YYYY")}</span>
                                             </div>
                                         </div>
                                         <div class="guest">
@@ -229,14 +229,14 @@ const ConfirmBooking = props => {
                                 <dl class="other-details">
                                     <dt class="feature">room Type:</dt>
                                     <dd class="value">{props.location.state && props.location.state.room_type}</dd>
-                                    <dt class="feature">per Room price:</dt>
-                                    <dd class="value">-</dd>
-                                    <dt class="feature">2 night Stay:</dt>
-                                    <dd class="value">-</dd>
-                                    <dt class="feature">taxes and fees:</dt>
-                                    <dd class="value">-</dd>
+                                    <dt class="feature">per night price:</dt>
+                                    <dd class="value">{props.location.state.price}</dd>
+                                    {/* <dt class="feature">2 night Stay:</dt>
+                                    <dd class="value">-</dd> */}
+                                    {/* <dt class="feature">taxes and fees:</dt>
+                                    <dd class="value">-</dd> */}
                                     <dt class="total-price">Total Price</dt>
-                                    <dd class="total-price-value">PKR. {props.location.state && props.location.state.price * props.location.state.rooms * (moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days') == 0 ? 1 : moment(props.location.state && props.location.state.ranges[0].endDate).diff(moment(props.location.state && props.location.state.ranges[0].startDate), 'days'))}</dd>
+                                    <dd class="total-price-value">PKR. {props.location.state && props.location.state.price * props.location.state.rooms * (moment(props.location.state && props.location.state.ranges[0].end).diff(moment(props.location.state && props.location.state.ranges[0].start), 'days') == 0 ? 1 : moment(props.location.state && props.location.state.ranges[0].end).diff(moment(props.location.state && props.location.state.ranges[0].start), 'days'))}</dd>
                                 </dl>
                             </div>
                             <div class="travelo-box contact-box">

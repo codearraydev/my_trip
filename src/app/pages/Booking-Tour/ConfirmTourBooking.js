@@ -1,11 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import moment from 'moment';
 import { useDispatch } from "react-redux";
 import SubHeader from "../../components/SubHeader";
 import Footer from '../../components/Footer';
 import TourBookingActions from "../../../shared/actions/TourBookingAction";
+import { Helmet } from "react-helmet";
+
 
 const ConfirmBookingTour = props => {
+
+
+
+
+    const [fisrtLoad, setFirstLoad] = useState(true)
+    useLayoutEffect(() => {
+        if (fisrtLoad) {
+            window.scrollTo(0, 0)
+            setFirstLoad(false)
+        }
+        setFirstLoad(false)
+
+    });
 
     const tourservicesTitles = [
         {
@@ -64,21 +79,21 @@ const ConfirmBookingTour = props => {
 
     const checkEvent = (e) => {
         tourservicesTitles.filter(x => {
-            if(state.tourservices.includes(x.title))
+            if (state.tourservices.includes(x.title))
                 x.checked = true;
         })
         tourservicesTitles.find(x => x.title.toLowerCase() == e.target.value.toLowerCase()).checked = !tourservicesTitles.find(x => x.title.toLowerCase() == e.target.value.toLowerCase()).checked;
-        setState({...state, tourservices: tourservicesTitles.filter(y => y.checked).map(x => x.title).join(",")})
+        setState({ ...state, tourservices: tourservicesTitles.filter(y => y.checked).map(x => x.title).join(",") })
     }
-    
-    function confirmBooking(event){
+
+    function confirmBooking(event) {
         event.preventDefault();
-        if(!state.first_name || !state.travephone || !state.travelDate)
-            return setState({...state, error: 'Please provide required information' });
+        if (!state.first_name || !state.travephone || !state.travelDate)
+            return setState({ ...state, error: 'Please provide required information' });
 
         setState({ ...state, error: null, confirmBtnText: 'PLEASE WAIT' })
 
-        TourBookingActions.confirmTourBooking({ 
+        TourBookingActions.confirmTourBooking({
             ...state,
             travelUser: state.first_name + ' ' + state.last_name
         }).then(x => {
@@ -94,15 +109,27 @@ const ConfirmBookingTour = props => {
 
     return (
         <div id="page-wrapper">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Book Tour | MyTrip</title>
+
+                <script src="http://localhost:3000/js/TourForm.js" type="text/javascript" />
+                {/* <script data-b24-form="inline/4/bibmmc" data-skip-moving="true">
+                    (function(w,d,u){
+                    var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/180000|0);
+                    var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+                        })(window,document,'https://cdn.bitrix24.com/b16326669/crm/form/loader_4.js');
+                </script> */}
+            </Helmet>
             <SubHeader />
             <div className="page-title-container">
                 <div className="container">
                     <div className="page-title pull-left">
-                        <h2 className="entry-title">Hotel Booking</h2>
+                        <h2 className="entry-title">Tour Booking</h2>
                     </div>
                     <ul className="breadcrumbs pull-right">
                         <li><a href="#">HOME</a></li>
-                        <li className="active">Hotel Booking</li>
+                        <li className="active">Tour Booking</li>
                     </ul>
                 </div>
             </div>
@@ -110,7 +137,9 @@ const ConfirmBookingTour = props => {
                 <div className="container">
                     <div className="row">
                         <div id="main" className="col-sms-12 col-sm-12 col-md-12">
-                            <div className="booking-section travelo-box">
+
+                            <iframe src={'https://b24-xtnk3r.bitrix24.site/crm_form2/'} height={1100} width={'100%'} />
+                            {/* <div className="booking-section travelo-box">
                                 <form onSubmit={ confirmBooking } className="booking-form">
                                     <div className="person-information">
                                         <h2>Your Personal Information</h2>
@@ -222,7 +251,7 @@ const ConfirmBookingTour = props => {
                                         <div className="col-sm-4 col-md-4"></div>
                                     </div>
                                 </form>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -236,7 +265,7 @@ const Checkbox = props => {
     return (
         <>
             <input type="checkbox" value={props.title} onClick={props.checkEvent} /> {props.title}
-            <br/>
+            <br />
         </>
     );
 }

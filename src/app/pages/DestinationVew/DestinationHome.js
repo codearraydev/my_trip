@@ -61,7 +61,7 @@ const Home = props => {
     const listItems = [
         {
             "name": "1",
-            "title": "KPK"
+            "title": "Khyber Pakhtunkhwa"
         },
         {
             "name": "6",
@@ -122,11 +122,11 @@ const Home = props => {
             <div className="page-title-container">
                 <div className="container">
                     <div className="page-title pull-left">
-                        <h2 className="entry-title">Destination Search Results</h2>
+                        <h2 className="entry-title">Destinations</h2>
                     </div>
                     <ul className="breadcrumbs pull-right">
                         <li><a href="#">HOME</a></li>
-                        <li className="active">Destination Search Results</li>
+                        <li className="active">Destinations</li>
                     </ul>
                 </div>
             </div>

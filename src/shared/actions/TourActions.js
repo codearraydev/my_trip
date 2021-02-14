@@ -2,7 +2,7 @@ import { LOAD_TOUR, LOAD_TOUR_SUCCESS, LOAD_TOUR_FAIL } from "../constant/Consta
 
 
 
-export const fetchDestFromApi = (initialFIlters) => {
+export const fetchToursFromApi = (initialFIlters) => {
     return (disptach) => {
         disptach(getTour())
         var myHeaders = new Headers();

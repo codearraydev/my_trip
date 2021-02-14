@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { ActivityIndicator, FlatList, TouchableOpacity, View } from "react-native-web";
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SubHeader from '../../components/SubHeader';
 import Footer from '../../components/Footer';
@@ -10,7 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TourPackages from "../../components/TourDetails/TourPackages";
 
 
-import { Modal, ModalBody, ModalDialog, ModalFooter, ModalTitle, ModalProps, ModalDialogProps } from 'react-bootstrap';
+// import { Modal, ModalBody, ModalDialog, ModalFooter, ModalTitle, ModalProps, ModalDialogProps } from 'react-bootstrap';
+import { Button, Modal } from "react-bootstrap";
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: '6px 16px',
@@ -39,6 +40,41 @@ const TourDetail = props => {
                 state: { tour: destInfo.TourInfo.tour[0] }
             })
     }
+
+
+
+    function MyVerticallyCenteredModal(props) {
+        return (
+            <Modal
+                {...props}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Modal heading
+              </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h4>Centered Modal</h4>
+                    <p>
+                        Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+                        dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
+                        consectetur ac, vestibulum at eros.
+              </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={props.onHide}>Close</Button>
+                </Modal.Footer>
+            </Modal>
+        );
+    }
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     return (
         <div id="page-wrapper">
@@ -110,6 +146,7 @@ const TourDetail = props => {
                                                                                 return <TourPackages
                                                                                     packagePicture={"https://mytrip.pk/api/app/Controllers/uploads/" + item.package_image}
                                                                                     packageName={item.package_name}
+                                                                                    onPress={bookTourNow}
                                                                                 />
 
 
@@ -133,9 +170,9 @@ const TourDetail = props => {
                         </div>
                         {/* <DestSidebar /> */}
                         <div className="sidebar col-md-3">
-                            <div className="travelo-box">
+                            {/* <div className="travelo-box">
                                 <a onClick={bookTourNow} className="button yellow full-width uppercase btn-small">Book Tour Now</a>
-                            </div>
+                            </div> */}
                             <div className="travelo-box contact-box">
                                 <h4>Need Travelo Help?</h4>
                                 <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>

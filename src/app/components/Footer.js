@@ -84,7 +84,7 @@ export default function Footer() {
                 <div className="container">
                     <div className="logo pull-left">
                         <a href="/" title="Travelo - home">
-                            <img style={{ height: 28 }} src="https://www.mytrip.pk/images/logo.png" alt="Travelo HTML5 Template" />
+                            <img style={{ height: 28 }} src="https://www.mytrip.pk/images/my_trip_logo_lite.png" alt="Travelo HTML5 Template" />
                         </a>
                     </div>
                     <div className="pull-right">

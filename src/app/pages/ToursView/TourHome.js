@@ -7,7 +7,7 @@ import Footer from '../../components/Footer';
 import DestinationList from "../../components/DestinationDetails/DestintionList";
 import DestinationGrid from "../../components/DestinationDetails/DestinationGrid";
 
-import { fetchDestFromApi } from "../../../shared/actions/TourActions";
+import { fetchToursFromApi } from "../../../shared/actions/TourActions";
 import DestinationBlock from "../../components/DestinationDetails/DestinationBlock";
 
 
@@ -54,7 +54,7 @@ const TourHome = props => {
     const initialFIlters = JSON.stringify({ "region": null, "type": null, "style": null, "duration": null, "terrain": null, "travel_act": null, "basecity": null });
 
     useEffect(() => {
-        dispatch(fetchDestFromApi(initialFIlters))
+        dispatch(fetchToursFromApi(initialFIlters))
     }, [])
 
 
@@ -235,7 +235,7 @@ const TourHome = props => {
 
         console.log(data)
 
-        dispatch(fetchDestFromApi(data))
+        dispatch(fetchToursFromApi(data))
     }
     return (
         <div id="page-wrapper">
@@ -371,7 +371,7 @@ const TourHome = props => {
                                                 // console.log(JSON.stringify(item));
                                                 return (
                                                     <li style={{ cursor: 'pointer', marginLeft: 10, borderRadius: 4, marginTop: 4 }}>
-                                                        <a class="button btn-small" title={item.name} onClick={(e) => { findTours(e.target, "duration") }}>
+                                                        <a class="button btn-small-tour blue" title={item.name} onClick={(e) => { findTours(e.target, "duration") }}>
                                                             {item.title}
                                                         </a>
                                                     </li>

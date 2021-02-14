@@ -231,7 +231,7 @@ const HotelHome = props => {
                             <div className="col-sm-4 col-md-3">
                                 {/* <h4 className="search-results-title"><i className="soap-icon-search" /><b></b></h4> */}
                                 <div className="toggle-container filters-container">
-                                    <div className="panel style1 arrow-right">
+                                    {/* <div className="panel style1 arrow-right">
                                         <h4 className="panel-title">
                                             <a data-toggle="collapse" href="#price-filter" className="collapsed">Price</a>
                                         </h4>
@@ -240,9 +240,9 @@ const HotelHome = props => {
                                                 <div id="price-range" />
                                                 <br />
                                                 <div className="clearer" />
-                                            </div>{/* end content */}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     <div className="panel style1 arrow-right">
                                         <h4 className="panel-title">

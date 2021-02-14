@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import renderHTML from "react-render-html";
+
+import useModal from 'react-hooks-use-modal';
+
+
+
 const PlaceGrid = props => {
+
+    const [Modal, open, close, isOpen] = useModal('root', {
+        preventScroll: true
+    });
+
     return (
         <div className="col-sm-6 col-md-4">
             <article className="box">
@@ -26,10 +36,18 @@ const PlaceGrid = props => {
                     {/* <p className="description" style={{ height: 65, overflow: "hidden" }}>{renderHTML(props.dest_desc)}</p> */}
                     <div className="action">
                         {/* <Link className="button btn-small" to={props.destLink}><a href="#"> SELECT</a></Link> */}
-                        <a style={{ width: '96%' }} className="button btn-small yellow popup-map" href="#" data-box="48.856614, 2.352222">View Details</a>
+                        <a  onClick={open} style={{ width: '96%' }} className="button btn-small yellow" href="#" data-box="48.856614, 2.352222">View Details</a>
                     </div>
                 </div>
             </article>
+
+            <Modal>
+                <div style={{backgroundColor: '#fff', width: '70%' , padding: 20 , margin: 'auto'}}>
+                    <h1>{props.destName}</h1>
+                    <p>{renderHTML(props.dest_desc)}</p>
+                    <button onClick={close}>CLOSE</button>
+                </div>
+            </Modal>
         </div>
     );
 }

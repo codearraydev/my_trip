@@ -26,8 +26,18 @@ import Sidebar from "../../components/Sidebar";
 
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { DateRange } from 'react-date-range';
+//import { DateRange } from 'react-date-range';
 import { range } from "underscore";
+
+
+import {
+    ReactiveBase,
+    DateRange,
+    ResultCard,
+    SelectedFilters,
+    ReactiveList,
+} from '@appbaseio/reactivesearch';
+
 
 
 
@@ -119,17 +129,31 @@ const HotelDetail = props => {
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     function roomTypeChangeEvent(e) {
-        let monthSelected = monthNames[state.ranges[0].startDate.getMonth()].toLowerCase()
+        console.log(state)
+        var dt = new Date(state.ranges[0].start);
+        let monthSelected = monthNames[dt.getMonth()].toLowerCase()
         let price = hotelDetail.HotelInfo.hotelroom.find(x => x.room_id == e.target.value).roompricing.find(price => price.month.toLowerCase() == monthSelected).price
         setState({ ranges: state.ranges, hotel_id: id, hotel: hotelDetail.HotelInfo, price: price, error: null, rooms: document.getElementById('noOfRoomsDD').value, room_type: e.target.options[e.target.selectedIndex].innerHTML, room_id: e.target.value })
     }
 
     function dateRangeChangeEvent(rangeNew) {
+        console.log(rangeNew)
+        //alert(rangeNew)
         document.getElementById('roomTypeDD').value = 0
-        rangeDates.startDate = rangeNew.selection.startDate;
-        rangeDates.endDate = rangeNew.selection.endDate;
-        setState({ room_type: state.room_type, ranges: [rangeNew.selection], price: state.price, rooms: state.rooms, room_id: state.room_id, hotel: hotelDetail.HotelInfo, error: null })
+        rangeDates.startDate = rangeNew.start;
+        rangeDates.endDate = rangeNew.end;
+
+        console.log(rangeDates)
+        setState({ room_type: state.room_type, ranges: [rangeNew], price: state.price, rooms: state.rooms, room_id: state.room_id, hotel: hotelDetail.HotelInfo, error: null })
     }
+
+    // dateRangeChangeEvent = {
+    //     function(value) {
+    //         console.log("current value: ", value)
+    //         // set the state
+    //         // use the value with other js code
+    //     }
+    // }
 
     function noOfRoomsChangeEvent() {
         setState({ ranges: state.ranges, hotel_id: id, room_type: state.room_type, price: state.price, rooms: document.getElementById('noOfRoomsDD').value, hotel: hotelDetail.HotelInfo, room_id: state.room_id, error: null })
@@ -208,8 +232,8 @@ const HotelDetail = props => {
                                     <li className="active"><a href="#hotel-description" data-toggle="tab">Description</a></li>
                                     <li><a href="#hotel-availability" data-toggle="tab">Rooms</a></li>
                                     <li><a href="#hotel-amenities" data-toggle="tab">Amenities</a></li>
-                                    <li><a href="#hotel-reviews" data-toggle="tab">Reviews</a></li>
-                                    <li><a href="#hotel-faqs" data-toggle="tab">FAQs</a></li>
+                                    {/* <li><a href="#hotel-reviews" data-toggle="tab">Reviews</a></li>
+                                    <li><a href="#hotel-faqs" data-toggle="tab">FAQs</a></li> */}
                                     <li><a href="#hotel-things-todo" data-toggle="tab">Hotel Rules</a></li>
                                     {/* <li><a href="#hotel-write-review" data-toggle="tab">Write a Review</a></li> */}
                                 </ul>
@@ -274,7 +298,7 @@ const HotelDetail = props => {
 
                         {/* <Sidebar /> */}
                         <div className="sidebar col-md-3">
-                            <article style={{ width: 290 }} className="detailed-logo">
+                            <article style={{}} className="detailed-logo">
                                 <figure>
                                     <img width={114} height={85} src="http://placehold.it/114x85" alt />
                                 </figure>
@@ -293,21 +317,70 @@ const HotelDetail = props => {
                                             ) : null
                                         }
 
+                                        <ReactiveBase
+                                            app="airbeds-test-app"
+                                            url="https://a03a1cb71321:75b6603d-9456-4a5a-af6b-a487b309eb61@arc-cluster-appbase-demo-6pjy6z.searchbase.io"
+                                            enableAppbase
+                                            type="listing"
+                                        >
+                                            <DateRange
+                                                componentId="DateSensor"
+                                                dataField="mtime"
+                                                placeholder={{
+                                                    start: 'Check-in',
+                                                    end: 'Check-out',
+                                                }}
+                                                filterLabel="Date"
+                                                onValueChange={dateRangeChangeEvent}
+                                            // initialMonth={new Date()}
+                                            //onChange={dateRangeChangeEvent}
+                                            />
+                                            {/* <DateRange
+                                                componentId="DateSensor"
+                                                dataField="mtime"
+                                                title="DateRange"
+                                                defaultValue={{
+                                                    start: new Date(),
+                                                    end: new Date('2022-12-31'),
+                                                }}
+                                                placeholder={{
+                                                    start: 'Start Date',
+                                                    end: 'End Date',
+                                                }}
+                                                focused={true}
+                                                numberOfMonths={2}
+                                                queryFormat="date"
+                                                autoFocusEnd={true}
+                                                showClear={true}
+                                                showFilter={true}
+                                                filterLabel="Date"
+                                                URLParams={false}
+                                            /> */}
 
-                                        <DateRange
+                                        </ReactiveBase>
+
+
+
+
+                                        {/* <DateRange
                                             editableDateInputs={true}
                                             onChange={dateRangeChangeEvent}
                                             moveRangeOnFirstSelection={false}
                                             ranges={state.ranges}
-                                        />
+                                        /> */}
 
-                                        <select style={{ width: "100%" }} id="noOfRoomsDD" onChange={noOfRoomsChangeEvent}>
+                                        <select style={{ width: "100%", marginTop: 15 }} id="noOfRoomsDD" onChange={noOfRoomsChangeEvent}>
                                             <option value="0" selected disabled>No. of rooms</option>
                                             <option value="1" key={1}>1</option>
                                             <option value="2" key={2}>2</option>
                                             <option value="3" key={3}>3</option>
                                             <option value="4" key={4}>4</option>
                                             <option value="5" key={5}>5</option>
+                                            <option value="6" key={6}>6</option>
+                                            <option value="7" key={7}>7</option>
+                                            <option value="8" key={8}>8</option>
+                                            <option value="9" key={9}>9</option>
+                                            <option value="10" key={10}>10</option>
                                         </select>
                                         <select id="roomTypeDD" onChange={roomTypeChangeEvent} style={{ width: "100%", margin: "10px 0px" }}>
                                             <option value="0" selected disabled>Room Type</option>
