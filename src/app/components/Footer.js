@@ -10,11 +10,11 @@ export default function Footer() {
                             <h2>Discover</h2>
                             <ul className="discover triangle hover row">
                                 <li className="col-xs-6"><Link to='/about-us'><a href="#">About Us</a></Link></li>
-                                <li className="col-xs-6"><Link to='/important-numbers'><a href="#">Important</a></Link></li>
-                                <li className="col-xs-6"><Link to='/blogs'><a href="#">Blog</a></Link></li>
+                                {/* <li className="col-xs-6"><Link to='/important-numbers'><a href="#">Important</a></Link></li> */}
+                                <li className="col-xs-6"><Link to='/blogs'><a href="#">Blogs</a></Link></li>
                                 <li className="col-xs-6"><Link to='faq'><a href="#">FAQ's</a></Link></li>
                                 <li className="col-xs-6"><a href="#">Contact Us</a></li>
-                                <li className="col-xs-6"><Link to='/privacy'> <a href="#">Privacy</a></Link></li>
+                                <li className="col-xs-6"><Link to='/privacy'> <a href="#">Privacy Policy</a></Link></li>
                                 <li className="col-xs-6"><Link to='/terms-of-use'><a href="#">Term of Use</a></Link></li>
 
                             </ul>
@@ -53,38 +53,41 @@ export default function Footer() {
                             <p>Travel Smarter! Sign up for our free newsletter.</p>
                             <br />
                             <div className="icon-check">
-                                <input type="text" className="input-text full-width" placeholder="your email" />
+                                <input type="text" className="input-text full-width" placeholder="Your Email" />
                             </div>
                             <br />
                             <span>We respect your privacy</span>
                         </div>
                         <div className="col-sm-6 col-md-4">
                             <h2>About MyTrip</h2>
-                            <p>Nunc cursus libero purus ac congue arcu cursus ut sed vitae pulvinar massaidp nequetiam lore elerisque.</p>
+                            <p>MyTrip.pk is the exclusive trademark of My Travel Guide, which aims to promote tourism and traveling in Pakistan. MyTrip is a premium travel company and serves as a one-stop-solution for all travel enthusiasts.</p>
                             <br />
                             <address className="contact-details">
-                                <span className="contact-phone"><i className="soap-icon-phone" /> 1-800-123-HELLO</span>
+                                <span className="contact-phone"><i className="soap-icon-phone" /> 03-111-483-222</span>
                                 <br />
                                 <a href="#" className="contact-email">info@mytrip.pk</a>
                             </address>
                             <ul className="social-icons clearfix">
                                 <li className="twitter"><a title="twitter" href="#" data-toggle="tooltip"><i className="soap-icon-twitter" /></a></li>
-                                <li className="googleplus"><a title="googleplus" href="#" data-toggle="tooltip"><i className="soap-icon-googleplus" /></a></li>
                                 <li className="facebook"><a title="facebook" href="#" data-toggle="tooltip"><i className="soap-icon-facebook" /></a></li>
                                 <li className="linkedin"><a title="linkedin" href="#" data-toggle="tooltip"><i className="soap-icon-linkedin" /></a></li>
                                 <li className="vimeo"><a title="vimeo" href="#" data-toggle="tooltip"><i className="soap-icon-vimeo" /></a></li>
-                                <li className="dribble"><a title="dribble" href="#" data-toggle="tooltip"><i className="soap-icon-dribble" /></a></li>
-                                <li className="flickr"><a title="flickr" href="#" data-toggle="tooltip"><i className="soap-icon-flickr" /></a></li>
+
                             </ul>
                         </div>
                     </div>
+
+                    <a href="tel:+923111483222" className="callbutton">
+                        <i className="fa fa-phone my-float" style={{ marginTop: 22 }} />
+                    </a>
+
                 </div>
             </div>
             <div className="bottom gray-area">
                 <div className="container">
                     <div className="logo pull-left">
                         <a href="/" title="Travelo - home">
-                            <img style={{ height: 28 }} src="https://www.mytrip.pk/images/my_trip_logo_lite.png" alt="Travelo HTML5 Template" />
+                            <img style={{ height: 28 }} src="https://www.mytrip.pk/images/my_trip_logo_lite.png" alt="MyTrip Pakistan" />
                         </a>
                     </div>
                     <div className="pull-right">

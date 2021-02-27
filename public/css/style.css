@@ -14874,3 +14874,72 @@ button.ui-button::-moz-focus-inner {
 .overlay button:hover {
   background: #bbb;
 }
+
+
+input#myplace:focus {
+  background: none;
+  outline: none;
+  box-shadow: none;
+  border-color: #fff;
+  color: #fff;
+}
+
+
+
+
+
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: -1;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+  display: flex;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
+
+
+
+.callbutton {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 12px;
+    right: 80px;
+    display: block;
+    background-color: #00cc9978;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 99999;
+}

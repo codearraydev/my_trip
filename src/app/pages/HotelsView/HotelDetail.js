@@ -284,7 +284,31 @@ const HotelDetail = props => {
                                             </div>
                                         </div>
 
-                                        <HotelAmenties />
+
+
+                                        <div className="tab-pane fade" id="hotel-amenities">
+                                            <ul className="amenities clearfix style1">
+
+                                                {
+                                                    typeof (hotelDetail.HotelInfo.hotel) !== 'undefined' ? (
+                                                        hotelDetail.HotelInfo.hotelamen.map((item, index) => {
+                                                            let d = new Date();
+                                                            return (
+                                                                <HotelAmenties 
+                                                                name={item.amentiy_type}
+                                                                class={item.amentiy_icon}
+                                                                />
+                                                            )
+
+                                                        })
+                                                    ) : null
+                                                }
+                                                
+                                               
+                                            </ul>
+                                            <br />
+                                        </div>
+
                                         <HotelReview />
                                         <HotelFaq />
                                         <HotelRules />
@@ -300,7 +324,7 @@ const HotelDetail = props => {
                         <div className="sidebar col-md-3">
                             <article style={{}} className="detailed-logo">
                                 <figure>
-                                    <img width={114} height={85} src="http://placehold.it/114x85" alt />
+                                    <img width={114} height={85} src={slideImages[0]} alt />
                                 </figure>
 
                                 {

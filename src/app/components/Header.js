@@ -13,7 +13,7 @@ export default function Header() {
                     <h1 className="logo navbar-brand">
                         <Link to='/'>
                             <a href="#" title="MyTrip - home">
-                                <img style={{ height: 33 }} src="https://www.mytrip.pk/images/my_trip_logo_lite.png" alt="Travelo HTML5 Template" />
+                                <img style={{ height: 44 }} src="https://www.mytrip.pk/images/my_trip_logo_lite.png" alt="Travelo HTML5 Template" />
                             </a>
                         </Link>
                     </h1>
@@ -139,7 +139,7 @@ export default function Header() {
                             <Link style={{ height: 70 }}>
                                 {/* <a href="#">Tours</a> */}
                                 <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
-                                    <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/shop-icon.png" alt="icon" />
+                                    <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/tour.png" alt="icon" />
                                     <p style={{ marginLeft: 10 }}>Shop</p>
                                 </a>
                             </Link>

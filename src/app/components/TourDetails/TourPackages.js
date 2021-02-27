@@ -61,7 +61,7 @@ const TourPackages = props => {
 
                 <article className="box">
                     <figure>
-                        <a title ><img style={{ width: '92%', marginLeft: 15, height: 160, objectFit: 'cover' }} src={[props.packagePicture]} alt width={270} height={160} /></a>
+                        <a title ><img style={{ width: '92%', marginLeft: 15, height: 160, objectFit: 'cover' }} src={[props.thumbPicture]} alt width={270} height={160} /></a>
                     </figure>
                     <div className="details">
                         <span className="price">

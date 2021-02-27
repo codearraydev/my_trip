@@ -259,9 +259,9 @@ const TourHome = props => {
                         <div className="row">
                             {/*  Search Filters */}
                             <div className="col-sm-4 col-md-3">
-                                <h4 className="search-results-title"><i className="soap-icon-search" /><b>Filters</b></h4>
-                                <div className="toggle-container filters-container">
 
+                                <div className="toggle-container filters-container">
+                                    <h4 className="search-results-title"><i className="soap-icon-search" /><b>Filters</b></h4>
 
                                     <div className="panel style1 arrow-right">
                                         <h4 className="panel-title">

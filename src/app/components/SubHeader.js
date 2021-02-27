@@ -12,7 +12,7 @@ export default function SubHeader() {
                     <h1 className="logo navbar-brand">
                         <Link to='/'>
                             <a href="#" title="My Trip - home">
-                                <img style={{ height: 33 }} src="https://www.mytrip.pk/images/my_trip_logo_lite.png" alt="Travelo HTML5 Template" />
+                                <img style={{ height: 44 }} src="https://www.mytrip.pk/images/my_trip_logo_lite.png" alt="Travelo HTML5 Template" />
                             </a>
                         </Link>
                     </h1>

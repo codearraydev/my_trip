@@ -526,12 +526,12 @@ const DestinationDetails = props => {
 
 
                             <div className="travelo-box contact-box">
-                                <h4>Need Travelo Help?</h4>
-                                <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
+                                <h4>Need Travel Help?</h4>
+                                <p>We would be more than happy to help you. Our customer support staff is at your service to help you.</p>
                                 <address className="contact-details">
-                                    <span className="contact-phone"><i className="soap-icon-phone" /> 1-800-123-HELLO</span>
+                                    <span className="contact-phone"><i className="soap-icon-phone" /> 03-111-483-222</span>
                                     <br />
-                                    <a className="contact-email" href="#">help@travelo.com</a>
+                                    <a className="contact-email" href="#">info@mytrip.pk</a>
                                 </address>
                             </div>
 
@@ -545,18 +545,18 @@ const DestinationDetails = props => {
                                 <ul>
                                     <li>
                                         <i className="soap-icon-hotel-1 circle" />
-                                        <h5 className="title"><a href="#">135,00+ Hotels</a></h5>
-                                        <p>Nunc cursus libero pur congue arut nimspnty.</p>
+                                        <h5 className="title"><a href="#">Best Hotels</a></h5>
+                                        <p>MyTrip.pk deal only with best hotels of any destination to avoid bad customer experience.</p>
                                     </li>
                                     <li>
                                         <i className="soap-icon-savings circle" />
-                                        <h5 className="title"><a href="#">Low Rates &amp; Savings</a></h5>
-                                        <p>Nunc cursus libero pur congue arut nimspnty.</p>
+                                        <h5 className="title"><a href="#">Expert Drivers</a></h5>
+                                        <p>Our drivers have years of experience and serve as guides.</p>
                                     </li>
                                     <li>
                                         <i className="soap-icon-support circle" />
-                                        <h5 className="title"><a href="#">Excellent Support</a></h5>
-                                        <p>Nunc cursus libero pur congue arut nimspnty.</p>
+                                        <h5 className="title"><a href="#">Helpline</a></h5>
+                                        <p>We have 24/7 helpline for customer support</p>
                                     </li>
                                 </ul>
                             </div>

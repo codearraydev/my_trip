@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useLayoutEffect } from 'react';
 import { connect, useSelector, useDispatch } from "react-redux";
 import { ActivityIndicator, FlatList, TouchableOpacity, View } from "react-native-web";
 import SubHeader from '../components/SubHeader';
@@ -9,6 +9,17 @@ const TermsPage = props => {
 
     const termsPage = useSelector(state => state.Terms);    //getting user profile
     const dispatch = useDispatch();
+
+
+    const [fisrtLoad, setFirstLoad] = useState(true)
+    useLayoutEffect(() => {
+        if (fisrtLoad) {
+            window.scrollTo(0, 0)
+            setFirstLoad(false)
+        }
+        setFirstLoad(false)
+
+    });
 
     useEffect(() => {
         //alert("this is id=====>>>>" + id)
