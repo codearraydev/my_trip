@@ -73,7 +73,7 @@ export default function SubHeader() {
                             </li>
                             <li className="menu-item-has-children">
                                 {/* <a href="#">Shop</a> */}
-                                <a href="#" style={{ paddingTop: 10, display: 'flex', flexDirection: 'column', }}>
+                                <a target="_blank" href="http://mytrip.pk/shop/" style={{ paddingTop: 10, display: 'flex', flexDirection: 'column', }}>
                                     <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom', margin: '0 auto', marginBottom: 5 }} src="https://mytrip.pk/images/icons/shop-icon.png" alt="icon" />
                                     <p>Shop</p>
                                 </a>
@@ -144,7 +144,7 @@ export default function SubHeader() {
                             {/* <a href="car-index.html">Tours</a> */}
                             <Link style={{ height: 70 }}>
                                 {/* <a href="#">Tours</a> */}
-                                <a href="#" style={{ display: 'flex', flexDirection: 'row', }}>
+                                <a target="_blank" href="http://mytrip.pk/shop/"  style={{ display: 'flex', flexDirection: 'row', }}>
                                     <img height={25} width={40} style={{ objectFit: 'contain', objectPosition: 'bottom' }} src="https://mytrip.pk/images/icons/shop-icon.png" alt="icon" />
                                     <p style={{ marginLeft: 10 }}>Shop</p>
                                 </a>
