@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useModal from 'react-hooks-use-modal';
+import { View } from "react-native-web";
 export default function Footer() {
+
+    const [Modal, open, close, isOpen] = useModal('root', {
+        preventScroll: true
+    });
     return (
         <footer id="footer">
             <div className="footer-wrapper">
@@ -76,10 +82,30 @@ export default function Footer() {
                             </ul>
                         </div>
                     </div>
+                    <View>
 
-                    <a href="tel:+923111483222" className="callbutton">
-                        <i className="fa fa-phone my-float" style={{ marginTop: 22 }} />
+                   
+                    <a style={{marginRight: 80 }} href="tel:+923111483222" className="callbutton">
+                        <i className="fa fa-phone my-float" style={{ marginTop: 22}} />
                     </a>
+                    <a onClick={open}  className="callbutton">
+                        <i className="fa fa-comments my-float" style={{ marginTop: 22 }} />
+                    </a>
+                     
+                    </View>
+
+                    <Modal>
+                        <div style={{ backgroundColor: '#fff', height: 600, width: '100%', padding: 40, margin: 'auto' }}>
+                            <iframe style={{
+
+                                top: 0,
+                                left: 0,
+                                width: "100%",
+                                height: "100%"
+                            }} src="https://www.mytrip.pk/mybot.html" frameborder="0" allowfullscreen></iframe>
+                            <button onClick={close}>CLOSE</button>
+                        </div>
+                    </Modal>
 
                 </div>
             </div>

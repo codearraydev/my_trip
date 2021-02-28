@@ -16,9 +16,12 @@ import { BrowserView, MobileView } from 'react-device-detect';
 
 import { Link } from 'react-router-dom';
 
+
 import $ from "jquery";
 
 const Home = props => {
+
+   
 
     const destinationList = useSelector(state => state.Tours);    //getting user profile
     const hotelInformation = useSelector(state => state.Hotels);    //getting user profile
@@ -295,7 +298,7 @@ const Home = props => {
 
                         <BrowserView>
                             <div>
-                                <h4 style={{marginBottom: 25 , color: '#fff' , fontSize: 26 , fontWeight: 'bold'}} className="box-title"> Pakistan's Premium Travel Platform </h4>
+                                <h4 style={{ marginBottom: 25, color: '#fff', fontSize: 26, fontWeight: 'bold' }} className="box-title"> Pakistan's Premium Travel Platform </h4>
                             </div>
                             <div style={{ border: '2px solid #fff', borderRadius: 300, padding: '8px 25px', width: 'auto', height: 50, margin: '0 auto', background: '#57657473', display: 'flex', flexDirection: 'column', flexFlow: 'initial', paddingRight: 20, justifyContent: 'center', alignItems: 'baseline' }}>
                                 <label htmlFor style={{ textAlign: 'center', float: 'left', marginRight: 20, fontSize: 20 }}>Destinations</label>
@@ -314,7 +317,7 @@ const Home = props => {
 
                         <MobileView>
                             <div>
-                                <h5 style={{marginBottom: 25 , color: '#fff' , fontSize: 18,  fontWeight: 'bold'}} className="box-title"> Pakistan's Premium Travel Platform </h5>
+                                <h5 style={{ marginBottom: 25, color: '#fff', fontSize: 18, fontWeight: 'bold' }} className="box-title"> Pakistan's Premium Travel Platform </h5>
                             </div>
                             <div style={{ border: '2px solid #fff', borderRadius: 300, padding: '8px 25px', width: 'auto', height: 50, margin: '0 auto', background: '#57657473', display: 'flex', flexDirection: 'column', flexFlow: 'initial', paddingRight: 20, justifyContent: 'center', alignItems: 'baseline' }}>
                                 <label htmlFor style={{ textAlign: 'center', float: 'left', marginRight: 20, fontSize: 16, marginBottom: 6 }}>Destinations</label>
@@ -344,6 +347,10 @@ const Home = props => {
 
 
             <section id="content">
+
+
+
+              
                 <div className="section container">
                     <h2>Popular Tours</h2>
                     <div className="row image-box style3">
@@ -505,6 +512,7 @@ const Home = props => {
 
             </section>
             <Footer />
+           
         </div>
     );
 }
